@@ -3,7 +3,6 @@ import SplitType from 'split-type';
 // Webflow is initialized
 window.Webflow ||= [];
 window.Webflow.push(() => {
-  console.log('webflow laoded');
   // Run code once webflow is initialized
   gsap.registerPlugin(ScrollTrigger);
   // Keep lenis and scrolltrigger in sync
