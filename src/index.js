@@ -1,4 +1,5 @@
 import SplitType from 'split-type';
+import { initLenis } from './interactions/lenis';
 
 // Webflow is initialized
 window.Webflow ||= [];
@@ -157,78 +158,74 @@ window.Webflow.push(() => {
     });
   }
 
+  const homeHeaderLoad = function () {
+    let tl = gsap.timeline({ delay: 0.5 });
+    tl.set('.section_home-header', {
+      opacity: 1,
+    });
+    tl.from('.home-header_crop-grid', {
+      width: '100%',
+      ease: 'power3.out',
+      duration: 1.4,
+    });
+    tl.from(
+      'h1 .line, [home-header-item], .section_home-header .button_wrapper',
+      {
+        y: isAnimationSafe ? '50%' : '5%',
+        opacity: 0,
+        stagger: { each: isAnimationSafe ? 0.2 : 0, from: 'left' },
+        ease: 'power2.out',
+        duration: 0.8,
+      },
+      '<'
+    );
+    tl.set(
+      'body',
+      {
+        overflow: 'visible',
+      },
+      '<.8'
+    );
+    tl.from(
+      '.home-header_image-gradient',
+      {
+        y: isAnimationSafe ? '2rem' : '0rem',
+        opacity: 0,
+        ease: 'power2.out',
+        duration: 1.2,
+      },
+      '<'
+    );
+  };
+
+  const headerGradients = function () {
+    const SELECTOR = '#gradient-canvas';
+    const gradientEl = document.querySelector(SELECTOR);
+    if (!gradientEl) return;
+    var gradient = new Gradient();
+    gradient.initGradient(SELECTOR);
+  };
+
   let mm = gsap.matchMedia();
   mm.add(
     {
-      //Animation Media Query
-      isAnimationSafe: '(prefers-reduced-motion: no-preference)',
-      isDesktop: '(min-width: 768px)',
+      //This is the conditions object
+      isMobile: '(max-width: 767px)',
+      isTablet: '(min-width: 768px)  and (max-width: 991px)',
+      isDesktop: '(min-width: 992px)',
+      reduceMotion: '(prefers-reduced-motion: reduce)',
     },
-    (context) => {
-      let { isAnimationSafe, isDesktop } = context.conditions;
+    (gsapContext) => {
+      let { isMobile, isTablet, isDesktop, reduceMotion } = gsapContext.conditions;
       //Page Load Animation
-      function homeHeaderLoad() {
-        let tl = gsap.timeline({ delay: 0.5 });
-        tl.set('.section_home-header', {
-          opacity: 1,
-        });
-        tl.from('.home-header_crop-grid', {
-          width: '100%',
-          ease: 'power3.out',
-          duration: 1.4,
-        });
-        tl.from(
-          'h1 .line, [home-header-item], .section_home-header .button_wrapper',
-          {
-            y: isAnimationSafe ? '50%' : '5%',
-            opacity: 0,
-            stagger: { each: isAnimationSafe ? 0.2 : 0, from: 'left' },
-            ease: 'power2.out',
-            duration: 0.8,
-          },
-          '<'
-        );
-        tl.set(
-          'body',
-          {
-            overflow: 'visible',
-          },
-          '<.8'
-        );
-        tl.from(
-          '.home-header_image-gradient',
-          {
-            y: isAnimationSafe ? '2rem' : '0rem',
-            opacity: 0,
-            ease: 'power2.out',
-            duration: 1.2,
-          },
-          '<'
-        );
-      }
       homeHeaderLoad();
-
+      headerGradients();
       // Conditional Animations
-      if (isAnimationSafe) {
+      if (!reduceMotion) {
         homeHeaderScroll();
         commercialsScroll();
         testimonialSplit();
         testimonialScroll();
-        // Update on window resize
-        let windowWidth = $(window).innerWidth();
-        window.addEventListener('resize', function () {
-          if (windowWidth !== $(window).innerWidth()) {
-            windowWidth = $(window).innerWidth();
-            elementsToSplit.each(function (index) {
-              instancesOfSplit[index].revert();
-            });
-            testimonialSplit();
-            testimonialScroll();
-          }
-        });
-      }
-      if (!isAnimationSafe) {
-        $('.line-mask').style.display = 'none';
       }
     }
   );
