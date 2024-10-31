@@ -1,92 +1,24 @@
 import SplitType from 'split-type';
 import { initLenis } from './interactions/lenis';
+import { load } from './interactions/load';
+import { scrollIn } from './interactions/scrollin';
+import { scrolling } from './interactions/scrolling';
 
+import { runSplit } from './utilities';
 // Webflow is initialized
-window.Webflow ||= [];
-window.Webflow.push(() => {
-  // Run code once webflow is initialized
-  gsap.registerPlugin(ScrollTrigger);
-  // Keep lenis and scrolltrigger in sync
-  lenis.on('scroll', () => {
-    if (!ScrollTrigger) return;
-    ScrollTrigger.update();
-  });
-
-  // Split the text up
-  let typeSplit = new SplitType('h1', {
-    types: 'lines, words',
-    tagName: 'span',
-  });
-
-  // Split the text up
-  function testimonialSplit() {
-    1;
-    let testimonialSplitInstance = new SplitType('.testimonial_quote', {
-      types: 'lines',
-    });
-    $('.testimonial_quote')
-      .find('.line')
-      .each(function (index) {
-        $(this).append("<div class='line-mask is-gradient'></div>");
-        $(this).append("<div class='line-mask is-grey'></div>");
-      });
+document.addEventListener('DOMContentLoaded', function () {
+  // register gsap plugins if available
+  if (gsap.ScrollTrigger !== undefined) {
+    gsap.registerPlugin(ScrollTrigger);
   }
-
-  // Home Header Parallax
-  function homeHeaderScroll() {
-    const triggerElement = $('.section_home-header');
-    let tl = gsap.timeline({
-      scrollTrigger: {
-        markers: false,
-        trigger: triggerElement,
-        start: '10% top',
-        end: 'bottom top',
-        scrub: 0.5,
-      },
-      defaults: {
-        duration: 1,
-      },
-    });
-    tl.to(
-      '.home-header_image-brand-wrap',
-      {
-        y: '20%',
-      },
-      0
-    );
-    tl.to(
-      '.home-header_image-voice-overs-wrap',
-      {
-        y: '50%',
-      },
-      0
-    );
-    tl.to(
-      '.home-header_lightbox-wrap',
-      {
-        y: '-15%',
-      },
-      0
-    );
-    tl.to(
-      '.home-header_image-gradient-wrap',
-      {
-        y: '-20%',
-      },
-      0
-    );
-    tl.to(
-      '.home-header_crop-grid',
-      {
-        height: '50%',
-      },
-      0
-    );
+  if (gsap.Flip !== undefined) {
+    gsap.registerPlugin(Flip);
   }
+  initLenis();
 
   // Commercials Parallax
-  function commercialsScroll() {
-    const triggerElement = $('.commercials_component');
+  commercialsScroll = function () {
+    const triggerElement = document.querySelector('.commercials_component');
     let tl = gsap.timeline({
       scrollTrigger: {
         markers: false,
@@ -130,72 +62,6 @@ window.Webflow.push(() => {
       },
       '<'
     );
-  }
-
-  // scroll animation for testimonial quote
-  function testimonialScroll() {
-    $('.line').each(function (index) {
-      let tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: $(this),
-          start: 'top center',
-          end: 'bottom center',
-          scrub: 1,
-        },
-      });
-      tl.to($(this).find('.line-mask.is-grey'), {
-        width: '0%',
-        duration: 1,
-      });
-      tl.to(
-        $(this).find('.line-mask.is-gradient'),
-        {
-          width: '100%',
-          duration: 1,
-        },
-        '<'
-      );
-    });
-  }
-
-  const homeHeaderLoad = function () {
-    let tl = gsap.timeline({ delay: 0.5 });
-    tl.set('.section_home-header', {
-      opacity: 1,
-    });
-    tl.from('.home-header_crop-grid', {
-      width: '100%',
-      ease: 'power3.out',
-      duration: 1.4,
-    });
-    tl.from(
-      'h1 .line, [home-header-item], .section_home-header .button_wrapper',
-      {
-        y: isAnimationSafe ? '50%' : '5%',
-        opacity: 0,
-        stagger: { each: isAnimationSafe ? 0.2 : 0, from: 'left' },
-        ease: 'power2.out',
-        duration: 0.8,
-      },
-      '<'
-    );
-    tl.set(
-      'body',
-      {
-        overflow: 'visible',
-      },
-      '<.8'
-    );
-    tl.from(
-      '.home-header_image-gradient',
-      {
-        y: isAnimationSafe ? '2rem' : '0rem',
-        opacity: 0,
-        ease: 'power2.out',
-        duration: 1.2,
-      },
-      '<'
-    );
   };
 
   const headerGradients = function () {
@@ -218,14 +84,14 @@ window.Webflow.push(() => {
     (gsapContext) => {
       let { isMobile, isTablet, isDesktop, reduceMotion } = gsapContext.conditions;
       //Page Load Animation
-      homeHeaderLoad();
+      // homeHeaderLoad();
       headerGradients();
+      load(gsapContext);
+      scrollIn(gsapContext);
+      scrolling(gsapContext);
       // Conditional Animations
       if (!reduceMotion) {
-        homeHeaderScroll();
         commercialsScroll();
-        testimonialSplit();
-        testimonialScroll();
       }
     }
   );
