@@ -14,6 +14,8 @@ export const scrollIn = function (gsapContext) {
   const IMAGE_WRAP = 'image-wrap';
   const IMAGE = 'image';
   const LINE = 'line';
+  const QUOTE = 'quote';
+  const QUOTE_LINE_CLASS = 'line-mask';
 
   //options
   const SCROLL_TOGGLE_ACTIONS = 'data-ix-scrollin-toggle-actions';
@@ -210,6 +212,57 @@ export const scrollIn = function (gsapContext) {
     });
   };
 
+  const scrollInQuote = function (item) {
+    //split the text
+    const splitText = runSplit(item, 'lines');
+    if (!splitText) return;
+    //set heading to full opacity (check to see if needed)
+    // item.style.opacity = 1;
+
+    const lineMasks = [];
+    splitText.lines.forEach((line) => {
+      //create line mask and append it to the line
+      const lineMask = document.createElement('div');
+      lineMask.classList.add(QUOTE_LINE_CLASS);
+      line.append(lineMask);
+      lineMasks.push(lineMask);
+    });
+    const tl = gsap.timeline({
+      defaults: {
+        duration: 0.6,
+        ease: 'power1.out',
+      },
+      scrollTrigger: {
+        trigger: item,
+        start: 'top 90%',
+        end: 'top 30%',
+        scrub: true,
+      },
+    });
+    tl.fromTo(lineMasks, { width: '100%' }, { width: '0%', stagger: { each: 0.1 } });
+
+    /*
+      
+      .line-mask {
+  position: absolute;
+  top: 0;
+  background-color: #bf4141;
+  height: 100%;
+  z-index: 2;
+  mix-blend-mode: darken;
+}
+.line-mask.is-gradient {
+	background-image: linear-gradient(to right, #4bb4ff, #79e885 50%, #c9e136);
+  width: 0%;
+  left: 0;
+}
+.line-mask.is-grey {
+	background-color: #4e5066;
+  width: 100%;
+  right: 0;
+}*/
+  };
+
   //get all elements and apply animations
   const items = gsap.utils.toArray(`[${ELEMENT}]`);
   items.forEach((item) => {
@@ -239,6 +292,9 @@ export const scrollIn = function (gsapContext) {
     }
     if (scrollInType === RICH_TEXT) {
       scrollInRichText(item);
+    }
+    if (scrollInType === QUOTE) {
+      scrollInQuote(item);
     }
   });
 };
