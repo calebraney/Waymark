@@ -80,16 +80,16 @@ export const imageSwitch = function (gsapContext) {
     });
 
     //manage clicking of tab links (button elements)
-    // tabLinks.forEach((link, index) => {
-    //   if (!link) return;
-    //   link.addEventListener('click', (e) => {
-    //     const el = items[index];
-    //     if (!el) return;
-    //     el.scrollIntoView({
-    //       behavior: 'smooth',
-    //       block: 'center',
-    //     });
-    //   });
-    // });
+    tabLinks.forEach((link, index) => {
+      if (!link) return;
+      link.addEventListener('click', (e) => {
+        const el = items[index];
+        if (!el) return;
+        el.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
+      });
+    });
   });
 };
