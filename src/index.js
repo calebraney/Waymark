@@ -4,6 +4,9 @@ import { load } from './interactions/load';
 import { scrollIn } from './interactions/scrollin';
 import { scrolling } from './interactions/scrolling';
 import { attr, runSplit } from './utilities';
+import { marquee } from './interactions/marquee';
+import { accordion } from './interactions/accordion';
+import { imageSwitch } from './interactions/image-switch';
 import Plyr from 'plyr';
 
 // Webflow is initialized
@@ -225,6 +228,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
       headerGradients();
       customVideoPlayer();
+      marquee(gsapContext);
+      accordion(gsapContext);
+      imageSwitch(gsapContext);
       load(gsapContext);
       scrollIn(gsapContext);
       scrolling(gsapContext);
