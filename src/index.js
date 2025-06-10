@@ -8,6 +8,7 @@ import { accordion } from './interactions/accordion';
 import { imageSwitch } from './interactions/image-switch';
 import { textScrub } from './interactions/text-scrub';
 import Plyr from 'plyr';
+import { countUp } from './interactions/count-up';
 
 // Webflow is initialized
 document.addEventListener('DOMContentLoaded', function () {
@@ -228,6 +229,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       headerGradients();
       customVideoPlayer();
+      countUp(gsapContext);
       marquee(gsapContext);
       accordion(gsapContext);
       imageSwitch(gsapContext);
