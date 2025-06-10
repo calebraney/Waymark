@@ -1,4 +1,3 @@
-import SplitType from 'split-type';
 import { initLenis } from './interactions/lenis';
 import { load } from './interactions/load';
 import { scrollIn } from './interactions/scrollin';
@@ -7,6 +6,7 @@ import { attr, runSplit } from './utilities';
 import { marquee } from './interactions/marquee';
 import { accordion } from './interactions/accordion';
 import { imageSwitch } from './interactions/image-switch';
+import { textScrub } from './interactions/text-scrub';
 import Plyr from 'plyr';
 
 // Webflow is initialized
@@ -234,6 +234,7 @@ document.addEventListener('DOMContentLoaded', function () {
       load(gsapContext);
       scrollIn(gsapContext);
       scrolling(gsapContext);
+      textScrub(gsapContext);
       pricingPanels();
       // Conditional Animations
       if (!reduceMotion) {
