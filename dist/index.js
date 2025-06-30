@@ -1,2 +1,3836 @@
-(()=>{var ri=Object.create;var rt=Object.defineProperty;var ai=Object.getOwnPropertyDescriptor;var li=Object.getOwnPropertyNames;var ci=Object.getPrototypeOf,ui=Object.prototype.hasOwnProperty;var hi=(u,l,d)=>l in u?rt(u,l,{enumerable:!0,configurable:!0,writable:!0,value:d}):u[l]=d;var di=(u,l)=>()=>(l||u((l={exports:{}}).exports,l),l.exports);var pi=(u,l,d,v)=>{if(l&&typeof l=="object"||typeof l=="function")for(let p of li(l))!ui.call(u,p)&&p!==d&&rt(u,p,{get:()=>l[p],enumerable:!(v=ai(l,p))||v.enumerable});return u};var mi=(u,l,d)=>(d=u!=null?ri(ci(u)):{},pi(l||!u||!u.__esModule?rt(d,"default",{value:u,enumerable:!0}):d,u));var Ee=(u,l,d)=>hi(u,typeof l!="symbol"?l+"":l,d);var Ht=di((ht,dt)=>{typeof navigator=="object"&&function(u,l){typeof ht=="object"&&typeof dt<"u"?dt.exports=l():typeof define=="function"&&define.amd?define("Plyr",l):(u=typeof globalThis<"u"?globalThis:u||self).Plyr=l()}(ht,function(){"use strict";function u(e,i,t){return(i=function(s){var n=function(o,a){if(typeof o!="object"||o===null)return o;var c=o[Symbol.toPrimitive];if(c!==void 0){var h=c.call(o,a||"default");if(typeof h!="object")return h;throw new TypeError("@@toPrimitive must return a primitive value.")}return(a==="string"?String:Number)(o)}(s,"string");return typeof n=="symbol"?n:String(n)}(i))in e?Object.defineProperty(e,i,{value:t,enumerable:!0,configurable:!0,writable:!0}):e[i]=t,e}function l(e,i){for(var t=0;t<i.length;t++){var s=i[t];s.enumerable=s.enumerable||!1,s.configurable=!0,"value"in s&&(s.writable=!0),Object.defineProperty(e,s.key,s)}}function d(e,i,t){return i in e?Object.defineProperty(e,i,{value:t,enumerable:!0,configurable:!0,writable:!0}):e[i]=t,e}function v(e,i){var t=Object.keys(e);if(Object.getOwnPropertySymbols){var s=Object.getOwnPropertySymbols(e);i&&(s=s.filter(function(n){return Object.getOwnPropertyDescriptor(e,n).enumerable})),t.push.apply(t,s)}return t}function p(e){for(var i=1;i<arguments.length;i++){var t=arguments[i]!=null?arguments[i]:{};i%2?v(Object(t),!0).forEach(function(s){d(e,s,t[s])}):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(t)):v(Object(t)).forEach(function(s){Object.defineProperty(e,s,Object.getOwnPropertyDescriptor(t,s))})}return e}var y={addCSS:!0,thumbWidth:15,watch:!0},f=function(e){return e!=null?e.constructor:null},T=function(e,i){return!!(e&&i&&e instanceof i)},S=function(e){return e==null},x=function(e){return f(e)===Object},P=function(e){return f(e)===String},k=function(e){return Array.isArray(e)},C=function(e){return T(e,NodeList)},M={nullOrUndefined:S,object:x,number:function(e){return f(e)===Number&&!Number.isNaN(e)},string:P,boolean:function(e){return f(e)===Boolean},function:function(e){return f(e)===Function},array:k,nodeList:C,element:function(e){return T(e,Element)},event:function(e){return T(e,Event)},empty:function(e){return S(e)||(P(e)||k(e)||C(e))&&!e.length||x(e)&&!Object.keys(e).length}};function F(e,i){if(1>i){var t=function(s){var n="".concat(s).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);return n?Math.max(0,(n[1]?n[1].length:0)-(n[2]?+n[2]:0)):0}(i);return parseFloat(e.toFixed(t))}return Math.round(e/i)*i}var j=function(){function e(i,t){(function(s,n){if(!(s instanceof n))throw new TypeError("Cannot call a class as a function")})(this,e),M.element(i)?this.element=i:M.string(i)&&(this.element=document.querySelector(i)),M.element(this.element)&&M.empty(this.element.rangeTouch)&&(this.config=p({},y,{},t),this.init())}return function(i,t,s){t&&l(i.prototype,t),s&&l(i,s)}(e,[{key:"init",value:function(){e.enabled&&(this.config.addCSS&&(this.element.style.userSelect="none",this.element.style.webKitUserSelect="none",this.element.style.touchAction="manipulation"),this.listeners(!0),this.element.rangeTouch=this)}},{key:"destroy",value:function(){e.enabled&&(this.config.addCSS&&(this.element.style.userSelect="",this.element.style.webKitUserSelect="",this.element.style.touchAction=""),this.listeners(!1),this.element.rangeTouch=null)}},{key:"listeners",value:function(i){var t=this,s=i?"addEventListener":"removeEventListener";["touchstart","touchmove","touchend"].forEach(function(n){t.element[s](n,function(o){return t.set(o)},!1)})}},{key:"get",value:function(i){if(!e.enabled||!M.event(i))return null;var t,s=i.target,n=i.changedTouches[0],o=parseFloat(s.getAttribute("min"))||0,a=parseFloat(s.getAttribute("max"))||100,c=parseFloat(s.getAttribute("step"))||1,h=s.getBoundingClientRect(),m=100/h.width*(this.config.thumbWidth/2)/100;return 0>(t=100/h.width*(n.clientX-h.left))?t=0:100<t&&(t=100),50>t?t-=(100-2*t)*m:50<t&&(t+=2*(t-50)*m),o+F(t/100*(a-o),c)}},{key:"set",value:function(i){e.enabled&&M.event(i)&&!i.target.disabled&&(i.preventDefault(),i.target.value=this.get(i),function(t,s){if(t&&s){var n=new Event(s,{bubbles:!0});t.dispatchEvent(n)}}(i.target,i.type==="touchend"?"change":"input"))}}],[{key:"setup",value:function(i){var t=1<arguments.length&&arguments[1]!==void 0?arguments[1]:{},s=null;if(M.empty(i)||M.string(i)?s=Array.from(document.querySelectorAll(M.string(i)?i:'input[type="range"]')):M.element(i)?s=[i]:M.nodeList(i)?s=Array.from(i):M.array(i)&&(s=i.filter(M.element)),M.empty(s))return null;var n=p({},y,{},t);if(M.string(i)&&n.watch){var o=new MutationObserver(function(a){Array.from(a).forEach(function(c){Array.from(c.addedNodes).forEach(function(h){M.element(h)&&function(m,A){return function(){return Array.from(document.querySelectorAll(A)).includes(this)}.call(m,A)}(h,i)&&new e(h,n)})})});o.observe(document.body,{childList:!0,subtree:!0})}return s.map(function(a){return new e(a,t)})}},{key:"enabled",get:function(){return"ontouchstart"in document.documentElement}}]),e}();let $=e=>e!=null?e.constructor:null,J=(e,i)=>!!(e&&i&&e instanceof i),N=e=>e==null,I=e=>$(e)===Object,B=e=>$(e)===String,z=e=>typeof e=="function",ie=e=>Array.isArray(e),he=e=>J(e,NodeList),ae=e=>N(e)||(B(e)||ie(e)||he(e))&&!e.length||I(e)&&!Object.keys(e).length;var r={nullOrUndefined:N,object:I,number:e=>$(e)===Number&&!Number.isNaN(e),string:B,boolean:e=>$(e)===Boolean,function:z,array:ie,weakMap:e=>J(e,WeakMap),nodeList:he,element:e=>e!==null&&typeof e=="object"&&e.nodeType===1&&typeof e.style=="object"&&typeof e.ownerDocument=="object",textNode:e=>$(e)===Text,event:e=>J(e,Event),keyboardEvent:e=>J(e,KeyboardEvent),cue:e=>J(e,window.TextTrackCue)||J(e,window.VTTCue),track:e=>J(e,TextTrack)||!N(e)&&B(e.kind),promise:e=>J(e,Promise)&&z(e.then),url:e=>{if(J(e,window.URL))return!0;if(!B(e))return!1;let i=e;e.startsWith("http://")&&e.startsWith("https://")||(i=`http://${e}`);try{return!ae(new URL(i).hostname)}catch{return!1}},empty:ae};let me=(()=>{let e=document.createElement("span"),i={WebkitTransition:"webkitTransitionEnd",MozTransition:"transitionend",OTransition:"oTransitionEnd otransitionend",transition:"transitionend"},t=Object.keys(i).find(s=>e.style[s]!==void 0);return!!r.string(t)&&i[t]})();function ue(e,i){setTimeout(()=>{try{e.hidden=!0,e.offsetHeight,e.hidden=!1}catch{}},i)}var ee={isIE:!!window.document.documentMode,isEdge:/Edge/g.test(navigator.userAgent),isWebKit:"WebkitAppearance"in document.documentElement.style&&!/Edge/g.test(navigator.userAgent),isIPhone:/iPhone|iPod/gi.test(navigator.userAgent)&&navigator.maxTouchPoints>1,isIPadOS:navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1,isIos:/iPad|iPhone|iPod/gi.test(navigator.userAgent)&&navigator.maxTouchPoints>1};function Ce(e,i){return i.split(".").reduce((t,s)=>t&&t[s],e)}function K(e={},...i){if(!i.length)return e;let t=i.shift();return r.object(t)?(Object.keys(t).forEach(s=>{r.object(t[s])?(Object.keys(e).includes(s)||Object.assign(e,{[s]:{}}),K(e[s],t[s])):Object.assign(e,{[s]:t[s]})}),K(e,...i)):e}function L(e,i){let t=e.length?e:[e];Array.from(t).reverse().forEach((s,n)=>{let o=n>0?i.cloneNode(!0):i,a=s.parentNode,c=s.nextSibling;o.appendChild(s),c?a.insertBefore(o,c):a.appendChild(o)})}function D(e,i){r.element(e)&&!r.empty(i)&&Object.entries(i).filter(([,t])=>!r.nullOrUndefined(t)).forEach(([t,s])=>e.setAttribute(t,s))}function g(e,i,t){let s=document.createElement(e);return r.object(i)&&D(s,i),r.string(t)&&(s.innerText=t),s}function le(e,i,t,s){r.element(i)&&i.appendChild(g(e,t,s))}function q(e){r.nodeList(e)||r.array(e)?Array.from(e).forEach(q):r.element(e)&&r.element(e.parentNode)&&e.parentNode.removeChild(e)}function ve(e){if(!r.element(e))return;let{length:i}=e.childNodes;for(;i>0;)e.removeChild(e.lastChild),i-=1}function Se(e,i){return r.element(i)&&r.element(i.parentNode)&&r.element(e)?(i.parentNode.replaceChild(e,i),e):null}function be(e,i){if(!r.string(e)||r.empty(e))return{};let t={},s=K({},i);return e.split(",").forEach(n=>{let o=n.trim(),a=o.replace(".",""),c=o.replace(/[[\]]/g,"").split("="),[h]=c,m=c.length>1?c[1].replace(/["']/g,""):"";switch(o.charAt(0)){case".":r.string(s.class)?t.class=`${s.class} ${a}`:t.class=a;break;case"#":t.id=o.replace("#","");break;case"[":t[h]=m}}),K(s,t)}function Ae(e,i){if(!r.element(e))return;let t=i;r.boolean(t)||(t=!e.hidden),e.hidden=t}function X(e,i,t){if(r.nodeList(e))return Array.from(e).map(s=>X(s,i,t));if(r.element(e)){let s="toggle";return t!==void 0&&(s=t?"add":"remove"),e.classList[s](i),e.classList.contains(i)}return!1}function Re(e,i){return r.element(e)&&e.classList.contains(i)}function Ne(e,i){let{prototype:t}=Element;return(t.matches||t.webkitMatchesSelector||t.mozMatchesSelector||t.msMatchesSelector||function(){return Array.from(document.querySelectorAll(i)).includes(this)}).call(e,i)}function se(e){return this.elements.container.querySelectorAll(e)}function ce(e){return this.elements.container.querySelector(e)}function Le(e=null,i=!1){r.element(e)&&e.focus({preventScroll:!0,focusVisible:i})}let fe={"audio/ogg":"vorbis","audio/wav":"1","video/webm":"vp8, vorbis","video/mp4":"avc1.42E01E, mp4a.40.2","video/ogg":"theora"},Q={audio:"canPlayType"in document.createElement("audio"),video:"canPlayType"in document.createElement("video"),check(e,i){let t=Q[e]||i!=="html5";return{api:t,ui:t&&Q.rangeInput}},pip:!(ee.isIPhone||!r.function(g("video").webkitSetPresentationMode)&&(!document.pictureInPictureEnabled||g("video").disablePictureInPicture)),airplay:r.function(window.WebKitPlaybackTargetAvailabilityEvent),playsinline:"playsInline"in document.createElement("video"),mime(e){if(r.empty(e))return!1;let[i]=e.split("/"),t=e;if(!this.isHTML5||i!==this.type)return!1;Object.keys(fe).includes(t)&&(t+=`; codecs="${fe[e]}"`);try{return!!(t&&this.media.canPlayType(t).replace(/no/,""))}catch{return!1}},textTracks:"textTracks"in document.createElement("video"),rangeInput:(()=>{let e=document.createElement("input");return e.type="range",e.type==="range"})(),touch:"ontouchstart"in document.documentElement,transitions:me!==!1,reducedMotion:"matchMedia"in window&&window.matchMedia("(prefers-reduced-motion)").matches},ne=(()=>{let e=!1;try{let i=Object.defineProperty({},"passive",{get:()=>(e=!0,null)});window.addEventListener("test",null,i),window.removeEventListener("test",null,i)}catch{}return e})();function _e(e,i,t,s=!1,n=!0,o=!1){if(!e||!("addEventListener"in e)||r.empty(i)||!r.function(t))return;let a=i.split(" "),c=o;ne&&(c={passive:n,capture:o}),a.forEach(h=>{this&&this.eventListeners&&s&&this.eventListeners.push({element:e,type:h,callback:t,options:c}),e[s?"addEventListener":"removeEventListener"](h,t,c)})}function W(e,i="",t,s=!0,n=!1){_e.call(this,e,i,t,!0,s,n)}function Ie(e,i="",t,s=!0,n=!1){_e.call(this,e,i,t,!1,s,n)}function De(e,i="",t,s=!0,n=!1){let o=(...a)=>{Ie(e,i,o,s,n),t.apply(this,a)};_e.call(this,e,i,o,!0,s,n)}function O(e,i="",t=!1,s={}){if(!r.element(e)||r.empty(i))return;let n=new CustomEvent(i,{bubbles:t,detail:{...s,plyr:this}});e.dispatchEvent(n)}function Qe(){this&&this.eventListeners&&(this.eventListeners.forEach(e=>{let{element:i,type:t,callback:s,options:n}=e;i.removeEventListener(t,s,n)}),this.eventListeners=[])}function Wt(){return new Promise(e=>this.ready?setTimeout(e,0):W.call(this,this.elements.container,"ready",e)).then(()=>{})}function ke(e){r.promise(e)&&e.then(null,()=>{})}function Je(e){return r.array(e)?e.filter((i,t)=>e.indexOf(i)===t):e}function pt(e,i){return r.array(e)&&e.length?e.reduce((t,s)=>Math.abs(s-i)<Math.abs(t-i)?s:t):null}function mt(e){return!(!window||!window.CSS)&&window.CSS.supports(e)}let gt=[[1,1],[4,3],[3,4],[5,4],[4,5],[3,2],[2,3],[16,10],[10,16],[16,9],[9,16],[21,9],[9,21],[32,9],[9,32]].reduce((e,[i,t])=>({...e,[i/t]:[i,t]}),{});function ft(e){return r.array(e)||r.string(e)&&e.includes(":")?(r.array(e)?e:e.split(":")).map(Number).every(r.number):!1}function Be(e){if(!r.array(e)||!e.every(r.number))return null;let[i,t]=e,s=(o,a)=>a===0?o:s(a,o%a),n=s(i,t);return[i/n,t/n]}function Ze(e){let i=s=>ft(s)?s.split(":").map(Number):null,t=i(e);if(t===null&&(t=i(this.config.ratio)),t===null&&!r.empty(this.embed)&&r.array(this.embed.ratio)&&({ratio:t}=this.embed),t===null&&this.isHTML5){let{videoWidth:s,videoHeight:n}=this.media;t=[s,n]}return Be(t)}function Oe(e){if(!this.isVideo)return{};let{wrapper:i}=this.elements,t=Ze.call(this,e);if(!r.array(t))return{};let[s,n]=Be(t),o=100/s*n;if(mt(`aspect-ratio: ${s}/${n}`)?i.style.aspectRatio=`${s}/${n}`:i.style.paddingBottom=`${o}%`,this.isVimeo&&!this.config.vimeo.premium&&this.supported.ui){let a=100/this.media.offsetWidth*parseInt(window.getComputedStyle(this.media).paddingBottom,10),c=(a-o)/(a/50);this.fullscreen.active?i.style.paddingBottom=null:this.media.style.transform=`translateY(-${c}%)`}else this.isHTML5&&i.classList.add(this.config.classNames.videoFixedRatio);return{padding:o,ratio:t}}function yt(e,i,t=.05){let s=e/i,n=pt(Object.keys(gt),s);return Math.abs(n-s)<=t?gt[n]:[e,i]}let Pe={getSources(){return this.isHTML5?Array.from(this.media.querySelectorAll("source")).filter(e=>{let i=e.getAttribute("type");return!!r.empty(i)||Q.mime.call(this,i)}):[]},getQualityOptions(){return this.config.quality.forced?this.config.quality.options:Pe.getSources.call(this).map(e=>Number(e.getAttribute("size"))).filter(Boolean)},setup(){if(!this.isHTML5)return;let e=this;e.options.speed=e.config.speed.options,r.empty(this.config.ratio)||Oe.call(e),Object.defineProperty(e.media,"quality",{get(){let i=Pe.getSources.call(e).find(t=>t.getAttribute("src")===e.source);return i&&Number(i.getAttribute("size"))},set(i){if(e.quality!==i){if(e.config.quality.forced&&r.function(e.config.quality.onChange))e.config.quality.onChange(i);else{let t=Pe.getSources.call(e).find(h=>Number(h.getAttribute("size"))===i);if(!t)return;let{currentTime:s,paused:n,preload:o,readyState:a,playbackRate:c}=e.media;e.media.src=t.getAttribute("src"),(o!=="none"||a)&&(e.once("loadedmetadata",()=>{e.speed=c,e.currentTime=s,n||ke(e.play())}),e.media.load())}O.call(e,e.media,"qualitychange",!1,{quality:i})}}})},cancelRequests(){this.isHTML5&&(q(Pe.getSources.call(this)),this.media.setAttribute("src",this.config.blankVideo),this.media.load(),this.debug.log("Cancelled network requests"))}};function et(e,...i){return r.empty(e)?e:e.toString().replace(/{(\d+)}/g,(t,s)=>i[s].toString())}let Ve=(e="",i="",t="")=>e.replace(new RegExp(i.toString().replace(/([.*+?^=!:${}()|[\]/\\])/g,"\\$1"),"g"),t.toString()),bt=(e="")=>e.toString().replace(/\w\S*/g,i=>i.charAt(0).toUpperCase()+i.slice(1).toLowerCase());function Yt(e=""){let i=e.toString();return i=function(t=""){let s=t.toString();return s=Ve(s,"-"," "),s=Ve(s,"_"," "),s=bt(s),Ve(s," ","")}(i),i.charAt(0).toLowerCase()+i.slice(1)}function Gt(e){let i=document.createElement("div");return i.appendChild(e),i.innerHTML}let vt={pip:"PIP",airplay:"AirPlay",html5:"HTML5",vimeo:"Vimeo",youtube:"YouTube"},pe={get(e="",i={}){if(r.empty(e)||r.empty(i))return"";let t=Ce(i.i18n,e);if(r.empty(t))return Object.keys(vt).includes(e)?vt[e]:"";let s={"{seektime}":i.seekTime,"{title}":i.title};return Object.entries(s).forEach(([n,o])=>{t=Ve(t,n,o)}),t}};class $e{constructor(i){u(this,"get",t=>{if(!$e.supported||!this.enabled)return null;let s=window.localStorage.getItem(this.key);if(r.empty(s))return null;let n=JSON.parse(s);return r.string(t)&&t.length?n[t]:n}),u(this,"set",t=>{if(!$e.supported||!this.enabled||!r.object(t))return;let s=this.get();r.empty(s)&&(s={}),K(s,t);try{window.localStorage.setItem(this.key,JSON.stringify(s))}catch{}}),this.enabled=i.config.storage.enabled,this.key=i.config.storage.key}static get supported(){try{if(!("localStorage"in window))return!1;let i="___test";return window.localStorage.setItem(i,i),window.localStorage.removeItem(i),!0}catch{return!1}}}function qe(e,i="text"){return new Promise((t,s)=>{try{let n=new XMLHttpRequest;if(!("withCredentials"in n))return;n.addEventListener("load",()=>{if(i==="text")try{t(JSON.parse(n.responseText))}catch{t(n.responseText)}else t(n.response)}),n.addEventListener("error",()=>{throw new Error(n.status)}),n.open("GET",e,!0),n.responseType=i,n.send()}catch(n){s(n)}})}function wt(e,i){if(!r.string(e))return;let t="cache",s=r.string(i),n=!1,o=()=>document.getElementById(i)!==null,a=(c,h)=>{c.innerHTML=h,s&&o()||document.body.insertAdjacentElement("afterbegin",c)};if(!s||!o()){let c=$e.supported,h=document.createElement("div");if(h.setAttribute("hidden",""),s&&h.setAttribute("id",i),c){let m=window.localStorage.getItem(`${t}-${i}`);if(n=m!==null,n){let A=JSON.parse(m);a(h,A.content)}}qe(e).then(m=>{if(!r.empty(m)){if(c)try{window.localStorage.setItem(`${t}-${i}`,JSON.stringify({content:m}))}catch{}a(h,m)}}).catch(()=>{})}}let Tt=e=>Math.trunc(e/60/60%60,10),Kt=e=>Math.trunc(e/60%60,10),Xt=e=>Math.trunc(e%60,10);function Ue(e=0,i=!1,t=!1){if(!r.number(e))return Ue(void 0,i,t);let s=c=>`0${c}`.slice(-2),n=Tt(e),o=Kt(e),a=Xt(e);return n=i||n>0?`${n}:`:"",`${t&&e>0?"-":""}${n}${s(o)}:${s(a)}`}let w={getIconUrl(){let e=new URL(this.config.iconUrl,window.location),i=window.location.host?window.location.host:window.top.location.host,t=e.host!==i||ee.isIE&&!window.svg4everybody;return{url:this.config.iconUrl,cors:t}},findElements(){try{return this.elements.controls=ce.call(this,this.config.selectors.controls.wrapper),this.elements.buttons={play:se.call(this,this.config.selectors.buttons.play),pause:ce.call(this,this.config.selectors.buttons.pause),restart:ce.call(this,this.config.selectors.buttons.restart),rewind:ce.call(this,this.config.selectors.buttons.rewind),fastForward:ce.call(this,this.config.selectors.buttons.fastForward),mute:ce.call(this,this.config.selectors.buttons.mute),pip:ce.call(this,this.config.selectors.buttons.pip),airplay:ce.call(this,this.config.selectors.buttons.airplay),settings:ce.call(this,this.config.selectors.buttons.settings),captions:ce.call(this,this.config.selectors.buttons.captions),fullscreen:ce.call(this,this.config.selectors.buttons.fullscreen)},this.elements.progress=ce.call(this,this.config.selectors.progress),this.elements.inputs={seek:ce.call(this,this.config.selectors.inputs.seek),volume:ce.call(this,this.config.selectors.inputs.volume)},this.elements.display={buffer:ce.call(this,this.config.selectors.display.buffer),currentTime:ce.call(this,this.config.selectors.display.currentTime),duration:ce.call(this,this.config.selectors.display.duration)},r.element(this.elements.progress)&&(this.elements.display.seekTooltip=this.elements.progress.querySelector(`.${this.config.classNames.tooltip}`)),!0}catch(e){return this.debug.warn("It looks like there is a problem with your custom controls HTML",e),this.toggleNativeControls(!0),!1}},createIcon(e,i){let t="http://www.w3.org/2000/svg",s=w.getIconUrl.call(this),n=`${s.cors?"":s.url}#${this.config.iconPrefix}`,o=document.createElementNS(t,"svg");D(o,K(i,{"aria-hidden":"true",focusable:"false"}));let a=document.createElementNS(t,"use"),c=`${n}-${e}`;return"href"in a&&a.setAttributeNS("http://www.w3.org/1999/xlink","href",c),a.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href",c),o.appendChild(a),o},createLabel(e,i={}){let t=pe.get(e,this.config);return g("span",{...i,class:[i.class,this.config.classNames.hidden].filter(Boolean).join(" ")},t)},createBadge(e){if(r.empty(e))return null;let i=g("span",{class:this.config.classNames.menu.value});return i.appendChild(g("span",{class:this.config.classNames.menu.badge},e)),i},createButton(e,i){let t=K({},i),s=Yt(e),n={element:"button",toggle:!1,label:null,icon:null,labelPressed:null,iconPressed:null};switch(["element","icon","label"].forEach(a=>{Object.keys(t).includes(a)&&(n[a]=t[a],delete t[a])}),n.element!=="button"||Object.keys(t).includes("type")||(t.type="button"),Object.keys(t).includes("class")?t.class.split(" ").some(a=>a===this.config.classNames.control)||K(t,{class:`${t.class} ${this.config.classNames.control}`}):t.class=this.config.classNames.control,e){case"play":n.toggle=!0,n.label="play",n.labelPressed="pause",n.icon="play",n.iconPressed="pause";break;case"mute":n.toggle=!0,n.label="mute",n.labelPressed="unmute",n.icon="volume",n.iconPressed="muted";break;case"captions":n.toggle=!0,n.label="enableCaptions",n.labelPressed="disableCaptions",n.icon="captions-off",n.iconPressed="captions-on";break;case"fullscreen":n.toggle=!0,n.label="enterFullscreen",n.labelPressed="exitFullscreen",n.icon="enter-fullscreen",n.iconPressed="exit-fullscreen";break;case"play-large":t.class+=` ${this.config.classNames.control}--overlaid`,s="play",n.label="play",n.icon="play";break;default:r.empty(n.label)&&(n.label=s),r.empty(n.icon)&&(n.icon=e)}let o=g(n.element);return n.toggle?(o.appendChild(w.createIcon.call(this,n.iconPressed,{class:"icon--pressed"})),o.appendChild(w.createIcon.call(this,n.icon,{class:"icon--not-pressed"})),o.appendChild(w.createLabel.call(this,n.labelPressed,{class:"label--pressed"})),o.appendChild(w.createLabel.call(this,n.label,{class:"label--not-pressed"}))):(o.appendChild(w.createIcon.call(this,n.icon)),o.appendChild(w.createLabel.call(this,n.label))),K(t,be(this.config.selectors.buttons[s],t)),D(o,t),s==="play"?(r.array(this.elements.buttons[s])||(this.elements.buttons[s]=[]),this.elements.buttons[s].push(o)):this.elements.buttons[s]=o,o},createRange(e,i){let t=g("input",K(be(this.config.selectors.inputs[e]),{type:"range",min:0,max:100,step:.01,value:0,autocomplete:"off",role:"slider","aria-label":pe.get(e,this.config),"aria-valuemin":0,"aria-valuemax":100,"aria-valuenow":0},i));return this.elements.inputs[e]=t,w.updateRangeFill.call(this,t),j.setup(t),t},createProgress(e,i){let t=g("progress",K(be(this.config.selectors.display[e]),{min:0,max:100,value:0,role:"progressbar","aria-hidden":!0},i));if(e!=="volume"){t.appendChild(g("span",null,"0"));let s={played:"played",buffer:"buffered"}[e],n=s?pe.get(s,this.config):"";t.innerText=`% ${n.toLowerCase()}`}return this.elements.display[e]=t,t},createTime(e,i){let t=be(this.config.selectors.display[e],i),s=g("div",K(t,{class:`${t.class?t.class:""} ${this.config.classNames.display.time} `.trim(),"aria-label":pe.get(e,this.config),role:"timer"}),"00:00");return this.elements.display[e]=s,s},bindMenuItemShortcuts(e,i){W.call(this,e,"keydown keyup",t=>{if(![" ","ArrowUp","ArrowDown","ArrowRight"].includes(t.key)||(t.preventDefault(),t.stopPropagation(),t.type==="keydown"))return;let s=Ne(e,'[role="menuitemradio"]');if(!s&&[" ","ArrowRight"].includes(t.key))w.showMenuPanel.call(this,i,!0);else{let n;t.key!==" "&&(t.key==="ArrowDown"||s&&t.key==="ArrowRight"?(n=e.nextElementSibling,r.element(n)||(n=e.parentNode.firstElementChild)):(n=e.previousElementSibling,r.element(n)||(n=e.parentNode.lastElementChild)),Le.call(this,n,!0))}},!1),W.call(this,e,"keyup",t=>{t.key==="Return"&&w.focusFirstMenuItem.call(this,null,!0)})},createMenuItem({value:e,list:i,type:t,title:s,badge:n=null,checked:o=!1}){let a=be(this.config.selectors.inputs[t]),c=g("button",K(a,{type:"button",role:"menuitemradio",class:`${this.config.classNames.control} ${a.class?a.class:""}`.trim(),"aria-checked":o,value:e})),h=g("span");h.innerHTML=s,r.element(n)&&h.appendChild(n),c.appendChild(h),Object.defineProperty(c,"checked",{enumerable:!0,get:()=>c.getAttribute("aria-checked")==="true",set(m){m&&Array.from(c.parentNode.children).filter(A=>Ne(A,'[role="menuitemradio"]')).forEach(A=>A.setAttribute("aria-checked","false")),c.setAttribute("aria-checked",m?"true":"false")}}),this.listeners.bind(c,"click keyup",m=>{if(!r.keyboardEvent(m)||m.key===" "){switch(m.preventDefault(),m.stopPropagation(),c.checked=!0,t){case"language":this.currentTrack=Number(e);break;case"quality":this.quality=e;break;case"speed":this.speed=parseFloat(e)}w.showMenuPanel.call(this,"home",r.keyboardEvent(m))}},t,!1),w.bindMenuItemShortcuts.call(this,c,t),i.appendChild(c)},formatTime(e=0,i=!1){return r.number(e)?Ue(e,Tt(this.duration)>0,i):e},updateTimeDisplay(e=null,i=0,t=!1){r.element(e)&&r.number(i)&&(e.innerText=w.formatTime(i,t))},updateVolume(){this.supported.ui&&(r.element(this.elements.inputs.volume)&&w.setRange.call(this,this.elements.inputs.volume,this.muted?0:this.volume),r.element(this.elements.buttons.mute)&&(this.elements.buttons.mute.pressed=this.muted||this.volume===0))},setRange(e,i=0){r.element(e)&&(e.value=i,w.updateRangeFill.call(this,e))},updateProgress(e){if(!this.supported.ui||!r.event(e))return;let i=0,t=(o,a)=>{let c=r.number(a)?a:0,h=r.element(o)?o:this.elements.display.buffer;if(r.element(h)){h.value=c;let m=h.getElementsByTagName("span")[0];r.element(m)&&(m.childNodes[0].nodeValue=c)}};if(e)switch(e.type){case"timeupdate":case"seeking":case"seeked":s=this.currentTime,n=this.duration,i=s===0||n===0||Number.isNaN(s)||Number.isNaN(n)?0:(s/n*100).toFixed(2),e.type==="timeupdate"&&w.setRange.call(this,this.elements.inputs.seek,i);break;case"playing":case"progress":t(this.elements.display.buffer,100*this.buffered)}var s,n},updateRangeFill(e){let i=r.event(e)?e.target:e;if(r.element(i)&&i.getAttribute("type")==="range"){if(Ne(i,this.config.selectors.inputs.seek)){i.setAttribute("aria-valuenow",this.currentTime);let t=w.formatTime(this.currentTime),s=w.formatTime(this.duration),n=pe.get("seekLabel",this.config);i.setAttribute("aria-valuetext",n.replace("{currentTime}",t).replace("{duration}",s))}else if(Ne(i,this.config.selectors.inputs.volume)){let t=100*i.value;i.setAttribute("aria-valuenow",t),i.setAttribute("aria-valuetext",`${t.toFixed(1)}%`)}else i.setAttribute("aria-valuenow",i.value);(ee.isWebKit||ee.isIPadOS)&&i.style.setProperty("--value",i.value/i.max*100+"%")}},updateSeekTooltip(e){var i,t;if(!this.config.tooltips.seek||!r.element(this.elements.inputs.seek)||!r.element(this.elements.display.seekTooltip)||this.duration===0)return;let s=this.elements.display.seekTooltip,n=`${this.config.classNames.tooltip}--visible`,o=A=>X(s,n,A);if(this.touch)return void o(!1);let a=0,c=this.elements.progress.getBoundingClientRect();if(r.event(e))a=100/c.width*(e.pageX-c.left);else{if(!Re(s,n))return;a=parseFloat(s.style.left,10)}a<0?a=0:a>100&&(a=100);let h=this.duration/100*a;s.innerText=w.formatTime(h);let m=(i=this.config.markers)===null||i===void 0||(t=i.points)===null||t===void 0?void 0:t.find(({time:A})=>A===Math.round(h));m&&s.insertAdjacentHTML("afterbegin",`${m.label}<br>`),s.style.left=`${a}%`,r.event(e)&&["mouseenter","mouseleave"].includes(e.type)&&o(e.type==="mouseenter")},timeUpdate(e){let i=!r.element(this.elements.display.duration)&&this.config.invertTime;w.updateTimeDisplay.call(this,this.elements.display.currentTime,i?this.duration-this.currentTime:this.currentTime,i),e&&e.type==="timeupdate"&&this.media.seeking||w.updateProgress.call(this,e)},durationUpdate(){if(!this.supported.ui||!this.config.invertTime&&this.currentTime)return;if(this.duration>=2**32)return Ae(this.elements.display.currentTime,!0),void Ae(this.elements.progress,!0);r.element(this.elements.inputs.seek)&&this.elements.inputs.seek.setAttribute("aria-valuemax",this.duration);let e=r.element(this.elements.display.duration);!e&&this.config.displayDuration&&this.paused&&w.updateTimeDisplay.call(this,this.elements.display.currentTime,this.duration),e&&w.updateTimeDisplay.call(this,this.elements.display.duration,this.duration),this.config.markers.enabled&&w.setMarkers.call(this),w.updateSeekTooltip.call(this)},toggleMenuButton(e,i){Ae(this.elements.settings.buttons[e],!i)},updateSetting(e,i,t){let s=this.elements.settings.panels[e],n=null,o=i;if(e==="captions")n=this.currentTrack;else{if(n=r.empty(t)?this[e]:t,r.empty(n)&&(n=this.config[e].default),!r.empty(this.options[e])&&!this.options[e].includes(n))return void this.debug.warn(`Unsupported value of '${n}' for ${e}`);if(!this.config[e].options.includes(n))return void this.debug.warn(`Disabled value of '${n}' for ${e}`)}if(r.element(o)||(o=s&&s.querySelector('[role="menu"]')),!r.element(o))return;this.elements.settings.buttons[e].querySelector(`.${this.config.classNames.menu.value}`).innerHTML=w.getLabel.call(this,e,n);let a=o&&o.querySelector(`[value="${n}"]`);r.element(a)&&(a.checked=!0)},getLabel(e,i){switch(e){case"speed":return i===1?pe.get("normal",this.config):`${i}&times;`;case"quality":if(r.number(i)){let t=pe.get(`qualityLabel.${i}`,this.config);return t.length?t:`${i}p`}return bt(i);case"captions":return Z.getLabel.call(this);default:return null}},setQualityMenu(e){if(!r.element(this.elements.settings.panels.quality))return;let i="quality",t=this.elements.settings.panels.quality.querySelector('[role="menu"]');r.array(e)&&(this.options.quality=Je(e).filter(o=>this.config.quality.options.includes(o)));let s=!r.empty(this.options.quality)&&this.options.quality.length>1;if(w.toggleMenuButton.call(this,i,s),ve(t),w.checkMenu.call(this),!s)return;let n=o=>{let a=pe.get(`qualityBadge.${o}`,this.config);return a.length?w.createBadge.call(this,a):null};this.options.quality.sort((o,a)=>{let c=this.config.quality.options;return c.indexOf(o)>c.indexOf(a)?1:-1}).forEach(o=>{w.createMenuItem.call(this,{value:o,list:t,type:i,title:w.getLabel.call(this,"quality",o),badge:n(o)})}),w.updateSetting.call(this,i,t)},setCaptionsMenu(){if(!r.element(this.elements.settings.panels.captions))return;let e="captions",i=this.elements.settings.panels.captions.querySelector('[role="menu"]'),t=Z.getTracks.call(this),s=!!t.length;if(w.toggleMenuButton.call(this,e,s),ve(i),w.checkMenu.call(this),!s)return;let n=t.map((o,a)=>({value:a,checked:this.captions.toggled&&this.currentTrack===a,title:Z.getLabel.call(this,o),badge:o.language&&w.createBadge.call(this,o.language.toUpperCase()),list:i,type:"language"}));n.unshift({value:-1,checked:!this.captions.toggled,title:pe.get("disabled",this.config),list:i,type:"language"}),n.forEach(w.createMenuItem.bind(this)),w.updateSetting.call(this,e,i)},setSpeedMenu(){if(!r.element(this.elements.settings.panels.speed))return;let e="speed",i=this.elements.settings.panels.speed.querySelector('[role="menu"]');this.options.speed=this.options.speed.filter(s=>s>=this.minimumSpeed&&s<=this.maximumSpeed);let t=!r.empty(this.options.speed)&&this.options.speed.length>1;w.toggleMenuButton.call(this,e,t),ve(i),w.checkMenu.call(this),t&&(this.options.speed.forEach(s=>{w.createMenuItem.call(this,{value:s,list:i,type:e,title:w.getLabel.call(this,"speed",s)})}),w.updateSetting.call(this,e,i))},checkMenu(){let{buttons:e}=this.elements.settings,i=!r.empty(e)&&Object.values(e).some(t=>!t.hidden);Ae(this.elements.settings.menu,!i)},focusFirstMenuItem(e,i=!1){if(this.elements.settings.popup.hidden)return;let t=e;r.element(t)||(t=Object.values(this.elements.settings.panels).find(n=>!n.hidden));let s=t.querySelector('[role^="menuitem"]');Le.call(this,s,i)},toggleMenu(e){let{popup:i}=this.elements.settings,t=this.elements.buttons.settings;if(!r.element(i)||!r.element(t))return;let{hidden:s}=i,n=s;if(r.boolean(e))n=e;else if(r.keyboardEvent(e)&&e.key==="Escape")n=!1;else if(r.event(e)){let o=r.function(e.composedPath)?e.composedPath()[0]:e.target,a=i.contains(o);if(a||!a&&e.target!==t&&n)return}t.setAttribute("aria-expanded",n),Ae(i,!n),X(this.elements.container,this.config.classNames.menu.open,n),n&&r.keyboardEvent(e)?w.focusFirstMenuItem.call(this,null,!0):n||s||Le.call(this,t,r.keyboardEvent(e))},getMenuSize(e){let i=e.cloneNode(!0);i.style.position="absolute",i.style.opacity=0,i.removeAttribute("hidden"),e.parentNode.appendChild(i);let t=i.scrollWidth,s=i.scrollHeight;return q(i),{width:t,height:s}},showMenuPanel(e="",i=!1){let t=this.elements.container.querySelector(`#plyr-settings-${this.id}-${e}`);if(!r.element(t))return;let s=t.parentNode,n=Array.from(s.children).find(o=>!o.hidden);if(Q.transitions&&!Q.reducedMotion){s.style.width=`${n.scrollWidth}px`,s.style.height=`${n.scrollHeight}px`;let o=w.getMenuSize.call(this,t),a=c=>{c.target===s&&["width","height"].includes(c.propertyName)&&(s.style.width="",s.style.height="",Ie.call(this,s,me,a))};W.call(this,s,me,a),s.style.width=`${o.width}px`,s.style.height=`${o.height}px`}Ae(n,!0),Ae(t,!1),w.focusFirstMenuItem.call(this,t,i)},setDownloadUrl(){let e=this.elements.buttons.download;r.element(e)&&e.setAttribute("href",this.download)},create(e){let{bindMenuItemShortcuts:i,createButton:t,createProgress:s,createRange:n,createTime:o,setQualityMenu:a,setSpeedMenu:c,showMenuPanel:h}=w;this.elements.controls=null,r.array(this.config.controls)&&this.config.controls.includes("play-large")&&this.elements.container.appendChild(t.call(this,"play-large"));let m=g("div",be(this.config.selectors.controls.wrapper));this.elements.controls=m;let A={class:"plyr__controls__item"};return Je(r.array(this.config.controls)?this.config.controls:[]).forEach(_=>{if(_==="restart"&&m.appendChild(t.call(this,"restart",A)),_==="rewind"&&m.appendChild(t.call(this,"rewind",A)),_==="play"&&m.appendChild(t.call(this,"play",A)),_==="fast-forward"&&m.appendChild(t.call(this,"fast-forward",A)),_==="progress"){let b=g("div",{class:`${A.class} plyr__progress__container`}),V=g("div",be(this.config.selectors.progress));if(V.appendChild(n.call(this,"seek",{id:`plyr-seek-${e.id}`})),V.appendChild(s.call(this,"buffer")),this.config.tooltips.seek){let Y=g("span",{class:this.config.classNames.tooltip},"00:00");V.appendChild(Y),this.elements.display.seekTooltip=Y}this.elements.progress=V,b.appendChild(this.elements.progress),m.appendChild(b)}if(_==="current-time"&&m.appendChild(o.call(this,"currentTime",A)),_==="duration"&&m.appendChild(o.call(this,"duration",A)),_==="mute"||_==="volume"){let{volume:b}=this.elements;if(r.element(b)&&m.contains(b)||(b=g("div",K({},A,{class:`${A.class} plyr__volume`.trim()})),this.elements.volume=b,m.appendChild(b)),_==="mute"&&b.appendChild(t.call(this,"mute")),_==="volume"&&!ee.isIos&&!ee.isIPadOS){let V={max:1,step:.05,value:this.config.volume};b.appendChild(n.call(this,"volume",K(V,{id:`plyr-volume-${e.id}`})))}}if(_==="captions"&&m.appendChild(t.call(this,"captions",A)),_==="settings"&&!r.empty(this.config.settings)){let b=g("div",K({},A,{class:`${A.class} plyr__menu`.trim(),hidden:""}));b.appendChild(t.call(this,"settings",{"aria-haspopup":!0,"aria-controls":`plyr-settings-${e.id}`,"aria-expanded":!1}));let V=g("div",{class:"plyr__menu__container",id:`plyr-settings-${e.id}`,hidden:""}),Y=g("div"),G=g("div",{id:`plyr-settings-${e.id}-home`}),oe=g("div",{role:"menu"});G.appendChild(oe),Y.appendChild(G),this.elements.settings.panels.home=G,this.config.settings.forEach(H=>{let re=g("button",K(be(this.config.selectors.buttons.settings),{type:"button",class:`${this.config.classNames.control} ${this.config.classNames.control}--forward`,role:"menuitem","aria-haspopup":!0,hidden:""}));i.call(this,re,H),W.call(this,re,"click",()=>{h.call(this,H,!1)});let E=g("span",null,pe.get(H,this.config)),U=g("span",{class:this.config.classNames.menu.value});U.innerHTML=e[H],E.appendChild(U),re.appendChild(E),oe.appendChild(re);let de=g("div",{id:`plyr-settings-${e.id}-${H}`,hidden:""}),ye=g("button",{type:"button",class:`${this.config.classNames.control} ${this.config.classNames.control}--back`});ye.appendChild(g("span",{"aria-hidden":!0},pe.get(H,this.config))),ye.appendChild(g("span",{class:this.config.classNames.hidden},pe.get("menuBack",this.config))),W.call(this,de,"keydown",Te=>{Te.key==="ArrowLeft"&&(Te.preventDefault(),Te.stopPropagation(),h.call(this,"home",!0))},!1),W.call(this,ye,"click",()=>{h.call(this,"home",!1)}),de.appendChild(ye),de.appendChild(g("div",{role:"menu"})),Y.appendChild(de),this.elements.settings.buttons[H]=re,this.elements.settings.panels[H]=de}),V.appendChild(Y),b.appendChild(V),m.appendChild(b),this.elements.settings.popup=V,this.elements.settings.menu=b}if(_==="pip"&&Q.pip&&m.appendChild(t.call(this,"pip",A)),_==="airplay"&&Q.airplay&&m.appendChild(t.call(this,"airplay",A)),_==="download"){let b=K({},A,{element:"a",href:this.download,target:"_blank"});this.isHTML5&&(b.download="");let{download:V}=this.config.urls;!r.url(V)&&this.isEmbed&&K(b,{icon:`logo-${this.provider}`,label:this.provider}),m.appendChild(t.call(this,"download",b))}_==="fullscreen"&&m.appendChild(t.call(this,"fullscreen",A))}),this.isHTML5&&a.call(this,Pe.getQualityOptions.call(this)),c.call(this),m},inject(){if(this.config.loadSprite){let n=w.getIconUrl.call(this);n.cors&&wt(n.url,"sprite-plyr")}this.id=Math.floor(1e4*Math.random());let e=null;this.elements.controls=null;let i={id:this.id,seektime:this.config.seekTime,title:this.config.title},t=!0;r.function(this.config.controls)&&(this.config.controls=this.config.controls.call(this,i)),this.config.controls||(this.config.controls=[]),r.element(this.config.controls)||r.string(this.config.controls)?e=this.config.controls:(e=w.create.call(this,{id:this.id,seektime:this.config.seekTime,speed:this.speed,quality:this.quality,captions:Z.getLabel.call(this)}),t=!1);let s;if(t&&r.string(this.config.controls)&&(e=(n=>{let o=n;return Object.entries(i).forEach(([a,c])=>{o=Ve(o,`{${a}}`,c)}),o})(e)),r.string(this.config.selectors.controls.container)&&(s=document.querySelector(this.config.selectors.controls.container)),r.element(s)||(s=this.elements.container),s[r.element(e)?"insertAdjacentElement":"insertAdjacentHTML"]("afterbegin",e),r.element(this.elements.controls)||w.findElements.call(this),!r.empty(this.elements.buttons)){let n=o=>{let a=this.config.classNames.controlPressed;o.setAttribute("aria-pressed","false"),Object.defineProperty(o,"pressed",{configurable:!0,enumerable:!0,get:()=>Re(o,a),set(c=!1){X(o,a,c),o.setAttribute("aria-pressed",c?"true":"false")}})};Object.values(this.elements.buttons).filter(Boolean).forEach(o=>{r.array(o)||r.nodeList(o)?Array.from(o).filter(Boolean).forEach(n):n(o)})}if(ee.isEdge&&ue(s),this.config.tooltips.controls){let{classNames:n,selectors:o}=this.config,a=`${o.controls.wrapper} ${o.labels} .${n.hidden}`,c=se.call(this,a);Array.from(c).forEach(h=>{X(h,this.config.classNames.hidden,!1),X(h,this.config.classNames.tooltip,!0)})}},setMediaMetadata(){try{"mediaSession"in navigator&&(navigator.mediaSession.metadata=new window.MediaMetadata({title:this.config.mediaMetadata.title,artist:this.config.mediaMetadata.artist,album:this.config.mediaMetadata.album,artwork:this.config.mediaMetadata.artwork}))}catch{}},setMarkers(){var e,i;if(!this.duration||this.elements.markers)return;let t=(e=this.config.markers)===null||e===void 0||(i=e.points)===null||i===void 0?void 0:i.filter(({time:h})=>h>0&&h<this.duration);if(t==null||!t.length)return;let s=document.createDocumentFragment(),n=document.createDocumentFragment(),o=null,a=`${this.config.classNames.tooltip}--visible`,c=h=>X(o,a,h);t.forEach(h=>{let m=g("span",{class:this.config.classNames.marker},""),A=h.time/this.duration*100+"%";o&&(m.addEventListener("mouseenter",()=>{h.label||(o.style.left=A,o.innerHTML=h.label,c(!0))}),m.addEventListener("mouseleave",()=>{c(!1)})),m.addEventListener("click",()=>{this.currentTime=h.time}),m.style.left=A,n.appendChild(m)}),s.appendChild(n),this.config.tooltips.seek||(o=g("span",{class:this.config.classNames.tooltip},""),s.appendChild(o)),this.elements.markers={points:n,tip:o},this.elements.progress.appendChild(s)}};function St(e,i=!0){let t=e;if(i){let s=document.createElement("a");s.href=t,t=s.href}try{return new URL(t)}catch{return null}}function At(e){let i=new URLSearchParams;return r.object(e)&&Object.entries(e).forEach(([t,s])=>{i.set(t,s)}),i}let Z={setup(){if(!this.supported.ui)return;if(!this.isVideo||this.isYouTube||this.isHTML5&&!Q.textTracks)return void(r.array(this.config.controls)&&this.config.controls.includes("settings")&&this.config.settings.includes("captions")&&w.setCaptionsMenu.call(this));var e,i;if(r.element(this.elements.captions)||(this.elements.captions=g("div",be(this.config.selectors.captions)),this.elements.captions.setAttribute("dir","auto"),e=this.elements.captions,i=this.elements.wrapper,r.element(e)&&r.element(i)&&i.parentNode.insertBefore(e,i.nextSibling)),ee.isIE&&window.URL){let o=this.media.querySelectorAll("track");Array.from(o).forEach(a=>{let c=a.getAttribute("src"),h=St(c);h!==null&&h.hostname!==window.location.href.hostname&&["http:","https:"].includes(h.protocol)&&qe(c,"blob").then(m=>{a.setAttribute("src",window.URL.createObjectURL(m))}).catch(()=>{q(a)})})}let t=Je((navigator.languages||[navigator.language||navigator.userLanguage||"en"]).map(o=>o.split("-")[0])),s=(this.storage.get("language")||this.config.captions.language||"auto").toLowerCase();s==="auto"&&([s]=t);let n=this.storage.get("captions");if(r.boolean(n)||({active:n}=this.config.captions),Object.assign(this.captions,{toggled:!1,active:n,language:s,languages:t}),this.isHTML5){let o=this.config.captions.update?"addtrack removetrack":"removetrack";W.call(this,this.media.textTracks,o,Z.update.bind(this))}setTimeout(Z.update.bind(this),0)},update(){let e=Z.getTracks.call(this,!0),{active:i,language:t,meta:s,currentTrackNode:n}=this.captions,o=!!e.find(a=>a.language===t);this.isHTML5&&this.isVideo&&e.filter(a=>!s.get(a)).forEach(a=>{this.debug.log("Track added",a),s.set(a,{default:a.mode==="showing"}),a.mode==="showing"&&(a.mode="hidden"),W.call(this,a,"cuechange",()=>Z.updateCues.call(this))}),(o&&this.language!==t||!e.includes(n))&&(Z.setLanguage.call(this,t),Z.toggle.call(this,i&&o)),this.elements&&X(this.elements.container,this.config.classNames.captions.enabled,!r.empty(e)),r.array(this.config.controls)&&this.config.controls.includes("settings")&&this.config.settings.includes("captions")&&w.setCaptionsMenu.call(this)},toggle(e,i=!0){if(!this.supported.ui)return;let{toggled:t}=this.captions,s=this.config.classNames.captions.active,n=r.nullOrUndefined(e)?!t:e;if(n!==t){if(i||(this.captions.active=n,this.storage.set({captions:n})),!this.language&&n&&!i){let o=Z.getTracks.call(this),a=Z.findTrack.call(this,[this.captions.language,...this.captions.languages],!0);return this.captions.language=a.language,void Z.set.call(this,o.indexOf(a))}this.elements.buttons.captions&&(this.elements.buttons.captions.pressed=n),X(this.elements.container,s,n),this.captions.toggled=n,w.updateSetting.call(this,"captions"),O.call(this,this.media,n?"captionsenabled":"captionsdisabled")}setTimeout(()=>{n&&this.captions.toggled&&(this.captions.currentTrackNode.mode="hidden")})},set(e,i=!0){let t=Z.getTracks.call(this);if(e!==-1)if(r.number(e))if(e in t){if(this.captions.currentTrack!==e){this.captions.currentTrack=e;let s=t[e],{language:n}=s||{};this.captions.currentTrackNode=s,w.updateSetting.call(this,"captions"),i||(this.captions.language=n,this.storage.set({language:n})),this.isVimeo&&this.embed.enableTextTrack(n),O.call(this,this.media,"languagechange")}Z.toggle.call(this,!0,i),this.isHTML5&&this.isVideo&&Z.updateCues.call(this)}else this.debug.warn("Track not found",e);else this.debug.warn("Invalid caption argument",e);else Z.toggle.call(this,!1,i)},setLanguage(e,i=!0){if(!r.string(e))return void this.debug.warn("Invalid language argument",e);let t=e.toLowerCase();this.captions.language=t;let s=Z.getTracks.call(this),n=Z.findTrack.call(this,[t]);Z.set.call(this,s.indexOf(n),i)},getTracks(e=!1){return Array.from((this.media||{}).textTracks||[]).filter(i=>!this.isHTML5||e||this.captions.meta.has(i)).filter(i=>["captions","subtitles"].includes(i.kind))},findTrack(e,i=!1){let t=Z.getTracks.call(this),s=a=>Number((this.captions.meta.get(a)||{}).default),n=Array.from(t).sort((a,c)=>s(c)-s(a)),o;return e.every(a=>(o=n.find(c=>c.language===a),!o)),o||(i?n[0]:void 0)},getCurrentTrack(){return Z.getTracks.call(this)[this.currentTrack]},getLabel(e){let i=e;return!r.track(i)&&Q.textTracks&&this.captions.toggled&&(i=Z.getCurrentTrack.call(this)),r.track(i)?r.empty(i.label)?r.empty(i.language)?pe.get("enabled",this.config):e.language.toUpperCase():i.label:pe.get("disabled",this.config)},updateCues(e){if(!this.supported.ui)return;if(!r.element(this.elements.captions))return void this.debug.warn("No captions element to render to");if(!r.nullOrUndefined(e)&&!Array.isArray(e))return void this.debug.warn("updateCues: Invalid input",e);let i=e;if(!i){let s=Z.getCurrentTrack.call(this);i=Array.from((s||{}).activeCues||[]).map(n=>n.getCueAsHTML()).map(Gt)}let t=i.map(s=>s.trim()).join(`
-`);if(t!==this.elements.captions.innerHTML){ve(this.elements.captions);let s=g("span",be(this.config.selectors.caption));s.innerHTML=t,this.elements.captions.appendChild(s),O.call(this,this.media,"cuechange")}}},kt={enabled:!0,title:"",debug:!1,autoplay:!1,autopause:!0,playsinline:!0,seekTime:10,volume:1,muted:!1,duration:null,displayDuration:!0,invertTime:!0,toggleInvert:!0,ratio:null,clickToPlay:!0,hideControls:!0,resetOnEnd:!1,disableContextMenu:!0,loadSprite:!0,iconPrefix:"plyr",iconUrl:"https://cdn.plyr.io/3.7.8/plyr.svg",blankVideo:"https://cdn.plyr.io/static/blank.mp4",quality:{default:576,options:[4320,2880,2160,1440,1080,720,576,480,360,240],forced:!1,onChange:null},loop:{active:!1},speed:{selected:1,options:[.5,.75,1,1.25,1.5,1.75,2,4]},keyboard:{focused:!0,global:!1},tooltips:{controls:!1,seek:!0},captions:{active:!1,language:"auto",update:!1},fullscreen:{enabled:!0,fallback:!0,iosNative:!1},storage:{enabled:!0,key:"plyr"},controls:["play-large","play","progress","current-time","mute","volume","captions","settings","pip","airplay","fullscreen"],settings:["captions","quality","speed"],i18n:{restart:"Restart",rewind:"Rewind {seektime}s",play:"Play",pause:"Pause",fastForward:"Forward {seektime}s",seek:"Seek",seekLabel:"{currentTime} of {duration}",played:"Played",buffered:"Buffered",currentTime:"Current time",duration:"Duration",volume:"Volume",mute:"Mute",unmute:"Unmute",enableCaptions:"Enable captions",disableCaptions:"Disable captions",download:"Download",enterFullscreen:"Enter fullscreen",exitFullscreen:"Exit fullscreen",frameTitle:"Player for {title}",captions:"Captions",settings:"Settings",pip:"PIP",menuBack:"Go back to previous menu",speed:"Speed",normal:"Normal",quality:"Quality",loop:"Loop",start:"Start",end:"End",all:"All",reset:"Reset",disabled:"Disabled",enabled:"Enabled",advertisement:"Ad",qualityBadge:{2160:"4K",1440:"HD",1080:"HD",720:"HD",576:"SD",480:"SD"}},urls:{download:null,vimeo:{sdk:"https://player.vimeo.com/api/player.js",iframe:"https://player.vimeo.com/video/{0}?{1}",api:"https://vimeo.com/api/oembed.json?url={0}"},youtube:{sdk:"https://www.youtube.com/iframe_api",api:"https://noembed.com/embed?url=https://www.youtube.com/watch?v={0}"},googleIMA:{sdk:"https://imasdk.googleapis.com/js/sdkloader/ima3.js"}},listeners:{seek:null,play:null,pause:null,restart:null,rewind:null,fastForward:null,mute:null,volume:null,captions:null,download:null,fullscreen:null,pip:null,airplay:null,speed:null,quality:null,loop:null,language:null},events:["ended","progress","stalled","playing","waiting","canplay","canplaythrough","loadstart","loadeddata","loadedmetadata","timeupdate","volumechange","play","pause","error","seeking","seeked","emptied","ratechange","cuechange","download","enterfullscreen","exitfullscreen","captionsenabled","captionsdisabled","languagechange","controlshidden","controlsshown","ready","statechange","qualitychange","adsloaded","adscontentpause","adscontentresume","adstarted","adsmidpoint","adscomplete","adsallcomplete","adsimpression","adsclick"],selectors:{editable:"input, textarea, select, [contenteditable]",container:".plyr",controls:{container:null,wrapper:".plyr__controls"},labels:"[data-plyr]",buttons:{play:'[data-plyr="play"]',pause:'[data-plyr="pause"]',restart:'[data-plyr="restart"]',rewind:'[data-plyr="rewind"]',fastForward:'[data-plyr="fast-forward"]',mute:'[data-plyr="mute"]',captions:'[data-plyr="captions"]',download:'[data-plyr="download"]',fullscreen:'[data-plyr="fullscreen"]',pip:'[data-plyr="pip"]',airplay:'[data-plyr="airplay"]',settings:'[data-plyr="settings"]',loop:'[data-plyr="loop"]'},inputs:{seek:'[data-plyr="seek"]',volume:'[data-plyr="volume"]',speed:'[data-plyr="speed"]',language:'[data-plyr="language"]',quality:'[data-plyr="quality"]'},display:{currentTime:".plyr__time--current",duration:".plyr__time--duration",buffer:".plyr__progress__buffer",loop:".plyr__progress__loop",volume:".plyr__volume--display"},progress:".plyr__progress",captions:".plyr__captions",caption:".plyr__caption"},classNames:{type:"plyr--{0}",provider:"plyr--{0}",video:"plyr__video-wrapper",embed:"plyr__video-embed",videoFixedRatio:"plyr__video-wrapper--fixed-ratio",embedContainer:"plyr__video-embed__container",poster:"plyr__poster",posterEnabled:"plyr__poster-enabled",ads:"plyr__ads",control:"plyr__control",controlPressed:"plyr__control--pressed",playing:"plyr--playing",paused:"plyr--paused",stopped:"plyr--stopped",loading:"plyr--loading",hover:"plyr--hover",tooltip:"plyr__tooltip",cues:"plyr__cues",marker:"plyr__progress__marker",hidden:"plyr__sr-only",hideControls:"plyr--hide-controls",isTouch:"plyr--is-touch",uiSupported:"plyr--full-ui",noTransition:"plyr--no-transition",display:{time:"plyr__time"},menu:{value:"plyr__menu__value",badge:"plyr__badge",open:"plyr--menu-open"},captions:{enabled:"plyr--captions-enabled",active:"plyr--captions-active"},fullscreen:{enabled:"plyr--fullscreen-enabled",fallback:"plyr--fullscreen-fallback"},pip:{supported:"plyr--pip-supported",active:"plyr--pip-active"},airplay:{supported:"plyr--airplay-supported",active:"plyr--airplay-active"},previewThumbnails:{thumbContainer:"plyr__preview-thumb",thumbContainerShown:"plyr__preview-thumb--is-shown",imageContainer:"plyr__preview-thumb__image-container",timeContainer:"plyr__preview-thumb__time-container",scrubbingContainer:"plyr__preview-scrubbing",scrubbingContainerShown:"plyr__preview-scrubbing--is-shown"}},attributes:{embed:{provider:"data-plyr-provider",id:"data-plyr-embed-id",hash:"data-plyr-embed-hash"}},ads:{enabled:!1,publisherId:"",tagUrl:""},previewThumbnails:{enabled:!1,src:""},vimeo:{byline:!1,portrait:!1,title:!1,speed:!0,transparent:!1,customControls:!0,referrerPolicy:null,premium:!1},youtube:{rel:0,showinfo:0,iv_load_policy:3,modestbranding:1,customControls:!0,noCookie:!1},mediaMetadata:{title:"",artist:"",album:"",artwork:[]},markers:{enabled:!1,points:[]}},Et="picture-in-picture",Qt="inline",Me={html5:"html5",youtube:"youtube",vimeo:"vimeo"},Jt="audio",Ct="video",tt=()=>{};class Zt{constructor(i=!1){this.enabled=window.console&&i,this.enabled&&this.log("Debugging enabled")}get log(){return this.enabled?Function.prototype.bind.call(console.log,console):tt}get warn(){return this.enabled?Function.prototype.bind.call(console.warn,console):tt}get error(){return this.enabled?Function.prototype.bind.call(console.error,console):tt}}class we{constructor(i){u(this,"onChange",()=>{if(!this.supported)return;let t=this.player.elements.buttons.fullscreen;r.element(t)&&(t.pressed=this.active);let s=this.target===this.player.media?this.target:this.player.elements.container;O.call(this.player,s,this.active?"enterfullscreen":"exitfullscreen",!0)}),u(this,"toggleFallback",(t=!1)=>{if(t?this.scrollPosition={x:window.scrollX??0,y:window.scrollY??0}:window.scrollTo(this.scrollPosition.x,this.scrollPosition.y),document.body.style.overflow=t?"hidden":"",X(this.target,this.player.config.classNames.fullscreen.fallback,t),ee.isIos){let s=document.head.querySelector('meta[name="viewport"]'),n="viewport-fit=cover";s||(s=document.createElement("meta"),s.setAttribute("name","viewport"));let o=r.string(s.content)&&s.content.includes(n);t?(this.cleanupViewport=!o,o||(s.content+=`,${n}`)):this.cleanupViewport&&(s.content=s.content.split(",").filter(a=>a.trim()!==n).join(","))}this.onChange()}),u(this,"trapFocus",t=>{if(ee.isIos||ee.isIPadOS||!this.active||t.key!=="Tab")return;let s=document.activeElement,n=se.call(this.player,"a[href], button:not(:disabled), input:not(:disabled), [tabindex]"),[o]=n,a=n[n.length-1];s!==a||t.shiftKey?s===o&&t.shiftKey&&(a.focus(),t.preventDefault()):(o.focus(),t.preventDefault())}),u(this,"update",()=>{if(this.supported){let t;t=this.forceFallback?"Fallback (forced)":we.nativeSupported?"Native":"Fallback",this.player.debug.log(`${t} fullscreen enabled`)}else this.player.debug.log("Fullscreen not supported and fallback disabled");X(this.player.elements.container,this.player.config.classNames.fullscreen.enabled,this.supported)}),u(this,"enter",()=>{this.supported&&(ee.isIos&&this.player.config.fullscreen.iosNative?this.player.isVimeo?this.player.embed.requestFullscreen():this.target.webkitEnterFullscreen():!we.nativeSupported||this.forceFallback?this.toggleFallback(!0):this.prefix?r.empty(this.prefix)||this.target[`${this.prefix}Request${this.property}`]():this.target.requestFullscreen({navigationUI:"hide"}))}),u(this,"exit",()=>{if(this.supported)if(ee.isIos&&this.player.config.fullscreen.iosNative)this.player.isVimeo?this.player.embed.exitFullscreen():this.target.webkitEnterFullscreen(),ke(this.player.play());else if(!we.nativeSupported||this.forceFallback)this.toggleFallback(!1);else if(this.prefix){if(!r.empty(this.prefix)){let t=this.prefix==="moz"?"Cancel":"Exit";document[`${this.prefix}${t}${this.property}`]()}}else(document.cancelFullScreen||document.exitFullscreen).call(document)}),u(this,"toggle",()=>{this.active?this.exit():this.enter()}),this.player=i,this.prefix=we.prefix,this.property=we.property,this.scrollPosition={x:0,y:0},this.forceFallback=i.config.fullscreen.fallback==="force",this.player.elements.fullscreen=i.config.fullscreen.container&&function(t,s){let{prototype:n}=Element;return(n.closest||function(){let o=this;do{if(Ne.matches(o,s))return o;o=o.parentElement||o.parentNode}while(o!==null&&o.nodeType===1);return null}).call(t,s)}(this.player.elements.container,i.config.fullscreen.container),W.call(this.player,document,this.prefix==="ms"?"MSFullscreenChange":`${this.prefix}fullscreenchange`,()=>{this.onChange()}),W.call(this.player,this.player.elements.container,"dblclick",t=>{r.element(this.player.elements.controls)&&this.player.elements.controls.contains(t.target)||this.player.listeners.proxy(t,this.toggle,"fullscreen")}),W.call(this,this.player.elements.container,"keydown",t=>this.trapFocus(t)),this.update()}static get nativeSupported(){return!!(document.fullscreenEnabled||document.webkitFullscreenEnabled||document.mozFullScreenEnabled||document.msFullscreenEnabled)}get useNative(){return we.nativeSupported&&!this.forceFallback}static get prefix(){if(r.function(document.exitFullscreen))return"";let i="";return["webkit","moz","ms"].some(t=>!(!r.function(document[`${t}ExitFullscreen`])&&!r.function(document[`${t}CancelFullScreen`]))&&(i=t,!0)),i}static get property(){return this.prefix==="moz"?"FullScreen":"Fullscreen"}get supported(){return[this.player.config.fullscreen.enabled,this.player.isVideo,we.nativeSupported||this.player.config.fullscreen.fallback,!this.player.isYouTube||we.nativeSupported||!ee.isIos||this.player.config.playsinline&&!this.player.config.fullscreen.iosNative].every(Boolean)}get active(){if(!this.supported)return!1;if(!we.nativeSupported||this.forceFallback)return Re(this.target,this.player.config.classNames.fullscreen.fallback);let i=this.prefix?this.target.getRootNode()[`${this.prefix}${this.property}Element`]:this.target.getRootNode().fullscreenElement;return i&&i.shadowRoot?i===this.target.getRootNode().host:i===this.target}get target(){return ee.isIos&&this.player.config.fullscreen.iosNative?this.player.media:this.player.elements.fullscreen??this.player.elements.container}}function ze(e,i=1){return new Promise((t,s)=>{let n=new Image,o=()=>{delete n.onload,delete n.onerror,(n.naturalWidth>=i?t:s)(n)};Object.assign(n,{onload:o,onerror:o,src:e})})}let te={addStyleHook(){X(this.elements.container,this.config.selectors.container.replace(".",""),!0),X(this.elements.container,this.config.classNames.uiSupported,this.supported.ui)},toggleNativeControls(e=!1){e&&this.isHTML5?this.media.setAttribute("controls",""):this.media.removeAttribute("controls")},build(){if(this.listeners.media(),!this.supported.ui)return this.debug.warn(`Basic support only for ${this.provider} ${this.type}`),void te.toggleNativeControls.call(this,!0);r.element(this.elements.controls)||(w.inject.call(this),this.listeners.controls()),te.toggleNativeControls.call(this),this.isHTML5&&Z.setup.call(this),this.volume=null,this.muted=null,this.loop=null,this.quality=null,this.speed=null,w.updateVolume.call(this),w.timeUpdate.call(this),w.durationUpdate.call(this),te.checkPlaying.call(this),X(this.elements.container,this.config.classNames.pip.supported,Q.pip&&this.isHTML5&&this.isVideo),X(this.elements.container,this.config.classNames.airplay.supported,Q.airplay&&this.isHTML5),X(this.elements.container,this.config.classNames.isTouch,this.touch),this.ready=!0,setTimeout(()=>{O.call(this,this.media,"ready")},0),te.setTitle.call(this),this.poster&&te.setPoster.call(this,this.poster,!1).catch(()=>{}),this.config.duration&&w.durationUpdate.call(this),this.config.mediaMetadata&&w.setMediaMetadata.call(this)},setTitle(){let e=pe.get("play",this.config);if(r.string(this.config.title)&&!r.empty(this.config.title)&&(e+=`, ${this.config.title}`),Array.from(this.elements.buttons.play||[]).forEach(i=>{i.setAttribute("aria-label",e)}),this.isEmbed){let i=ce.call(this,"iframe");if(!r.element(i))return;let t=r.empty(this.config.title)?"video":this.config.title,s=pe.get("frameTitle",this.config);i.setAttribute("title",s.replace("{title}",t))}},togglePoster(e){X(this.elements.container,this.config.classNames.posterEnabled,e)},setPoster(e,i=!0){return i&&this.poster?Promise.reject(new Error("Poster already set")):(this.media.setAttribute("data-poster",e),this.elements.poster.removeAttribute("hidden"),Wt.call(this).then(()=>ze(e)).catch(t=>{throw e===this.poster&&te.togglePoster.call(this,!1),t}).then(()=>{if(e!==this.poster)throw new Error("setPoster cancelled by later call to setPoster")}).then(()=>(Object.assign(this.elements.poster.style,{backgroundImage:`url('${e}')`,backgroundSize:""}),te.togglePoster.call(this,!0),e)))},checkPlaying(e){X(this.elements.container,this.config.classNames.playing,this.playing),X(this.elements.container,this.config.classNames.paused,this.paused),X(this.elements.container,this.config.classNames.stopped,this.stopped),Array.from(this.elements.buttons.play||[]).forEach(i=>{Object.assign(i,{pressed:this.playing}),i.setAttribute("aria-label",pe.get(this.playing?"pause":"play",this.config))}),r.event(e)&&e.type==="timeupdate"||te.toggleControls.call(this)},checkLoading(e){this.loading=["stalled","waiting"].includes(e.type),clearTimeout(this.timers.loading),this.timers.loading=setTimeout(()=>{X(this.elements.container,this.config.classNames.loading,this.loading),te.toggleControls.call(this)},this.loading?250:0)},toggleControls(e){let{controls:i}=this.elements;if(i&&this.config.hideControls){let t=this.touch&&this.lastSeekTime+2e3>Date.now();this.toggleControls(!!(e||this.loading||this.paused||i.pressed||i.hover||t))}},migrateStyles(){Object.values({...this.media.style}).filter(e=>!r.empty(e)&&r.string(e)&&e.startsWith("--plyr")).forEach(e=>{this.elements.container.style.setProperty(e,this.media.style.getPropertyValue(e)),this.media.style.removeProperty(e)}),r.empty(this.media.style)&&this.media.removeAttribute("style")}};class ei{constructor(i){u(this,"firstTouch",()=>{let{player:t}=this,{elements:s}=t;t.touch=!0,X(s.container,t.config.classNames.isTouch,!0)}),u(this,"global",(t=!0)=>{let{player:s}=this;s.config.keyboard.global&&_e.call(s,window,"keydown keyup",this.handleKey,t,!1),_e.call(s,document.body,"click",this.toggleMenu,t),De.call(s,document.body,"touchstart",this.firstTouch)}),u(this,"container",()=>{let{player:t}=this,{config:s,elements:n,timers:o}=t;!s.keyboard.global&&s.keyboard.focused&&W.call(t,n.container,"keydown keyup",this.handleKey,!1),W.call(t,n.container,"mousemove mouseleave touchstart touchmove enterfullscreen exitfullscreen",h=>{let{controls:m}=n;m&&h.type==="enterfullscreen"&&(m.pressed=!1,m.hover=!1);let A=0;["touchstart","touchmove","mousemove"].includes(h.type)&&(te.toggleControls.call(t,!0),A=t.touch?3e3:2e3),clearTimeout(o.controls),o.controls=setTimeout(()=>te.toggleControls.call(t,!1),A)});let a=()=>{if(!t.isVimeo||t.config.vimeo.premium)return;let h=n.wrapper,{active:m}=t.fullscreen,[A,_]=Ze.call(t),b=mt(`aspect-ratio: ${A} / ${_}`);if(!m)return void(b?(h.style.width=null,h.style.height=null):(h.style.maxWidth=null,h.style.margin=null));let[V,Y]=[Math.max(document.documentElement.clientWidth||0,window.innerWidth||0),Math.max(document.documentElement.clientHeight||0,window.innerHeight||0)],G=V/Y>A/_;b?(h.style.width=G?"auto":"100%",h.style.height=G?"100%":"auto"):(h.style.maxWidth=G?Y/_*A+"px":null,h.style.margin=G?"0 auto":null)},c=()=>{clearTimeout(o.resized),o.resized=setTimeout(a,50)};W.call(t,n.container,"enterfullscreen exitfullscreen",h=>{let{target:m}=t.fullscreen;m===n.container&&(!t.isEmbed&&r.empty(t.config.ratio)||(a(),(h.type==="enterfullscreen"?W:Ie).call(t,window,"resize",c)))})}),u(this,"media",()=>{let{player:t}=this,{elements:s}=t;if(W.call(t,t.media,"timeupdate seeking seeked",o=>w.timeUpdate.call(t,o)),W.call(t,t.media,"durationchange loadeddata loadedmetadata",o=>w.durationUpdate.call(t,o)),W.call(t,t.media,"ended",()=>{t.isHTML5&&t.isVideo&&t.config.resetOnEnd&&(t.restart(),t.pause())}),W.call(t,t.media,"progress playing seeking seeked",o=>w.updateProgress.call(t,o)),W.call(t,t.media,"volumechange",o=>w.updateVolume.call(t,o)),W.call(t,t.media,"playing play pause ended emptied timeupdate",o=>te.checkPlaying.call(t,o)),W.call(t,t.media,"waiting canplay seeked playing",o=>te.checkLoading.call(t,o)),t.supported.ui&&t.config.clickToPlay&&!t.isAudio){let o=ce.call(t,`.${t.config.classNames.video}`);if(!r.element(o))return;W.call(t,s.container,"click",a=>{([s.container,o].includes(a.target)||o.contains(a.target))&&(t.touch&&t.config.hideControls||(t.ended?(this.proxy(a,t.restart,"restart"),this.proxy(a,()=>{ke(t.play())},"play")):this.proxy(a,()=>{ke(t.togglePlay())},"play")))})}t.supported.ui&&t.config.disableContextMenu&&W.call(t,s.wrapper,"contextmenu",o=>{o.preventDefault()},!1),W.call(t,t.media,"volumechange",()=>{t.storage.set({volume:t.volume,muted:t.muted})}),W.call(t,t.media,"ratechange",()=>{w.updateSetting.call(t,"speed"),t.storage.set({speed:t.speed})}),W.call(t,t.media,"qualitychange",o=>{w.updateSetting.call(t,"quality",null,o.detail.quality)}),W.call(t,t.media,"ready qualitychange",()=>{w.setDownloadUrl.call(t)});let n=t.config.events.concat(["keyup","keydown"]).join(" ");W.call(t,t.media,n,o=>{let{detail:a={}}=o;o.type==="error"&&(a=t.media.error),O.call(t,s.container,o.type,!0,a)})}),u(this,"proxy",(t,s,n)=>{let{player:o}=this,a=o.config.listeners[n],c=!0;r.function(a)&&(c=a.call(o,t)),c!==!1&&r.function(s)&&s.call(o,t)}),u(this,"bind",(t,s,n,o,a=!0)=>{let{player:c}=this,h=c.config.listeners[o],m=r.function(h);W.call(c,t,s,A=>this.proxy(A,n,o),a&&!m)}),u(this,"controls",()=>{let{player:t}=this,{elements:s}=t,n=ee.isIE?"change":"input";if(s.buttons.play&&Array.from(s.buttons.play).forEach(o=>{this.bind(o,"click",()=>{ke(t.togglePlay())},"play")}),this.bind(s.buttons.restart,"click",t.restart,"restart"),this.bind(s.buttons.rewind,"click",()=>{t.lastSeekTime=Date.now(),t.rewind()},"rewind"),this.bind(s.buttons.fastForward,"click",()=>{t.lastSeekTime=Date.now(),t.forward()},"fastForward"),this.bind(s.buttons.mute,"click",()=>{t.muted=!t.muted},"mute"),this.bind(s.buttons.captions,"click",()=>t.toggleCaptions()),this.bind(s.buttons.download,"click",()=>{O.call(t,t.media,"download")},"download"),this.bind(s.buttons.fullscreen,"click",()=>{t.fullscreen.toggle()},"fullscreen"),this.bind(s.buttons.pip,"click",()=>{t.pip="toggle"},"pip"),this.bind(s.buttons.airplay,"click",t.airplay,"airplay"),this.bind(s.buttons.settings,"click",o=>{o.stopPropagation(),o.preventDefault(),w.toggleMenu.call(t,o)},null,!1),this.bind(s.buttons.settings,"keyup",o=>{[" ","Enter"].includes(o.key)&&(o.key!=="Enter"?(o.preventDefault(),o.stopPropagation(),w.toggleMenu.call(t,o)):w.focusFirstMenuItem.call(t,null,!0))},null,!1),this.bind(s.settings.menu,"keydown",o=>{o.key==="Escape"&&w.toggleMenu.call(t,o)}),this.bind(s.inputs.seek,"mousedown mousemove",o=>{let a=s.progress.getBoundingClientRect(),c=100/a.width*(o.pageX-a.left);o.currentTarget.setAttribute("seek-value",c)}),this.bind(s.inputs.seek,"mousedown mouseup keydown keyup touchstart touchend",o=>{let a=o.currentTarget,c="play-on-seeked";if(r.keyboardEvent(o)&&!["ArrowLeft","ArrowRight"].includes(o.key))return;t.lastSeekTime=Date.now();let h=a.hasAttribute(c),m=["mouseup","touchend","keyup"].includes(o.type);h&&m?(a.removeAttribute(c),ke(t.play())):!m&&t.playing&&(a.setAttribute(c,""),t.pause())}),ee.isIos){let o=se.call(t,'input[type="range"]');Array.from(o).forEach(a=>this.bind(a,n,c=>ue(c.target)))}this.bind(s.inputs.seek,n,o=>{let a=o.currentTarget,c=a.getAttribute("seek-value");r.empty(c)&&(c=a.value),a.removeAttribute("seek-value"),t.currentTime=c/a.max*t.duration},"seek"),this.bind(s.progress,"mouseenter mouseleave mousemove",o=>w.updateSeekTooltip.call(t,o)),this.bind(s.progress,"mousemove touchmove",o=>{let{previewThumbnails:a}=t;a&&a.loaded&&a.startMove(o)}),this.bind(s.progress,"mouseleave touchend click",()=>{let{previewThumbnails:o}=t;o&&o.loaded&&o.endMove(!1,!0)}),this.bind(s.progress,"mousedown touchstart",o=>{let{previewThumbnails:a}=t;a&&a.loaded&&a.startScrubbing(o)}),this.bind(s.progress,"mouseup touchend",o=>{let{previewThumbnails:a}=t;a&&a.loaded&&a.endScrubbing(o)}),ee.isWebKit&&Array.from(se.call(t,'input[type="range"]')).forEach(o=>{this.bind(o,"input",a=>w.updateRangeFill.call(t,a.target))}),t.config.toggleInvert&&!r.element(s.display.duration)&&this.bind(s.display.currentTime,"click",()=>{t.currentTime!==0&&(t.config.invertTime=!t.config.invertTime,w.timeUpdate.call(t))}),this.bind(s.inputs.volume,n,o=>{t.volume=o.target.value},"volume"),this.bind(s.controls,"mouseenter mouseleave",o=>{s.controls.hover=!t.touch&&o.type==="mouseenter"}),s.fullscreen&&Array.from(s.fullscreen.children).filter(o=>!o.contains(s.container)).forEach(o=>{this.bind(o,"mouseenter mouseleave",a=>{s.controls&&(s.controls.hover=!t.touch&&a.type==="mouseenter")})}),this.bind(s.controls,"mousedown mouseup touchstart touchend touchcancel",o=>{s.controls.pressed=["mousedown","touchstart"].includes(o.type)}),this.bind(s.controls,"focusin",()=>{let{config:o,timers:a}=t;X(s.controls,o.classNames.noTransition,!0),te.toggleControls.call(t,!0),setTimeout(()=>{X(s.controls,o.classNames.noTransition,!1)},0);let c=this.touch?3e3:4e3;clearTimeout(a.controls),a.controls=setTimeout(()=>te.toggleControls.call(t,!1),c)}),this.bind(s.inputs.volume,"wheel",o=>{let a=o.webkitDirectionInvertedFromDevice,[c,h]=[o.deltaX,-o.deltaY].map(_=>a?-_:_),m=Math.sign(Math.abs(c)>Math.abs(h)?c:h);t.increaseVolume(m/50);let{volume:A}=t.media;(m===1&&A<1||m===-1&&A>0)&&o.preventDefault()},"volume",!1)}),this.player=i,this.lastKey=null,this.focusTimer=null,this.lastKeyDown=null,this.handleKey=this.handleKey.bind(this),this.toggleMenu=this.toggleMenu.bind(this),this.firstTouch=this.firstTouch.bind(this)}handleKey(i){let{player:t}=this,{elements:s}=t,{key:n,type:o,altKey:a,ctrlKey:c,metaKey:h,shiftKey:m}=i,A=o==="keydown",_=A&&n===this.lastKey;if(!(a||c||h||m)&&n){if(A){let V=document.activeElement;if(r.element(V)){let{editable:Y}=t.config.selectors,{seek:G}=s.inputs;if(V!==G&&Ne(V,Y)||i.key===" "&&Ne(V,'button, [role^="menuitem"]'))return}switch([" ","ArrowLeft","ArrowUp","ArrowRight","ArrowDown","0","1","2","3","4","5","6","7","8","9","c","f","k","l","m"].includes(n)&&(i.preventDefault(),i.stopPropagation()),n){case"0":case"1":case"2":case"3":case"4":case"5":case"6":case"7":case"8":case"9":_||(b=parseInt(n,10),t.currentTime=t.duration/10*b);break;case" ":case"k":_||ke(t.togglePlay());break;case"ArrowUp":t.increaseVolume(.1);break;case"ArrowDown":t.decreaseVolume(.1);break;case"m":_||(t.muted=!t.muted);break;case"ArrowRight":t.forward();break;case"ArrowLeft":t.rewind();break;case"f":t.fullscreen.toggle();break;case"c":_||t.toggleCaptions();break;case"l":t.loop=!t.loop}n==="Escape"&&!t.fullscreen.usingNative&&t.fullscreen.active&&t.fullscreen.toggle(),this.lastKey=n}else this.lastKey=null;var b}}toggleMenu(i){w.toggleMenu.call(this.player,i)}}typeof globalThis<"u"||typeof window<"u"||(typeof global<"u"?global:typeof self<"u");var ti=function(e,i){return e(i={exports:{}},i.exports),i.exports}(function(e,i){e.exports=function(){var t=function(){},s={},n={},o={};function a(b,V){b=b.push?b:[b];var Y,G,oe,H=[],re=b.length,E=re;for(Y=function(U,de){de.length&&H.push(U),--E||V(H)};re--;)G=b[re],(oe=n[G])?Y(G,oe):(o[G]=o[G]||[]).push(Y)}function c(b,V){if(b){var Y=o[b];if(n[b]=V,Y)for(;Y.length;)Y[0](b,V),Y.splice(0,1)}}function h(b,V){b.call&&(b={success:b}),V.length?(b.error||t)(V):(b.success||t)(b)}function m(b,V,Y,G){var oe,H,re=document,E=Y.async,U=(Y.numRetries||0)+1,de=Y.before||t,ye=b.replace(/[\?|#].*$/,""),Te=b.replace(/^(css|img)!/,"");G=G||0,/(^css!|\.css$)/.test(ye)?((H=re.createElement("link")).rel="stylesheet",H.href=Te,(oe="hideFocus"in H)&&H.relList&&(oe=0,H.rel="preload",H.as="style")):/(^img!|\.(png|gif|jpg|svg|webp)$)/.test(ye)?(H=re.createElement("img")).src=Te:((H=re.createElement("script")).src=b,H.async=E===void 0||E),H.onload=H.onerror=H.onbeforeload=function(xe){var Ye=xe.type[0];if(oe)try{H.sheet.cssText.length||(Ye="e")}catch(oi){oi.code!=18&&(Ye="e")}if(Ye=="e"){if((G+=1)<U)return m(b,V,Y,G)}else if(H.rel=="preload"&&H.as=="style")return H.rel="stylesheet";V(b,Ye,xe.defaultPrevented)},de(b,H)!==!1&&re.head.appendChild(H)}function A(b,V,Y){var G,oe,H=(b=b.push?b:[b]).length,re=H,E=[];for(G=function(U,de,ye){if(de=="e"&&E.push(U),de=="b"){if(!ye)return;E.push(U)}--H||V(E)},oe=0;oe<re;oe++)m(b[oe],G,Y)}function _(b,V,Y){var G,oe;if(V&&V.trim&&(G=V),oe=(G?Y:V)||{},G){if(G in s)throw"LoadJS";s[G]=!0}function H(re,E){A(b,function(U){h(oe,U),re&&h({success:re,error:E},U),c(G,U)},oe)}if(oe.returnPromise)return new Promise(H);H()}return _.ready=function(b,V){return a(b,function(Y){h(V,Y)}),_},_.done=function(b){c(b,[])},_.reset=function(){s={},n={},o={}},_.isDefined=function(b){return b in s},_}()});function it(e){return new Promise((i,t)=>{ti(e,{success:i,error:t})})}function Fe(e){e&&!this.embed.hasPlayed&&(this.embed.hasPlayed=!0),this.media.paused===e&&(this.media.paused=!e,O.call(this,this.media,e?"play":"pause"))}let st={setup(){let e=this;X(e.elements.wrapper,e.config.classNames.embed,!0),e.options.speed=e.config.speed.options,Oe.call(e),r.object(window.Vimeo)?st.ready.call(e):it(e.config.urls.vimeo.sdk).then(()=>{st.ready.call(e)}).catch(i=>{e.debug.warn("Vimeo SDK (player.js) failed to load",i)})},ready(){let e=this,i=e.config.vimeo,{premium:t,referrerPolicy:s,...n}=i,o=e.media.getAttribute("src"),a="";r.empty(o)?(o=e.media.getAttribute(e.config.attributes.embed.id),a=e.media.getAttribute(e.config.attributes.embed.hash)):a=function(E){let U=E.match(/^.*(vimeo.com\/|video\/)(\d+)(\?.*&*h=|\/)+([\d,a-f]+)/);return U&&U.length===5?U[4]:null}(o);let c=a?{h:a}:{};t&&Object.assign(n,{controls:!1,sidedock:!1});let h=At({loop:e.config.loop.active,autoplay:e.autoplay,muted:e.muted,gesture:"media",playsinline:e.config.playsinline,...c,...n}),m=(A=o,r.empty(A)?null:r.number(Number(A))?A:A.match(/^.*(vimeo.com\/|video\/)(\d+).*/)?RegExp.$2:A);var A;let _=g("iframe"),b=et(e.config.urls.vimeo.iframe,m,h);if(_.setAttribute("src",b),_.setAttribute("allowfullscreen",""),_.setAttribute("allow",["autoplay","fullscreen","picture-in-picture","encrypted-media","accelerometer","gyroscope"].join("; ")),r.empty(s)||_.setAttribute("referrerPolicy",s),t||!i.customControls)_.setAttribute("data-poster",e.poster),e.media=Se(_,e.media);else{let E=g("div",{class:e.config.classNames.embedContainer,"data-poster":e.poster});E.appendChild(_),e.media=Se(E,e.media)}i.customControls||qe(et(e.config.urls.vimeo.api,b)).then(E=>{!r.empty(E)&&E.thumbnail_url&&te.setPoster.call(e,E.thumbnail_url).catch(()=>{})}),e.embed=new window.Vimeo.Player(_,{autopause:e.config.autopause,muted:e.muted}),e.media.paused=!0,e.media.currentTime=0,e.supported.ui&&e.embed.disableTextTrack(),e.media.play=()=>(Fe.call(e,!0),e.embed.play()),e.media.pause=()=>(Fe.call(e,!1),e.embed.pause()),e.media.stop=()=>{e.pause(),e.currentTime=0};let{currentTime:V}=e.media;Object.defineProperty(e.media,"currentTime",{get:()=>V,set(E){let{embed:U,media:de,paused:ye,volume:Te}=e,xe=ye&&!U.hasPlayed;de.seeking=!0,O.call(e,de,"seeking"),Promise.resolve(xe&&U.setVolume(0)).then(()=>U.setCurrentTime(E)).then(()=>xe&&U.pause()).then(()=>xe&&U.setVolume(Te)).catch(()=>{})}});let Y=e.config.speed.selected;Object.defineProperty(e.media,"playbackRate",{get:()=>Y,set(E){e.embed.setPlaybackRate(E).then(()=>{Y=E,O.call(e,e.media,"ratechange")}).catch(()=>{e.options.speed=[1]})}});let{volume:G}=e.config;Object.defineProperty(e.media,"volume",{get:()=>G,set(E){e.embed.setVolume(E).then(()=>{G=E,O.call(e,e.media,"volumechange")})}});let{muted:oe}=e.config;Object.defineProperty(e.media,"muted",{get:()=>oe,set(E){let U=!!r.boolean(E)&&E;e.embed.setMuted(!!U||e.config.muted).then(()=>{oe=U,O.call(e,e.media,"volumechange")})}});let H,{loop:re}=e.config;Object.defineProperty(e.media,"loop",{get:()=>re,set(E){let U=r.boolean(E)?E:e.config.loop.active;e.embed.setLoop(U).then(()=>{re=U})}}),e.embed.getVideoUrl().then(E=>{H=E,w.setDownloadUrl.call(e)}).catch(E=>{this.debug.warn(E)}),Object.defineProperty(e.media,"currentSrc",{get:()=>H}),Object.defineProperty(e.media,"ended",{get:()=>e.currentTime===e.duration}),Promise.all([e.embed.getVideoWidth(),e.embed.getVideoHeight()]).then(E=>{let[U,de]=E;e.embed.ratio=yt(U,de),Oe.call(this)}),e.embed.setAutopause(e.config.autopause).then(E=>{e.config.autopause=E}),e.embed.getVideoTitle().then(E=>{e.config.title=E,te.setTitle.call(this)}),e.embed.getCurrentTime().then(E=>{V=E,O.call(e,e.media,"timeupdate")}),e.embed.getDuration().then(E=>{e.media.duration=E,O.call(e,e.media,"durationchange")}),e.embed.getTextTracks().then(E=>{e.media.textTracks=E,Z.setup.call(e)}),e.embed.on("cuechange",({cues:E=[]})=>{let U=E.map(de=>function(ye){let Te=document.createDocumentFragment(),xe=document.createElement("div");return Te.appendChild(xe),xe.innerHTML=ye,Te.firstChild.innerText}(de.text));Z.updateCues.call(e,U)}),e.embed.on("loaded",()=>{e.embed.getPaused().then(E=>{Fe.call(e,!E),E||O.call(e,e.media,"playing")}),r.element(e.embed.element)&&e.supported.ui&&e.embed.element.setAttribute("tabindex",-1)}),e.embed.on("bufferstart",()=>{O.call(e,e.media,"waiting")}),e.embed.on("bufferend",()=>{O.call(e,e.media,"playing")}),e.embed.on("play",()=>{Fe.call(e,!0),O.call(e,e.media,"playing")}),e.embed.on("pause",()=>{Fe.call(e,!1)}),e.embed.on("timeupdate",E=>{e.media.seeking=!1,V=E.seconds,O.call(e,e.media,"timeupdate")}),e.embed.on("progress",E=>{e.media.buffered=E.percent,O.call(e,e.media,"progress"),parseInt(E.percent,10)===1&&O.call(e,e.media,"canplaythrough"),e.embed.getDuration().then(U=>{U!==e.media.duration&&(e.media.duration=U,O.call(e,e.media,"durationchange"))})}),e.embed.on("seeked",()=>{e.media.seeking=!1,O.call(e,e.media,"seeked")}),e.embed.on("ended",()=>{e.media.paused=!0,O.call(e,e.media,"ended")}),e.embed.on("error",E=>{e.media.error=E,O.call(e,e.media,"error")}),i.customControls&&setTimeout(()=>te.build.call(e),0)}};function He(e){e&&!this.embed.hasPlayed&&(this.embed.hasPlayed=!0),this.media.paused===e&&(this.media.paused=!e,O.call(this,this.media,e?"play":"pause"))}function ii(e){return e.noCookie?"https://www.youtube-nocookie.com":window.location.protocol==="http:"?"http://www.youtube.com":void 0}let We={setup(){if(X(this.elements.wrapper,this.config.classNames.embed,!0),r.object(window.YT)&&r.function(window.YT.Player))We.ready.call(this);else{let e=window.onYouTubeIframeAPIReady;window.onYouTubeIframeAPIReady=()=>{r.function(e)&&e(),We.ready.call(this)},it(this.config.urls.youtube.sdk).catch(i=>{this.debug.warn("YouTube API failed to load",i)})}},getTitle(e){qe(et(this.config.urls.youtube.api,e)).then(i=>{if(r.object(i)){let{title:t,height:s,width:n}=i;this.config.title=t,te.setTitle.call(this),this.embed.ratio=yt(n,s)}Oe.call(this)}).catch(()=>{Oe.call(this)})},ready(){let e=this,i=e.config.youtube,t=e.media&&e.media.getAttribute("id");if(!r.empty(t)&&t.startsWith("youtube-"))return;let s=e.media.getAttribute("src");r.empty(s)&&(s=e.media.getAttribute(this.config.attributes.embed.id));let n=(o=s,r.empty(o)?null:o.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/)?RegExp.$2:o);var o;let a=g("div",{id:`${e.provider}-${Math.floor(1e4*Math.random())}`,"data-poster":i.customControls?e.poster:void 0});if(e.media=Se(a,e.media),i.customControls){let c=h=>`https://i.ytimg.com/vi/${n}/${h}default.jpg`;ze(c("maxres"),121).catch(()=>ze(c("sd"),121)).catch(()=>ze(c("hq"))).then(h=>te.setPoster.call(e,h.src)).then(h=>{h.includes("maxres")||(e.elements.poster.style.backgroundSize="cover")}).catch(()=>{})}e.embed=new window.YT.Player(e.media,{videoId:n,host:ii(i),playerVars:K({},{autoplay:e.config.autoplay?1:0,hl:e.config.hl,controls:e.supported.ui&&i.customControls?0:1,disablekb:1,playsinline:e.config.playsinline&&!e.config.fullscreen.iosNative?1:0,cc_load_policy:e.captions.active?1:0,cc_lang_pref:e.config.captions.language,widget_referrer:window?window.location.href:null},i),events:{onError(c){if(!e.media.error){let h=c.data,m={2:"The request contains an invalid parameter value. For example, this error occurs if you specify a video ID that does not have 11 characters, or if the video ID contains invalid characters, such as exclamation points or asterisks.",5:"The requested content cannot be played in an HTML5 player or another error related to the HTML5 player has occurred.",100:"The video requested was not found. This error occurs when a video has been removed (for any reason) or has been marked as private.",101:"The owner of the requested video does not allow it to be played in embedded players.",150:"The owner of the requested video does not allow it to be played in embedded players."}[h]||"An unknown error occurred";e.media.error={code:h,message:m},O.call(e,e.media,"error")}},onPlaybackRateChange(c){let h=c.target;e.media.playbackRate=h.getPlaybackRate(),O.call(e,e.media,"ratechange")},onReady(c){if(r.function(e.media.play))return;let h=c.target;We.getTitle.call(e,n),e.media.play=()=>{He.call(e,!0),h.playVideo()},e.media.pause=()=>{He.call(e,!1),h.pauseVideo()},e.media.stop=()=>{h.stopVideo()},e.media.duration=h.getDuration(),e.media.paused=!0,e.media.currentTime=0,Object.defineProperty(e.media,"currentTime",{get:()=>Number(h.getCurrentTime()),set(b){e.paused&&!e.embed.hasPlayed&&e.embed.mute(),e.media.seeking=!0,O.call(e,e.media,"seeking"),h.seekTo(b)}}),Object.defineProperty(e.media,"playbackRate",{get:()=>h.getPlaybackRate(),set(b){h.setPlaybackRate(b)}});let{volume:m}=e.config;Object.defineProperty(e.media,"volume",{get:()=>m,set(b){m=b,h.setVolume(100*m),O.call(e,e.media,"volumechange")}});let{muted:A}=e.config;Object.defineProperty(e.media,"muted",{get:()=>A,set(b){let V=r.boolean(b)?b:A;A=V,h[V?"mute":"unMute"](),h.setVolume(100*m),O.call(e,e.media,"volumechange")}}),Object.defineProperty(e.media,"currentSrc",{get:()=>h.getVideoUrl()}),Object.defineProperty(e.media,"ended",{get:()=>e.currentTime===e.duration});let _=h.getAvailablePlaybackRates();e.options.speed=_.filter(b=>e.config.speed.options.includes(b)),e.supported.ui&&i.customControls&&e.media.setAttribute("tabindex",-1),O.call(e,e.media,"timeupdate"),O.call(e,e.media,"durationchange"),clearInterval(e.timers.buffering),e.timers.buffering=setInterval(()=>{e.media.buffered=h.getVideoLoadedFraction(),(e.media.lastBuffered===null||e.media.lastBuffered<e.media.buffered)&&O.call(e,e.media,"progress"),e.media.lastBuffered=e.media.buffered,e.media.buffered===1&&(clearInterval(e.timers.buffering),O.call(e,e.media,"canplaythrough"))},200),i.customControls&&setTimeout(()=>te.build.call(e),50)},onStateChange(c){let h=c.target;switch(clearInterval(e.timers.playing),e.media.seeking&&[1,2].includes(c.data)&&(e.media.seeking=!1,O.call(e,e.media,"seeked")),c.data){case-1:O.call(e,e.media,"timeupdate"),e.media.buffered=h.getVideoLoadedFraction(),O.call(e,e.media,"progress");break;case 0:He.call(e,!1),e.media.loop?(h.stopVideo(),h.playVideo()):O.call(e,e.media,"ended");break;case 1:i.customControls&&!e.config.autoplay&&e.media.paused&&!e.embed.hasPlayed?e.media.pause():(He.call(e,!0),O.call(e,e.media,"playing"),e.timers.playing=setInterval(()=>{O.call(e,e.media,"timeupdate")},50),e.media.duration!==h.getDuration()&&(e.media.duration=h.getDuration(),O.call(e,e.media,"durationchange")));break;case 2:e.muted||e.embed.unMute(),He.call(e,!1);break;case 3:O.call(e,e.media,"waiting")}O.call(e,e.elements.container,"statechange",!1,{code:c.data})}}})}},Lt={setup(){this.media?(X(this.elements.container,this.config.classNames.type.replace("{0}",this.type),!0),X(this.elements.container,this.config.classNames.provider.replace("{0}",this.provider),!0),this.isEmbed&&X(this.elements.container,this.config.classNames.type.replace("{0}","video"),!0),this.isVideo&&(this.elements.wrapper=g("div",{class:this.config.classNames.video}),L(this.media,this.elements.wrapper),this.elements.poster=g("div",{class:this.config.classNames.poster}),this.elements.wrapper.appendChild(this.elements.poster)),this.isHTML5?Pe.setup.call(this):this.isYouTube?We.setup.call(this):this.isVimeo&&st.setup.call(this)):this.debug.warn("No media element found!")}};class si{constructor(i){u(this,"load",()=>{this.enabled&&(r.object(window.google)&&r.object(window.google.ima)?this.ready():it(this.player.config.urls.googleIMA.sdk).then(()=>{this.ready()}).catch(()=>{this.trigger("error",new Error("Google IMA SDK failed to load"))}))}),u(this,"ready",()=>{var t;this.enabled||((t=this).manager&&t.manager.destroy(),t.elements.displayContainer&&t.elements.displayContainer.destroy(),t.elements.container.remove()),this.startSafetyTimer(12e3,"ready()"),this.managerPromise.then(()=>{this.clearSafetyTimer("onAdsManagerLoaded()")}),this.listeners(),this.setupIMA()}),u(this,"setupIMA",()=>{this.elements.container=g("div",{class:this.player.config.classNames.ads}),this.player.elements.container.appendChild(this.elements.container),google.ima.settings.setVpaidMode(google.ima.ImaSdkSettings.VpaidMode.ENABLED),google.ima.settings.setLocale(this.player.config.ads.language),google.ima.settings.setDisableCustomPlaybackForIOS10Plus(this.player.config.playsinline),this.elements.displayContainer=new google.ima.AdDisplayContainer(this.elements.container,this.player.media),this.loader=new google.ima.AdsLoader(this.elements.displayContainer),this.loader.addEventListener(google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED,t=>this.onAdsManagerLoaded(t),!1),this.loader.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR,t=>this.onAdError(t),!1),this.requestAds()}),u(this,"requestAds",()=>{let{container:t}=this.player.elements;try{let s=new google.ima.AdsRequest;s.adTagUrl=this.tagUrl,s.linearAdSlotWidth=t.offsetWidth,s.linearAdSlotHeight=t.offsetHeight,s.nonLinearAdSlotWidth=t.offsetWidth,s.nonLinearAdSlotHeight=t.offsetHeight,s.forceNonLinearFullSlot=!1,s.setAdWillPlayMuted(!this.player.muted),this.loader.requestAds(s)}catch(s){this.onAdError(s)}}),u(this,"pollCountdown",(t=!1)=>{if(!t)return clearInterval(this.countdownTimer),void this.elements.container.removeAttribute("data-badge-text");this.countdownTimer=setInterval(()=>{let s=Ue(Math.max(this.manager.getRemainingTime(),0)),n=`${pe.get("advertisement",this.player.config)} - ${s}`;this.elements.container.setAttribute("data-badge-text",n)},100)}),u(this,"onAdsManagerLoaded",t=>{if(!this.enabled)return;let s=new google.ima.AdsRenderingSettings;s.restoreCustomPlaybackStateOnAdBreakComplete=!0,s.enablePreloading=!0,this.manager=t.getAdsManager(this.player,s),this.cuePoints=this.manager.getCuePoints(),this.manager.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR,n=>this.onAdError(n)),Object.keys(google.ima.AdEvent.Type).forEach(n=>{this.manager.addEventListener(google.ima.AdEvent.Type[n],o=>this.onAdEvent(o))}),this.trigger("loaded")}),u(this,"addCuePoints",()=>{r.empty(this.cuePoints)||this.cuePoints.forEach(t=>{if(t!==0&&t!==-1&&t<this.player.duration){let s=this.player.elements.progress;if(r.element(s)){let n=100/this.player.duration*t,o=g("span",{class:this.player.config.classNames.cues});o.style.left=`${n.toString()}%`,s.appendChild(o)}}})}),u(this,"onAdEvent",t=>{let{container:s}=this.player.elements,n=t.getAd(),o=t.getAdData();switch((a=>{O.call(this.player,this.player.media,`ads${a.replace(/_/g,"").toLowerCase()}`)})(t.type),t.type){case google.ima.AdEvent.Type.LOADED:this.trigger("loaded"),this.pollCountdown(!0),n.isLinear()||(n.width=s.offsetWidth,n.height=s.offsetHeight);break;case google.ima.AdEvent.Type.STARTED:this.manager.setVolume(this.player.volume);break;case google.ima.AdEvent.Type.ALL_ADS_COMPLETED:this.player.ended?this.loadAds():this.loader.contentComplete();break;case google.ima.AdEvent.Type.CONTENT_PAUSE_REQUESTED:this.pauseContent();break;case google.ima.AdEvent.Type.CONTENT_RESUME_REQUESTED:this.pollCountdown(),this.resumeContent();break;case google.ima.AdEvent.Type.LOG:o.adError&&this.player.debug.warn(`Non-fatal ad error: ${o.adError.getMessage()}`)}}),u(this,"onAdError",t=>{this.cancel(),this.player.debug.warn("Ads error",t)}),u(this,"listeners",()=>{let{container:t}=this.player.elements,s;this.player.on("canplay",()=>{this.addCuePoints()}),this.player.on("ended",()=>{this.loader.contentComplete()}),this.player.on("timeupdate",()=>{s=this.player.currentTime}),this.player.on("seeked",()=>{let n=this.player.currentTime;r.empty(this.cuePoints)||this.cuePoints.forEach((o,a)=>{s<o&&o<n&&(this.manager.discardAdBreak(),this.cuePoints.splice(a,1))})}),window.addEventListener("resize",()=>{this.manager&&this.manager.resize(t.offsetWidth,t.offsetHeight,google.ima.ViewMode.NORMAL)})}),u(this,"play",()=>{let{container:t}=this.player.elements;this.managerPromise||this.resumeContent(),this.managerPromise.then(()=>{this.manager.setVolume(this.player.volume),this.elements.displayContainer.initialize();try{this.initialized||(this.manager.init(t.offsetWidth,t.offsetHeight,google.ima.ViewMode.NORMAL),this.manager.start()),this.initialized=!0}catch(s){this.onAdError(s)}}).catch(()=>{})}),u(this,"resumeContent",()=>{this.elements.container.style.zIndex="",this.playing=!1,ke(this.player.media.play())}),u(this,"pauseContent",()=>{this.elements.container.style.zIndex=3,this.playing=!0,this.player.media.pause()}),u(this,"cancel",()=>{this.initialized&&this.resumeContent(),this.trigger("error"),this.loadAds()}),u(this,"loadAds",()=>{this.managerPromise.then(()=>{this.manager&&this.manager.destroy(),this.managerPromise=new Promise(t=>{this.on("loaded",t),this.player.debug.log(this.manager)}),this.initialized=!1,this.requestAds()}).catch(()=>{})}),u(this,"trigger",(t,...s)=>{let n=this.events[t];r.array(n)&&n.forEach(o=>{r.function(o)&&o.apply(this,s)})}),u(this,"on",(t,s)=>(r.array(this.events[t])||(this.events[t]=[]),this.events[t].push(s),this)),u(this,"startSafetyTimer",(t,s)=>{this.player.debug.log(`Safety timer invoked from: ${s}`),this.safetyTimer=setTimeout(()=>{this.cancel(),this.clearSafetyTimer("startSafetyTimer()")},t)}),u(this,"clearSafetyTimer",t=>{r.nullOrUndefined(this.safetyTimer)||(this.player.debug.log(`Safety timer cleared from: ${t}`),clearTimeout(this.safetyTimer),this.safetyTimer=null)}),this.player=i,this.config=i.config.ads,this.playing=!1,this.initialized=!1,this.elements={container:null,displayContainer:null},this.manager=null,this.loader=null,this.cuePoints=null,this.events={},this.safetyTimer=null,this.countdownTimer=null,this.managerPromise=new Promise((t,s)=>{this.on("loaded",t),this.on("error",s)}),this.load()}get enabled(){let{config:i}=this;return this.player.isHTML5&&this.player.isVideo&&i.enabled&&(!r.empty(i.publisherId)||r.url(i.tagUrl))}get tagUrl(){let{config:i}=this;return r.url(i.tagUrl)?i.tagUrl:`https://go.aniview.com/api/adserver6/vast/?${At({AV_PUBLISHERID:"58c25bb0073ef448b1087ad6",AV_CHANNELID:"5a0458dc28a06145e4519d21",AV_URL:window.location.hostname,cb:Date.now(),AV_WIDTH:640,AV_HEIGHT:480,AV_CDIM2:i.publisherId})}`}}function xt(e=0,i=0,t=255){return Math.min(Math.max(e,i),t)}let ni=e=>{let i=[];return e.split(/\r\n\r\n|\n\n|\r\r/).forEach(t=>{let s={};t.split(/\r\n|\n|\r/).forEach(n=>{if(r.number(s.startTime)){if(!r.empty(n.trim())&&r.empty(s.text)){let o=n.trim().split("#xywh=");[s.text]=o,o[1]&&([s.x,s.y,s.w,s.h]=o[1].split(","))}}else{let o=n.match(/([0-9]{2})?:?([0-9]{2}):([0-9]{2}).([0-9]{2,3})( ?--> ?)([0-9]{2})?:?([0-9]{2}):([0-9]{2}).([0-9]{2,3})/);o&&(s.startTime=60*Number(o[1]||0)*60+60*Number(o[2])+Number(o[3])+ +`0.${o[4]}`,s.endTime=60*Number(o[6]||0)*60+60*Number(o[7])+Number(o[8])+ +`0.${o[9]}`)}}),s.text&&i.push(s)}),i},Nt=(e,i)=>{let t={};return e>i.width/i.height?(t.width=i.width,t.height=1/e*i.width):(t.height=i.height,t.width=e*i.height),t};class nt{constructor(i){u(this,"load",()=>{this.player.elements.display.seekTooltip&&(this.player.elements.display.seekTooltip.hidden=this.enabled),this.enabled&&this.getThumbnails().then(()=>{this.enabled&&(this.render(),this.determineContainerAutoSizing(),this.listeners(),this.loaded=!0)})}),u(this,"getThumbnails",()=>new Promise(t=>{let{src:s}=this.player.config.previewThumbnails;if(r.empty(s))throw new Error("Missing previewThumbnails.src config attribute");let n=()=>{this.thumbnails.sort((o,a)=>o.height-a.height),this.player.debug.log("Preview thumbnails",this.thumbnails),t()};if(r.function(s))s(o=>{this.thumbnails=o,n()});else{let o=(r.string(s)?[s]:s).map(a=>this.getThumbnail(a));Promise.all(o).then(n)}})),u(this,"getThumbnail",t=>new Promise(s=>{qe(t).then(n=>{let o={frames:ni(n),height:null,urlPrefix:""};o.frames[0].text.startsWith("/")||o.frames[0].text.startsWith("http://")||o.frames[0].text.startsWith("https://")||(o.urlPrefix=t.substring(0,t.lastIndexOf("/")+1));let a=new Image;a.onload=()=>{o.height=a.naturalHeight,o.width=a.naturalWidth,this.thumbnails.push(o),s()},a.src=o.urlPrefix+o.frames[0].text})})),u(this,"startMove",t=>{if(this.loaded&&r.event(t)&&["touchmove","mousemove"].includes(t.type)&&this.player.media.duration){if(t.type==="touchmove")this.seekTime=this.player.media.duration*(this.player.elements.inputs.seek.value/100);else{var s,n;let o=this.player.elements.progress.getBoundingClientRect(),a=100/o.width*(t.pageX-o.left);this.seekTime=this.player.media.duration*(a/100),this.seekTime<0&&(this.seekTime=0),this.seekTime>this.player.media.duration-1&&(this.seekTime=this.player.media.duration-1),this.mousePosX=t.pageX,this.elements.thumb.time.innerText=Ue(this.seekTime);let c=(s=this.player.config.markers)===null||s===void 0||(n=s.points)===null||n===void 0?void 0:n.find(({time:h})=>h===Math.round(this.seekTime));c&&this.elements.thumb.time.insertAdjacentHTML("afterbegin",`${c.label}<br>`)}this.showImageAtCurrentTime()}}),u(this,"endMove",()=>{this.toggleThumbContainer(!1,!0)}),u(this,"startScrubbing",t=>{(r.nullOrUndefined(t.button)||t.button===!1||t.button===0)&&(this.mouseDown=!0,this.player.media.duration&&(this.toggleScrubbingContainer(!0),this.toggleThumbContainer(!1,!0),this.showImageAtCurrentTime()))}),u(this,"endScrubbing",()=>{this.mouseDown=!1,Math.ceil(this.lastTime)===Math.ceil(this.player.media.currentTime)?this.toggleScrubbingContainer(!1):De.call(this.player,this.player.media,"timeupdate",()=>{this.mouseDown||this.toggleScrubbingContainer(!1)})}),u(this,"listeners",()=>{this.player.on("play",()=>{this.toggleThumbContainer(!1,!0)}),this.player.on("seeked",()=>{this.toggleThumbContainer(!1)}),this.player.on("timeupdate",()=>{this.lastTime=this.player.media.currentTime})}),u(this,"render",()=>{this.elements.thumb.container=g("div",{class:this.player.config.classNames.previewThumbnails.thumbContainer}),this.elements.thumb.imageContainer=g("div",{class:this.player.config.classNames.previewThumbnails.imageContainer}),this.elements.thumb.container.appendChild(this.elements.thumb.imageContainer);let t=g("div",{class:this.player.config.classNames.previewThumbnails.timeContainer});this.elements.thumb.time=g("span",{},"00:00"),t.appendChild(this.elements.thumb.time),this.elements.thumb.imageContainer.appendChild(t),r.element(this.player.elements.progress)&&this.player.elements.progress.appendChild(this.elements.thumb.container),this.elements.scrubbing.container=g("div",{class:this.player.config.classNames.previewThumbnails.scrubbingContainer}),this.player.elements.wrapper.appendChild(this.elements.scrubbing.container)}),u(this,"destroy",()=>{this.elements.thumb.container&&this.elements.thumb.container.remove(),this.elements.scrubbing.container&&this.elements.scrubbing.container.remove()}),u(this,"showImageAtCurrentTime",()=>{this.mouseDown?this.setScrubbingContainerSize():this.setThumbContainerSizeAndPos();let t=this.thumbnails[0].frames.findIndex(o=>this.seekTime>=o.startTime&&this.seekTime<=o.endTime),s=t>=0,n=0;this.mouseDown||this.toggleThumbContainer(s),s&&(this.thumbnails.forEach((o,a)=>{this.loadedImages.includes(o.frames[t].text)&&(n=a)}),t!==this.showingThumb&&(this.showingThumb=t,this.loadImage(n)))}),u(this,"loadImage",(t=0)=>{let s=this.showingThumb,n=this.thumbnails[t],{urlPrefix:o}=n,a=n.frames[s],c=n.frames[s].text,h=o+c;if(this.currentImageElement&&this.currentImageElement.dataset.filename===c)this.showImage(this.currentImageElement,a,t,s,c,!1),this.currentImageElement.dataset.index=s,this.removeOldImages(this.currentImageElement);else{this.loadingImage&&this.usingSprites&&(this.loadingImage.onload=null);let m=new Image;m.src=h,m.dataset.index=s,m.dataset.filename=c,this.showingThumbFilename=c,this.player.debug.log(`Loading image: ${h}`),m.onload=()=>this.showImage(m,a,t,s,c,!0),this.loadingImage=m,this.removeOldImages(m)}}),u(this,"showImage",(t,s,n,o,a,c=!0)=>{this.player.debug.log(`Showing thumb: ${a}. num: ${o}. qual: ${n}. newimg: ${c}`),this.setImageSizeAndOffset(t,s),c&&(this.currentImageContainer.appendChild(t),this.currentImageElement=t,this.loadedImages.includes(a)||this.loadedImages.push(a)),this.preloadNearby(o,!0).then(this.preloadNearby(o,!1)).then(this.getHigherQuality(n,t,s,a))}),u(this,"removeOldImages",t=>{Array.from(this.currentImageContainer.children).forEach(s=>{if(s.tagName.toLowerCase()!=="img")return;let n=this.usingSprites?500:1e3;if(s.dataset.index!==t.dataset.index&&!s.dataset.deleting){s.dataset.deleting=!0;let{currentImageContainer:o}=this;setTimeout(()=>{o.removeChild(s),this.player.debug.log(`Removing thumb: ${s.dataset.filename}`)},n)}})}),u(this,"preloadNearby",(t,s=!0)=>new Promise(n=>{setTimeout(()=>{let o=this.thumbnails[0].frames[t].text;if(this.showingThumbFilename===o){let a;a=s?this.thumbnails[0].frames.slice(t):this.thumbnails[0].frames.slice(0,t).reverse();let c=!1;a.forEach(h=>{let m=h.text;if(m!==o&&!this.loadedImages.includes(m)){c=!0,this.player.debug.log(`Preloading thumb filename: ${m}`);let{urlPrefix:A}=this.thumbnails[0],_=A+m,b=new Image;b.src=_,b.onload=()=>{this.player.debug.log(`Preloaded thumb filename: ${m}`),this.loadedImages.includes(m)||this.loadedImages.push(m),n()}}}),c||n()}},300)})),u(this,"getHigherQuality",(t,s,n,o)=>{if(t<this.thumbnails.length-1){let a=s.naturalHeight;this.usingSprites&&(a=n.h),a<this.thumbContainerHeight&&setTimeout(()=>{this.showingThumbFilename===o&&(this.player.debug.log(`Showing higher quality thumb for: ${o}`),this.loadImage(t+1))},300)}}),u(this,"toggleThumbContainer",(t=!1,s=!1)=>{let n=this.player.config.classNames.previewThumbnails.thumbContainerShown;this.elements.thumb.container.classList.toggle(n,t),!t&&s&&(this.showingThumb=null,this.showingThumbFilename=null)}),u(this,"toggleScrubbingContainer",(t=!1)=>{let s=this.player.config.classNames.previewThumbnails.scrubbingContainerShown;this.elements.scrubbing.container.classList.toggle(s,t),t||(this.showingThumb=null,this.showingThumbFilename=null)}),u(this,"determineContainerAutoSizing",()=>{(this.elements.thumb.imageContainer.clientHeight>20||this.elements.thumb.imageContainer.clientWidth>20)&&(this.sizeSpecifiedInCSS=!0)}),u(this,"setThumbContainerSizeAndPos",()=>{let{imageContainer:t}=this.elements.thumb;if(this.sizeSpecifiedInCSS){if(t.clientHeight>20&&t.clientWidth<20){let s=Math.floor(t.clientHeight*this.thumbAspectRatio);t.style.width=`${s}px`}else if(t.clientHeight<20&&t.clientWidth>20){let s=Math.floor(t.clientWidth/this.thumbAspectRatio);t.style.height=`${s}px`}}else{let s=Math.floor(this.thumbContainerHeight*this.thumbAspectRatio);t.style.height=`${this.thumbContainerHeight}px`,t.style.width=`${s}px`}this.setThumbContainerPos()}),u(this,"setThumbContainerPos",()=>{let t=this.player.elements.progress.getBoundingClientRect(),s=this.player.elements.container.getBoundingClientRect(),{container:n}=this.elements.thumb,o=s.left-t.left+10,a=s.right-t.left-n.clientWidth-10,c=this.mousePosX-t.left-n.clientWidth/2,h=xt(c,o,a);n.style.left=`${h}px`,n.style.setProperty("--preview-arrow-offset",c-h+"px")}),u(this,"setScrubbingContainerSize",()=>{let{width:t,height:s}=Nt(this.thumbAspectRatio,{width:this.player.media.clientWidth,height:this.player.media.clientHeight});this.elements.scrubbing.container.style.width=`${t}px`,this.elements.scrubbing.container.style.height=`${s}px`}),u(this,"setImageSizeAndOffset",(t,s)=>{if(!this.usingSprites)return;let n=this.thumbContainerHeight/s.h;t.style.height=t.naturalHeight*n+"px",t.style.width=t.naturalWidth*n+"px",t.style.left=`-${s.x*n}px`,t.style.top=`-${s.y*n}px`}),this.player=i,this.thumbnails=[],this.loaded=!1,this.lastMouseMoveTime=Date.now(),this.mouseDown=!1,this.loadedImages=[],this.elements={thumb:{},scrubbing:{}},this.load()}get enabled(){return this.player.isHTML5&&this.player.isVideo&&this.player.config.previewThumbnails.enabled}get currentImageContainer(){return this.mouseDown?this.elements.scrubbing.container:this.elements.thumb.imageContainer}get usingSprites(){return Object.keys(this.thumbnails[0].frames[0]).includes("w")}get thumbAspectRatio(){return this.usingSprites?this.thumbnails[0].frames[0].w/this.thumbnails[0].frames[0].h:this.thumbnails[0].width/this.thumbnails[0].height}get thumbContainerHeight(){if(this.mouseDown){let{height:i}=Nt(this.thumbAspectRatio,{width:this.player.media.clientWidth,height:this.player.media.clientHeight});return i}return this.sizeSpecifiedInCSS?this.elements.thumb.imageContainer.clientHeight:Math.floor(this.player.media.clientWidth/this.thumbAspectRatio/4)}get currentImageElement(){return this.mouseDown?this.currentScrubbingImageElement:this.currentThumbnailImageElement}set currentImageElement(i){this.mouseDown?this.currentScrubbingImageElement=i:this.currentThumbnailImageElement=i}}let ot={insertElements(e,i){r.string(i)?le(e,this.media,{src:i}):r.array(i)&&i.forEach(t=>{le(e,this.media,t)})},change(e){Ce(e,"sources.length")?(Pe.cancelRequests.call(this),this.destroy.call(this,()=>{this.options.quality=[],q(this.media),this.media=null,r.element(this.elements.container)&&this.elements.container.removeAttribute("class");let{sources:i,type:t}=e,[{provider:s=Me.html5,src:n}]=i,o=s==="html5"?t:"div",a=s==="html5"?{}:{src:n};Object.assign(this,{provider:s,type:t,supported:Q.check(t,s,this.config.playsinline),media:g(o,a)}),this.elements.container.appendChild(this.media),r.boolean(e.autoplay)&&(this.config.autoplay=e.autoplay),this.isHTML5&&(this.config.crossorigin&&this.media.setAttribute("crossorigin",""),this.config.autoplay&&this.media.setAttribute("autoplay",""),r.empty(e.poster)||(this.poster=e.poster),this.config.loop.active&&this.media.setAttribute("loop",""),this.config.muted&&this.media.setAttribute("muted",""),this.config.playsinline&&this.media.setAttribute("playsinline","")),te.addStyleHook.call(this),this.isHTML5&&ot.insertElements.call(this,"source",i),this.config.title=e.title,Lt.setup.call(this),this.isHTML5&&Object.keys(e).includes("tracks")&&ot.insertElements.call(this,"track",e.tracks),(this.isHTML5||this.isEmbed&&!this.supported.ui)&&te.build.call(this),this.isHTML5&&this.media.load(),r.empty(e.previewThumbnails)||(Object.assign(this.config.previewThumbnails,e.previewThumbnails),this.previewThumbnails&&this.previewThumbnails.loaded&&(this.previewThumbnails.destroy(),this.previewThumbnails=null),this.config.previewThumbnails.enabled&&(this.previewThumbnails=new nt(this))),this.fullscreen.update()},!0)):this.debug.warn("Invalid source format")}};class je{constructor(i,t){if(u(this,"play",()=>r.function(this.media.play)?(this.ads&&this.ads.enabled&&this.ads.managerPromise.then(()=>this.ads.play()).catch(()=>ke(this.media.play())),this.media.play()):null),u(this,"pause",()=>this.playing&&r.function(this.media.pause)?this.media.pause():null),u(this,"togglePlay",c=>(r.boolean(c)?c:!this.playing)?this.play():this.pause()),u(this,"stop",()=>{this.isHTML5?(this.pause(),this.restart()):r.function(this.media.stop)&&this.media.stop()}),u(this,"restart",()=>{this.currentTime=0}),u(this,"rewind",c=>{this.currentTime-=r.number(c)?c:this.config.seekTime}),u(this,"forward",c=>{this.currentTime+=r.number(c)?c:this.config.seekTime}),u(this,"increaseVolume",c=>{let h=this.media.muted?0:this.volume;this.volume=h+(r.number(c)?c:0)}),u(this,"decreaseVolume",c=>{this.increaseVolume(-c)}),u(this,"airplay",()=>{Q.airplay&&this.media.webkitShowPlaybackTargetPicker()}),u(this,"toggleControls",c=>{if(this.supported.ui&&!this.isAudio){let h=Re(this.elements.container,this.config.classNames.hideControls),m=c===void 0?void 0:!c,A=X(this.elements.container,this.config.classNames.hideControls,m);if(A&&r.array(this.config.controls)&&this.config.controls.includes("settings")&&!r.empty(this.config.settings)&&w.toggleMenu.call(this,!1),A!==h){let _=A?"controlshidden":"controlsshown";O.call(this,this.media,_)}return!A}return!1}),u(this,"on",(c,h)=>{W.call(this,this.elements.container,c,h)}),u(this,"once",(c,h)=>{De.call(this,this.elements.container,c,h)}),u(this,"off",(c,h)=>{Ie(this.elements.container,c,h)}),u(this,"destroy",(c,h=!1)=>{if(!this.ready)return;let m=()=>{document.body.style.overflow="",this.embed=null,h?(Object.keys(this.elements).length&&(q(this.elements.buttons.play),q(this.elements.captions),q(this.elements.controls),q(this.elements.wrapper),this.elements.buttons.play=null,this.elements.captions=null,this.elements.controls=null,this.elements.wrapper=null),r.function(c)&&c()):(Qe.call(this),Pe.cancelRequests.call(this),Se(this.elements.original,this.elements.container),O.call(this,this.elements.original,"destroyed",!0),r.function(c)&&c.call(this.elements.original),this.ready=!1,setTimeout(()=>{this.elements=null,this.media=null},200))};this.stop(),clearTimeout(this.timers.loading),clearTimeout(this.timers.controls),clearTimeout(this.timers.resized),this.isHTML5?(te.toggleNativeControls.call(this,!0),m()):this.isYouTube?(clearInterval(this.timers.buffering),clearInterval(this.timers.playing),this.embed!==null&&r.function(this.embed.destroy)&&this.embed.destroy(),m()):this.isVimeo&&(this.embed!==null&&this.embed.unload().then(m),setTimeout(m,200))}),u(this,"supports",c=>Q.mime.call(this,c)),this.timers={},this.ready=!1,this.loading=!1,this.failed=!1,this.touch=Q.touch,this.media=i,r.string(this.media)&&(this.media=document.querySelectorAll(this.media)),(window.jQuery&&this.media instanceof jQuery||r.nodeList(this.media)||r.array(this.media))&&(this.media=this.media[0]),this.config=K({},kt,je.defaults,t||{},(()=>{try{return JSON.parse(this.media.getAttribute("data-plyr-config"))}catch{return{}}})()),this.elements={container:null,fullscreen:null,captions:null,buttons:{},display:{},progress:{},inputs:{},settings:{popup:null,menu:null,panels:{},buttons:{}}},this.captions={active:null,currentTrack:-1,meta:new WeakMap},this.fullscreen={active:!1},this.options={speed:[],quality:[]},this.debug=new Zt(this.config.debug),this.debug.log("Config",this.config),this.debug.log("Support",Q),r.nullOrUndefined(this.media)||!r.element(this.media))return void this.debug.error("Setup failed: no suitable element passed");if(this.media.plyr)return void this.debug.warn("Target already setup");if(!this.config.enabled)return void this.debug.error("Setup failed: disabled by config");if(!Q.check().api)return void this.debug.error("Setup failed: no support");let s=this.media.cloneNode(!0);s.autoplay=!1,this.elements.original=s;let n=this.media.tagName.toLowerCase(),o=null,a=null;switch(n){case"div":if(o=this.media.querySelector("iframe"),r.element(o)){if(a=St(o.getAttribute("src")),this.provider=function(c){return/^(https?:\/\/)?(www\.)?(youtube\.com|youtube-nocookie\.com|youtu\.?be)\/.+$/.test(c)?Me.youtube:/^https?:\/\/player.vimeo.com\/video\/\d{0,9}(?=\b|\/)/.test(c)?Me.vimeo:null}(a.toString()),this.elements.container=this.media,this.media=o,this.elements.container.className="",a.search.length){let c=["1","true"];c.includes(a.searchParams.get("autoplay"))&&(this.config.autoplay=!0),c.includes(a.searchParams.get("loop"))&&(this.config.loop.active=!0),this.isYouTube?(this.config.playsinline=c.includes(a.searchParams.get("playsinline")),this.config.youtube.hl=a.searchParams.get("hl")):this.config.playsinline=!0}}else this.provider=this.media.getAttribute(this.config.attributes.embed.provider),this.media.removeAttribute(this.config.attributes.embed.provider);if(r.empty(this.provider)||!Object.values(Me).includes(this.provider))return void this.debug.error("Setup failed: Invalid provider");this.type=Ct;break;case"video":case"audio":this.type=n,this.provider=Me.html5,this.media.hasAttribute("crossorigin")&&(this.config.crossorigin=!0),this.media.hasAttribute("autoplay")&&(this.config.autoplay=!0),(this.media.hasAttribute("playsinline")||this.media.hasAttribute("webkit-playsinline"))&&(this.config.playsinline=!0),this.media.hasAttribute("muted")&&(this.config.muted=!0),this.media.hasAttribute("loop")&&(this.config.loop.active=!0);break;default:return void this.debug.error("Setup failed: unsupported type")}this.supported=Q.check(this.type,this.provider),this.supported.api?(this.eventListeners=[],this.listeners=new ei(this),this.storage=new $e(this),this.media.plyr=this,r.element(this.elements.container)||(this.elements.container=g("div"),L(this.media,this.elements.container)),te.migrateStyles.call(this),te.addStyleHook.call(this),Lt.setup.call(this),this.config.debug&&W.call(this,this.elements.container,this.config.events.join(" "),c=>{this.debug.log(`event: ${c.type}`)}),this.fullscreen=new we(this),(this.isHTML5||this.isEmbed&&!this.supported.ui)&&te.build.call(this),this.listeners.container(),this.listeners.global(),this.config.ads.enabled&&(this.ads=new si(this)),this.isHTML5&&this.config.autoplay&&this.once("canplay",()=>ke(this.play())),this.lastSeekTime=0,this.config.previewThumbnails.enabled&&(this.previewThumbnails=new nt(this))):this.debug.error("Setup failed: no support")}get isHTML5(){return this.provider===Me.html5}get isEmbed(){return this.isYouTube||this.isVimeo}get isYouTube(){return this.provider===Me.youtube}get isVimeo(){return this.provider===Me.vimeo}get isVideo(){return this.type===Ct}get isAudio(){return this.type===Jt}get playing(){return!!(this.ready&&!this.paused&&!this.ended)}get paused(){return!!this.media.paused}get stopped(){return!!(this.paused&&this.currentTime===0)}get ended(){return!!this.media.ended}set currentTime(i){if(!this.duration)return;let t=r.number(i)&&i>0;this.media.currentTime=t?Math.min(i,this.duration):0,this.debug.log(`Seeking to ${this.currentTime} seconds`)}get currentTime(){return Number(this.media.currentTime)}get buffered(){let{buffered:i}=this.media;return r.number(i)?i:i&&i.length&&this.duration>0?i.end(0)/this.duration:0}get seeking(){return!!this.media.seeking}get duration(){let i=parseFloat(this.config.duration),t=(this.media||{}).duration,s=r.number(t)&&t!==1/0?t:0;return i||s}set volume(i){let t=i;r.string(t)&&(t=Number(t)),r.number(t)||(t=this.storage.get("volume")),r.number(t)||({volume:t}=this.config),t>1&&(t=1),t<0&&(t=0),this.config.volume=t,this.media.volume=t,!r.empty(i)&&this.muted&&t>0&&(this.muted=!1)}get volume(){return Number(this.media.volume)}set muted(i){let t=i;r.boolean(t)||(t=this.storage.get("muted")),r.boolean(t)||(t=this.config.muted),this.config.muted=t,this.media.muted=t}get muted(){return!!this.media.muted}get hasAudio(){return!this.isHTML5||!!this.isAudio||!!this.media.mozHasAudio||!!this.media.webkitAudioDecodedByteCount||!!(this.media.audioTracks&&this.media.audioTracks.length)}set speed(i){let t=null;r.number(i)&&(t=i),r.number(t)||(t=this.storage.get("speed")),r.number(t)||(t=this.config.speed.selected);let{minimumSpeed:s,maximumSpeed:n}=this;t=xt(t,s,n),this.config.speed.selected=t,setTimeout(()=>{this.media&&(this.media.playbackRate=t)},0)}get speed(){return Number(this.media.playbackRate)}get minimumSpeed(){return this.isYouTube?Math.min(...this.options.speed):this.isVimeo?.5:.0625}get maximumSpeed(){return this.isYouTube?Math.max(...this.options.speed):this.isVimeo?2:16}set quality(i){let t=this.config.quality,s=this.options.quality;if(!s.length)return;let n=[!r.empty(i)&&Number(i),this.storage.get("quality"),t.selected,t.default].find(r.number),o=!0;if(!s.includes(n)){let a=pt(s,n);this.debug.warn(`Unsupported quality option: ${n}, using ${a} instead`),n=a,o=!1}t.selected=n,this.media.quality=n,o&&this.storage.set({quality:n})}get quality(){return this.media.quality}set loop(i){let t=r.boolean(i)?i:this.config.loop.active;this.config.loop.active=t,this.media.loop=t}get loop(){return!!this.media.loop}set source(i){ot.change.call(this,i)}get source(){return this.media.currentSrc}get download(){let{download:i}=this.config.urls;return r.url(i)?i:this.source}set download(i){r.url(i)&&(this.config.urls.download=i,w.setDownloadUrl.call(this))}set poster(i){this.isVideo?te.setPoster.call(this,i,!1).catch(()=>{}):this.debug.warn("Poster can only be set for video")}get poster(){return this.isVideo?this.media.getAttribute("poster")||this.media.getAttribute("data-poster"):null}get ratio(){if(!this.isVideo)return null;let i=Be(Ze.call(this));return r.array(i)?i.join(":"):i}set ratio(i){this.isVideo?r.string(i)&&ft(i)?(this.config.ratio=Be(i),Oe.call(this)):this.debug.error(`Invalid aspect ratio specified (${i})`):this.debug.warn("Aspect ratio can only be set for video")}set autoplay(i){this.config.autoplay=r.boolean(i)?i:this.config.autoplay}get autoplay(){return!!this.config.autoplay}toggleCaptions(i){Z.toggle.call(this,i,!1)}set currentTrack(i){Z.set.call(this,i,!1),Z.setup.call(this)}get currentTrack(){let{toggled:i,currentTrack:t}=this.captions;return i?t:-1}set language(i){Z.setLanguage.call(this,i,!1)}get language(){return(Z.getCurrentTrack.call(this)||{}).language}set pip(i){if(!Q.pip)return;let t=r.boolean(i)?i:!this.pip;r.function(this.media.webkitSetPresentationMode)&&this.media.webkitSetPresentationMode(t?Et:Qt),r.function(this.media.requestPictureInPicture)&&(!this.pip&&t?this.media.requestPictureInPicture():this.pip&&!t&&document.exitPictureInPicture())}get pip(){return Q.pip?r.empty(this.media.webkitPresentationMode)?this.media===document.pictureInPictureElement:this.media.webkitPresentationMode===Et:null}setPreviewThumbnails(i){this.previewThumbnails&&this.previewThumbnails.loaded&&(this.previewThumbnails.destroy(),this.previewThumbnails=null),Object.assign(this.config.previewThumbnails,i),this.config.previewThumbnails.enabled&&(this.previewThumbnails=new nt(this))}static supported(i,t){return Q.check(i,t)}static loadSprite(i,t){return wt(i,t)}static setup(i,t={}){let s=null;return r.string(i)?s=Array.from(document.querySelectorAll(i)):r.nodeList(i)?s=Array.from(i):r.array(i)&&(s=i.filter(r.element)),r.empty(s)?null:s.map(n=>new je(n,t))}}var Pt;return je.defaults=(Pt=kt,JSON.parse(JSON.stringify(Pt))),je})});function _t(u,l,d){return Math.max(u,Math.min(l,d))}var at=class{advance(l){if(!this.isRunning)return;let d=!1;if(this.lerp)this.value=(v=this.value,p=this.to,y=60*this.lerp,f=l,function(T,S,x){return(1-x)*T+x*S}(v,p,1-Math.exp(-y*f))),Math.round(this.value)===this.to&&(this.value=this.to,d=!0);else{this.currentTime+=l;let T=_t(0,this.currentTime/this.duration,1);d=T>=1;let S=d?1:this.easing(T);this.value=this.from+(this.to-this.from)*S}var v,p,y,f;this.onUpdate?.(this.value,d),d&&this.stop()}stop(){this.isRunning=!1}fromTo(l,d,{lerp:v=.1,duration:p=1,easing:y=S=>S,onStart:f,onUpdate:T}){this.from=this.value=l,this.to=d,this.lerp=v,this.duration=p,this.easing=y,this.currentTime=0,this.isRunning=!0,f?.(),this.onUpdate=T}},lt=class{constructor({wrapper:l,content:d,autoResize:v=!0,debounce:p=250}={}){Ee(this,"resize",()=>{this.onWrapperResize(),this.onContentResize()});Ee(this,"onWrapperResize",()=>{this.wrapper===window?(this.width=window.innerWidth,this.height=window.innerHeight):(this.width=this.wrapper.clientWidth,this.height=this.wrapper.clientHeight)});Ee(this,"onContentResize",()=>{this.wrapper===window?(this.scrollHeight=this.content.scrollHeight,this.scrollWidth=this.content.scrollWidth):(this.scrollHeight=this.wrapper.scrollHeight,this.scrollWidth=this.wrapper.scrollWidth)});this.wrapper=l,this.content=d,v&&(this.debouncedResize=function(y,f){let T;return function(){let S=arguments,x=this;clearTimeout(T),T=setTimeout(function(){y.apply(x,S)},f)}}(this.resize,p),this.wrapper===window?window.addEventListener("resize",this.debouncedResize,!1):(this.wrapperResizeObserver=new ResizeObserver(this.debouncedResize),this.wrapperResizeObserver.observe(this.wrapper)),this.contentResizeObserver=new ResizeObserver(this.debouncedResize),this.contentResizeObserver.observe(this.content)),this.resize()}destroy(){this.wrapperResizeObserver?.disconnect(),this.contentResizeObserver?.disconnect(),window.removeEventListener("resize",this.debouncedResize,!1)}get limit(){return{x:this.scrollWidth-this.width,y:this.scrollHeight-this.height}}},Ge=class{constructor(){this.events={}}emit(l,...d){let v=this.events[l]||[];for(let p=0,y=v.length;p<y;p++)v[p](...d)}on(l,d){return this.events[l]?.push(d)||(this.events[l]=[d]),()=>{this.events[l]=this.events[l]?.filter(v=>d!==v)}}off(l,d){this.events[l]=this.events[l]?.filter(v=>d!==v)}destroy(){this.events={}}},Mt=100/6,ct=class{constructor(l,{wheelMultiplier:d=1,touchMultiplier:v=1}){Ee(this,"onTouchStart",l=>{let{clientX:d,clientY:v}=l.targetTouches?l.targetTouches[0]:l;this.touchStart.x=d,this.touchStart.y=v,this.lastDelta={x:0,y:0},this.emitter.emit("scroll",{deltaX:0,deltaY:0,event:l})});Ee(this,"onTouchMove",l=>{let{clientX:d,clientY:v}=l.targetTouches?l.targetTouches[0]:l,p=-(d-this.touchStart.x)*this.touchMultiplier,y=-(v-this.touchStart.y)*this.touchMultiplier;this.touchStart.x=d,this.touchStart.y=v,this.lastDelta={x:p,y},this.emitter.emit("scroll",{deltaX:p,deltaY:y,event:l})});Ee(this,"onTouchEnd",l=>{this.emitter.emit("scroll",{deltaX:this.lastDelta.x,deltaY:this.lastDelta.y,event:l})});Ee(this,"onWheel",l=>{let{deltaX:d,deltaY:v,deltaMode:p}=l;d*=p===1?Mt:p===2?this.windowWidth:1,v*=p===1?Mt:p===2?this.windowHeight:1,d*=this.wheelMultiplier,v*=this.wheelMultiplier,this.emitter.emit("scroll",{deltaX:d,deltaY:v,event:l})});Ee(this,"onWindowResize",()=>{this.windowWidth=window.innerWidth,this.windowHeight=window.innerHeight});this.element=l,this.wheelMultiplier=d,this.touchMultiplier=v,this.touchStart={x:null,y:null},this.emitter=new Ge,window.addEventListener("resize",this.onWindowResize,!1),this.onWindowResize(),this.element.addEventListener("wheel",this.onWheel,{passive:!1}),this.element.addEventListener("touchstart",this.onTouchStart,{passive:!1}),this.element.addEventListener("touchmove",this.onTouchMove,{passive:!1}),this.element.addEventListener("touchend",this.onTouchEnd,{passive:!1})}on(l,d){return this.emitter.on(l,d)}destroy(){this.emitter.destroy(),window.removeEventListener("resize",this.onWindowResize,!1),this.element.removeEventListener("wheel",this.onWheel,{passive:!1}),this.element.removeEventListener("touchstart",this.onTouchStart,{passive:!1}),this.element.removeEventListener("touchmove",this.onTouchMove,{passive:!1}),this.element.removeEventListener("touchend",this.onTouchEnd,{passive:!1})}},Ke=class{constructor({wrapper:l=window,content:d=document.documentElement,wheelEventsTarget:v=l,eventsTarget:p=v,smoothWheel:y=!0,syncTouch:f=!1,syncTouchLerp:T=.075,touchInertiaMultiplier:S=35,duration:x,easing:P=I=>Math.min(1,1.001-Math.pow(2,-10*I)),lerp:k=!x&&.1,infinite:C=!1,orientation:M="vertical",gestureOrientation:F="vertical",touchMultiplier:j=1,wheelMultiplier:$=1,autoResize:J=!0,__experimental__naiveDimensions:N=!1}={}){this.__isSmooth=!1,this.__isScrolling=!1,this.__isStopped=!1,this.__isLocked=!1,this.onVirtualScroll=({deltaX:I,deltaY:B,event:z})=>{if(z.ctrlKey)return;let ie=z.type.includes("touch"),he=z.type.includes("wheel");if(this.options.syncTouch&&ie&&z.type==="touchstart"&&!this.isStopped&&!this.isLocked)return void this.reset();let ae=I===0&&B===0,r=this.options.gestureOrientation==="vertical"&&B===0||this.options.gestureOrientation==="horizontal"&&I===0;if(ae||r)return;let me=z.composedPath();if(me=me.slice(0,me.indexOf(this.rootElement)),me.find(K=>{var L,D,g,le,q;return((L=K.hasAttribute)===null||L===void 0?void 0:L.call(K,"data-lenis-prevent"))||ie&&((D=K.hasAttribute)===null||D===void 0?void 0:D.call(K,"data-lenis-prevent-touch"))||he&&((g=K.hasAttribute)===null||g===void 0?void 0:g.call(K,"data-lenis-prevent-wheel"))||((le=K.classList)===null||le===void 0?void 0:le.contains("lenis"))&&!(!((q=K.classList)===null||q===void 0)&&q.contains("lenis-stopped"))}))return;if(this.isStopped||this.isLocked)return void z.preventDefault();if(this.isSmooth=this.options.syncTouch&&ie||this.options.smoothWheel&&he,!this.isSmooth)return this.isScrolling=!1,void this.animate.stop();z.preventDefault();let ue=B;this.options.gestureOrientation==="both"?ue=Math.abs(B)>Math.abs(I)?B:I:this.options.gestureOrientation==="horizontal"&&(ue=I);let ee=ie&&this.options.syncTouch,Ce=ie&&z.type==="touchend"&&Math.abs(ue)>5;Ce&&(ue=this.velocity*this.options.touchInertiaMultiplier),this.scrollTo(this.targetScroll+ue,Object.assign({programmatic:!1},ee?{lerp:Ce?this.options.syncTouchLerp:1}:{lerp:this.options.lerp,duration:this.options.duration,easing:this.options.easing}))},this.onNativeScroll=()=>{if(!this.__preventNextScrollEvent&&!this.isScrolling){let I=this.animatedScroll;this.animatedScroll=this.targetScroll=this.actualScroll,this.velocity=0,this.direction=Math.sign(this.animatedScroll-I),this.emit()}},window.lenisVersion="1.0.42",l!==document.documentElement&&l!==document.body||(l=window),this.options={wrapper:l,content:d,wheelEventsTarget:v,eventsTarget:p,smoothWheel:y,syncTouch:f,syncTouchLerp:T,touchInertiaMultiplier:S,duration:x,easing:P,lerp:k,infinite:C,gestureOrientation:F,orientation:M,touchMultiplier:j,wheelMultiplier:$,autoResize:J,__experimental__naiveDimensions:N},this.animate=new at,this.emitter=new Ge,this.dimensions=new lt({wrapper:l,content:d,autoResize:J}),this.toggleClassName("lenis",!0),this.velocity=0,this.isLocked=!1,this.isStopped=!1,this.isSmooth=f||y,this.isScrolling=!1,this.targetScroll=this.animatedScroll=this.actualScroll,this.options.wrapper.addEventListener("scroll",this.onNativeScroll,!1),this.virtualScroll=new ct(p,{touchMultiplier:j,wheelMultiplier:$}),this.virtualScroll.on("scroll",this.onVirtualScroll)}destroy(){this.emitter.destroy(),this.options.wrapper.removeEventListener("scroll",this.onNativeScroll,!1),this.virtualScroll.destroy(),this.dimensions.destroy(),this.toggleClassName("lenis",!1),this.toggleClassName("lenis-smooth",!1),this.toggleClassName("lenis-scrolling",!1),this.toggleClassName("lenis-stopped",!1),this.toggleClassName("lenis-locked",!1)}on(l,d){return this.emitter.on(l,d)}off(l,d){return this.emitter.off(l,d)}setScroll(l){this.isHorizontal?this.rootElement.scrollLeft=l:this.rootElement.scrollTop=l}resize(){this.dimensions.resize()}emit(){this.emitter.emit("scroll",this)}reset(){this.isLocked=!1,this.isScrolling=!1,this.animatedScroll=this.targetScroll=this.actualScroll,this.velocity=0,this.animate.stop()}start(){this.isStopped&&(this.isStopped=!1,this.reset())}stop(){this.isStopped||(this.isStopped=!0,this.animate.stop(),this.reset())}raf(l){let d=l-(this.time||l);this.time=l,this.animate.advance(.001*d)}scrollTo(l,{offset:d=0,immediate:v=!1,lock:p=!1,duration:y=this.options.duration,easing:f=this.options.easing,lerp:T=!y&&this.options.lerp,onComplete:S,force:x=!1,programmatic:P=!0}={}){if(!this.isStopped&&!this.isLocked||x){if(["top","left","start"].includes(l))l=0;else if(["bottom","right","end"].includes(l))l=this.limit;else{let k;if(typeof l=="string"?k=document.querySelector(l):l?.nodeType&&(k=l),k){if(this.options.wrapper!==window){let M=this.options.wrapper.getBoundingClientRect();d-=this.isHorizontal?M.left:M.top}let C=k.getBoundingClientRect();l=(this.isHorizontal?C.left:C.top)+this.animatedScroll}}if(typeof l=="number"){if(l+=d,l=Math.round(l),this.options.infinite?P&&(this.targetScroll=this.animatedScroll=this.scroll):l=_t(0,l,this.limit),v)return this.animatedScroll=this.targetScroll=l,this.setScroll(this.scroll),this.reset(),void(S==null||S(this));if(!P){if(l===this.targetScroll)return;this.targetScroll=l}this.animate.fromTo(this.animatedScroll,l,{duration:y,easing:f,lerp:T,onStart:()=>{p&&(this.isLocked=!0),this.isScrolling=!0},onUpdate:(k,C)=>{this.isScrolling=!0,this.velocity=k-this.animatedScroll,this.direction=Math.sign(this.velocity),this.animatedScroll=k,this.setScroll(this.scroll),P&&(this.targetScroll=k),C||this.emit(),C&&(this.reset(),this.emit(),S?.(this),this.__preventNextScrollEvent=!0,requestAnimationFrame(()=>{delete this.__preventNextScrollEvent}))}})}}}get rootElement(){return this.options.wrapper===window?document.documentElement:this.options.wrapper}get limit(){return this.options.__experimental__naiveDimensions?this.isHorizontal?this.rootElement.scrollWidth-this.rootElement.clientWidth:this.rootElement.scrollHeight-this.rootElement.clientHeight:this.dimensions.limit[this.isHorizontal?"x":"y"]}get isHorizontal(){return this.options.orientation==="horizontal"}get actualScroll(){return this.isHorizontal?this.rootElement.scrollLeft:this.rootElement.scrollTop}get scroll(){return this.options.infinite?(l=this.animatedScroll,d=this.limit,(l%d+d)%d):this.animatedScroll;var l,d}get progress(){return this.limit===0?1:this.scroll/this.limit}get isSmooth(){return this.__isSmooth}set isSmooth(l){this.__isSmooth!==l&&(this.__isSmooth=l,this.toggleClassName("lenis-smooth",l))}get isScrolling(){return this.__isScrolling}set isScrolling(l){this.__isScrolling!==l&&(this.__isScrolling=l,this.toggleClassName("lenis-scrolling",l))}get isStopped(){return this.__isStopped}set isStopped(l){this.__isStopped!==l&&(this.__isStopped=l,this.toggleClassName("lenis-stopped",l))}get isLocked(){return this.__isLocked}set isLocked(l){this.__isLocked!==l&&(this.__isLocked=l,this.toggleClassName("lenis-locked",l))}get className(){let l="lenis";return this.isStopped&&(l+=" lenis-stopped"),this.isLocked&&(l+=" lenis-locked"),this.isScrolling&&(l+=" lenis-scrolling"),this.isSmooth&&(l+=" lenis-smooth"),l}toggleClassName(l,d){this.rootElement.classList.toggle(l,d),this.emitter.emit("className change",this)}};var It=function(){let u=new Ke({duration:1,easing:f=>f===1?1:1-Math.pow(2,-10*f),touchMultiplier:1.5});function l(f){u.raf(f),requestAnimationFrame(l)}requestAnimationFrame(l),u.on("scroll",()=>{ScrollTrigger&&ScrollTrigger.update()}),gsap.ticker.add(f=>{u.raf(f*1e3)}),gsap.ticker.lagSmoothing(0);function d(){let f=document.querySelectorAll("[scroll-to]");f?.forEach(T=>{let S=T.getAttribute("scroll-to"),x=document.getElementById(S);x&&T.addEventListener("click",P=>{u.scrollTo(x,{duration:1.85,easing:k=>k===1?1:1-Math.pow(2,-10*k)})})})}d();function v(){let f=document.querySelectorAll('[scroll="stop"]');f?.forEach(T=>{T.addEventListener("click",S=>{u.stop()})})}v();function p(){let f=document.querySelectorAll('[scroll="start"]');f?.forEach(T=>{T.addEventListener("click",S=>{u.start()})})}p();function y(){let f=document.querySelectorAll('[scroll="toggle"]');f?.forEach(T=>{let S=!1;T.addEventListener("click",x=>{S=!S,S?u.stop():u.start()})})}y()};var R=function(u,l){let d=typeof u;return typeof l!="string"||l.trim()===""?u:l==="true"&&d==="boolean"?!0:l==="false"&&d==="boolean"?!1:isNaN(l)&&d==="string"?l:!isNaN(l)&&d==="number"?+l:u};var ge=function(u,l,d){if(!u||!l||!d){console.error(`GSAP checkBreakpoints Error in ${l}`);return}let{isMobile:v,isTablet:p,isDesktop:y,reduceMotion:f}=d.conditions;if(v===void 0||p===void 0||y===void 0){console.error("GSAP Match Media Conditions Not Defined");return}let T=`data-ix-${l}-desktop`,S=`data-ix-${l}-tablet`,x=`data-ix-${l}-mobile`,P=`data-ix-${l}-run`;return runAll=R(!0,u.getAttribute(P)),runMobile=R(!0,u.getAttribute(x)),runTablet=R(!0,u.getAttribute(S)),runDesktop=R(!0,u.getAttribute(T)),!(runAll===!1||runMobile===!1&&v||runTablet===!1&&p||runDesktop===!1&&y)},ut=function(u){let l=u,d={left:"polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",right:"polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)",top:"polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",bottom:"polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",full:"polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)"};return u==="left"&&(l=d.left),u==="right"&&(l=d.right),u==="top"&&(l=d.top),u==="bottom"&&(l=d.bottom),u==="full"&&(l=d.full),l};var Ot=function(u){let l="load",d="data-ix-load",v="heading",p="item",y="image",f="line",T="stagger",S="data-ix-load-position",x="<0.2",P=gsap.utils.toArray(`[${d}]`);if(P.length===0)return;let k=gsap.timeline({paused:!0,defaults:{ease:"power1.out",duration:.8}}),C=function(N){gsap.set(N,{autoAlpha:1});let I=R(0,N.getAttribute(S));N.classList.contains("w-richtext")&&(N=N.children),SplitText.create(N,{type:"words",wordsClass:"word",autoSplit:!0,onSplit:B=>k.from(B.words,{y:"50%",rotateX:45,autoAlpha:0,stagger:.075},I)})},M=function(N){let I=R(x,N.getAttribute(S));k.fromTo(N,{autoAlpha:0,scale:.7},{autoAlpha:1,scale:1},I)},F=function(N){let I=R(x,N.getAttribute(S));k.fromTo(N,{clipPath:"polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)"},{clipPath:"polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)"},I)},j=function(N){let I=R(x,N.getAttribute(S));k.fromTo(N,{autoAlpha:0,y:"2rem"},{autoAlpha:1,y:"0rem"},I)},$=function(N){if(!N)return;let I=gsap.utils.toArray(N.children);I.length!==0&&I.forEach((B,z)=>{z===0&&gsap.set(N,{autoAlpha:1}),j(B)})},J=function(N){N&&k.fromTo(N,{autoAlpha:0},{autoAlpha:1,ease:"power1.out",duration:1.2},"<")};return P.forEach(N=>{if(!N)return;let I=N.getAttribute(d),B=ge(N,l,u);if(B===!1&&N.getAttribute("data-ix-load-run")==="false")return;let{isMobile:z,isTablet:ie,isDesktop:he,reduceMotion:ae}=u.conditions;ae||B===!1&&N.getAttribute("data-ix-load-run")==="true"?J(I===T?N.children:N):(I===v&&C(N),I===y&&M(N),I===f&&F(N),I===p&&j(N),I===T&&$(N))}),document.fonts.ready.then(()=>{k.play(0)}),k};var Rt=function(u){let l="scrollin",d="data-ix-scrollin",v="heading",p="item",y="container",f="stagger",T="rich-text",S="image-wrap",x="image",P="line",k="data-ix-scrollin-toggle-actions",C="data-ix-scrollin-scrub",M="data-ix-scrollin-start",F="data-ix-scrollin-end",j="data-ix-scrollin-clip-direction",$="data-ix-scrollin-stagger",B="power1.out",z=function(L){let D={scrub:!1,toggleActions:"play none none none",start:"top 90%",end:"top 75%"};return D.toggleActions=R(D.toggleActions,L.getAttribute(k)),D.scrub=R(D.scrub,L.getAttribute(C)),D.start=R(D.start,L.getAttribute(M)),D.end=R(D.end,L.getAttribute(F)),gsap.timeline({defaults:{duration:.6,ease:B},scrollTrigger:{trigger:L,start:D.start,end:D.end,toggleActions:D.toggleActions,scrub:D.scrub}})},ie=function(L,D,g={}){let le={autoAlpha:0,y:"2rem"},q={autoAlpha:1,y:"0rem"};return g.stagger&&(q.stagger={each:g.stagger,from:"start"}),g.stagger==="small"&&(q.stagger={each:.1,from:"start"}),g.stagger==="large"&&(q.stagger={each:.3,from:"start"}),D.fromTo(L,le,q)},he=function(L){L.classList.contains("w-richtext")&&(L=L.firstChild),SplitText.create(L,{type:"words",wordsClass:"word",autoSplit:!0,onSplit(D){let g=z(L);tween=ie(D.words,g,{stagger:"small"});let le=function(q){q.revert()};return tween.eventCallback("onComplete",le,[D]),tween}})},ae=function(L){if(L)if(L.classList.contains("w-richtext")){let D=gsap.utils.toArray(L.children);if(D.length===0)return;D.forEach(g=>{let le=z(g),q=ie(g,le)})}else{let D=z(L),g=ie(L,D)}},r=function(L){if(!L)return;let D=L.firstChild,g=z(L);g.fromTo(D,{scale:1.2},{scale:1,duration:1}),g.fromTo(L,{scale:.9},{scale:1,duration:1},"<")},me=function(L){if(!L)return;let D=R("left",L.getAttribute(j)),g=ut(D),le=ut("full");z(L).fromTo(L,{clipPath:g},{clipPath:le})},ue=function(L){if(!L)return;let D=gsap.utils.toArray(L.children);D.length!==0&&D.forEach(g=>{let le=z(g),q=ie(g,le)})},ee=function(L){if(!L)return;let D=L;window.getComputedStyle(L).getPropertyValue("display")==="contents"&&(D=L.parentElement);let q=R(.3,L.getAttribute($)),ve=gsap.utils.toArray(L.children);if(ve.length===0)return;let Se=z(D),be=ie(ve,Se,{stagger:q})},Ce=function(L){if(!L)return;let D=gsap.utils.toArray(L.children);D.length!==0&&D.forEach(g=>{let le=g.tagName;["H1","H2","H3","H4","H5","H6"].includes(le)&&he(g),le==="FIGURE"?r(g):ae(g)})};gsap.utils.toArray(`[${d}]`).forEach(L=>{if(!L||ge(L,l,u)===!1)return;let g=L.getAttribute(d);g===v&&he(L),g===p&&ae(L),g===x&&r(L),g===P&&me(L),g===y&&ue(L),g===f&&ee(L),g===T&&Ce(L)})};var Dt=function(u){let l="scrolling",d='[data-ix-scrolling="wrap"]',v='[data-ix-scrolling="trigger"]',p='[data-ix-scrolling="layer"]',y="data-ix-scrolling-start",f="data-ix-scrolling-end",T="data-ix-scrolling-start-tablet",S="data-ix-scrolling-end-tablet",x="data-ix-scrolling-start-mobile",P="data-ix-scrolling-end-mobile",k="data-ix-scrolling-scrub",C="data-ix-scrolling-position",M="data-ix-scrolling-x-start",F="data-ix-scrolling-x-end",j="data-ix-scrolling-y-start",$="data-ix-scrolling-y-end",J="data-ix-scrolling-scale-start",N="data-ix-scrolling-scale-end",I="data-ix-scrolling-width-start",B="data-ix-scrolling-width-end",z="data-ix-scrolling-height-start",ie="data-ix-scrolling-height-end",he="data-ix-scrolling-rotate-x-start",ae="data-ix-scrolling-rotate-x-end",r="data-ix-scrolling-rotate-y-start",me="data-ix-scrolling-rotate-y-end",ue="data-ix-scrolling-rotate-z-start",ee="data-ix-scrolling-rotate-z-end",Ce="data-ix-scrolling-opacity-start",K="data-ix-scrolling-opacity-end",L="data-ix-scrolling-clip-start",D="data-ix-scrolling-clip-end",g="data-ix-scrolling-clip-type";gsap.utils.toArray(d).forEach(q=>{let ve=q.querySelectorAll(p);if(!q||ve.length===0)return;let Se=q.querySelector(v);if(Se||(Se=q),ge(q,l,u)===!1)return;let{isMobile:Ae,isTablet:X,isDesktop:Re,reduceMotion:Ne}=u.conditions,se={scrub:.5,start:"top bottom",end:"bottom top"};se.start=R(se.start,q.getAttribute(y)),se.end=R(se.end,q.getAttribute(f)),se.scrub=R(se.scrub,q.getAttribute(k)),X&&q.getAttribute(T)&&(se.start=R(se.start,q.getAttribute(T))),X&&q.getAttribute(S)&&(se.start=R(se.start,q.getAttribute(S))),Ae&&q.getAttribute(x)&&(se.start=R(se.start,q.getAttribute(x))),Ae&&q.getAttribute(P)&&(se.start=R(se.start,q.getAttribute(P)));let ce=gsap.timeline({scrollTrigger:{trigger:Se,start:se.start,end:se.end,scrub:se.scrub,markers:!1},defaults:{duration:1,ease:"none"}});ve.forEach(Le=>{if(!Le)return;let fe={},Q={},ne=function(Ie,De){let O=Le.hasAttribute(Ie),Qe=R(De,Le.getAttribute(Ie));if(O)return Qe};fe.x=ne(M,"0%"),Q.x=ne(F,"0%"),fe.y=ne(j,"0%"),Q.y=ne($,"0%"),fe.scale=ne(J,1),Q.scale=ne(N,1),fe.width=ne(I,"0%"),Q.width=ne(B,"0%"),fe.height=ne(z,"0%"),Q.height=ne(ie,"0%"),fe.rotateX=ne(he,0),Q.rotateX=ne(ae,0),fe.rotateY=ne(r,0),Q.rotateY=ne(me,0),fe.rotateZ=ne(ue,0),Q.rotateZ=ne(ee,0),fe.opacity=ne(Ce,0),Q.opacity=ne(K,0),fe.clipPath=ne(L,"string"),Q.clipPath=ne(D,"string");let _e=R("<",Le.getAttribute(C)),W=ce.fromTo(Le,fe,Q,_e)})})};var Vt=function(u){let l="marquee",d='[data-ix-marquee="wrap"]',v='[data-ix-marquee="list"]',p="data-ix-marquee-vertical",y="data-ix-marquee-reverse",f="data-ix-marquee-duration",T="data-ix-marquee-duration-dynamic",S="data-ix-marquee-duration-per-item",x="data-ix-marquee-hover",P="accelerate",k="decelerate",C="pause",j=document.querySelectorAll(d);j.length!==0&&j.forEach($=>{if(ge($,l,u)===!1)return;let N=[...$.querySelectorAll(v)],I=R(!1,$.getAttribute(p)),B=R(!1,$.getAttribute(y)),z=R(30,$.getAttribute(f)),ie=R(!1,$.getAttribute(T)),he=R(5,$.getAttribute(S)),ae=N[0].childElementCount;ae===1&&(ae=N[0].firstElementChild.childElementCount),ie&&(z=ae*he);let r=R("none",$.getAttribute(x)),me=1;B&&(me=-1);let ue=gsap.timeline({repeat:-1,defaults:{ease:"none"}});ue.fromTo(N,{xPercent:0,yPercent:0},{xPercent:I?0:-100*me,yPercent:I?-100*me:0,duration:z}),r===P&&($.addEventListener("mouseenter",ee=>{ue.timeScale(2)}),$.addEventListener("mouseleave",ee=>{ue.timeScale(1)})),r===k&&($.addEventListener("mouseenter",ee=>{ue.timeScale(.5)}),$.addEventListener("mouseleave",ee=>{ue.timeScale(1)})),r===C&&($.addEventListener("mouseenter",ee=>{ue.pause()}),$.addEventListener("mouseleave",ee=>{ue.play()}))})};var $t=function(u){let l="accordion",d='[data-ix-accordion="wrap"]',v='[data-ix-accordion="item"]',p='[data-ix-accordion="open"]',y="data-ix-accordion-first-open",f="data-ix-accordion-one-active",T="data-ix-accordion-keep-one-open",S="data-ix-accordion-hover",x="is-active",P=gsap.utils.toArray(d),k=function(C,M=!0){M===!0?C.classList.add(x):C.classList.remove(x)};P.length===0||P===void 0||P.forEach(C=>{if(ge(C,l,u)===!1)return;let F=R(!1,C.getAttribute(y)),j=R(!1,C.getAttribute(f)),$=R(!1,C.getAttribute(T)),J=R(!1,C.getAttribute(S)),N=Array.from(C.querySelectorAll(v));if(N.length===0)return;let I=C.firstElementChild;F&&k(I),J||C.addEventListener("click",function(B){let z=B.target.closest(p);if(!z)return;let ie=z.closest(v),he=ie.classList.contains(x);he||(j&&N.forEach(ae=>{ae===ie?k(ae):k(ae,!1)}),j||k(ie)),he&&!$&&k(ie,!1),he&&keepOneActive&&N.filter(function(r){return r.classList.contains(activeClass)}).length>1&&k(item,!1)}),J&&N.forEach(B=>{B.addEventListener("mouseover",function(){k(B)}),B.addEventListener("mouseout",function(){k(B,!1)})})})};var qt=function(u){let l="imageswitch",d='[data-ix-imageswitch="wrap"]',v='[data-ix-imageswitch="item"]',p='[data-ix-imageswitch="image"]',y='[data-ix-imageswitch="link"]',f=[...document.querySelectorAll(d)];!f.length!==0&&f.forEach(T=>{if(ge(T,l,u)===!1)return;let x=[...T.querySelectorAll(y)],P=[...T.querySelectorAll(v)],k=[...T.querySelectorAll(p)],C="is-active";if(P.length===0||k.length===0)return;let M=function(F,j=!0){let $=k[F],J=P[F],N=x[F];j?($.classList.add(C),J.classList.add(C),N.classList.add(C)):($.classList.remove(C),J.classList.remove(C),N.classList.remove(C))};k.forEach(F=>F.classList.remove(C)),M(0),P.forEach((F,j)=>{let $=k[j],J=x[j];if(!F||!$)return;let N=gsap.timeline({scrollTrigger:{trigger:F,start:"top center",end:"bottom center",markers:!1,scrub:!0,onEnter:()=>{M(j)},onLeave:()=>{j!==P.length-1&&M(j,!1),J.classList.remove(C)},onEnterBack:()=>{M(j)},onLeaveBack:()=>{j!==0&&M(j,!1),J.classList.remove(C)}}})}),x.forEach((F,j)=>{F&&F.addEventListener("click",$=>{let J=P[j];J&&J.scrollIntoView({behavior:"smooth",block:"center"})})})})};var Ft=function(u){let l="textscrub",d='[data-ix-textscrub="item"]',v="line-mask";gsap.utils.toArray(d).forEach(y=>{if(!y||ge(y,l,u)===!1)return;let T,S=[],x=function(k){S.length!==0&&S.forEach(C=>{C.remove()}),k.lines.forEach(C=>{let M=document.createElement("div");S.push(M),M.classList.add(v),C.appendChild(M),gsap.timeline({scrollTrigger:{trigger:C,start:"top 70%",end:"bottom 70%",scrub:1.5}}).fromTo(M,{width:"100%"},{width:"0%",ease:"power1.out",duration:1})})};function P(){let k=SplitText.create(y,{type:"lines",linesClass:"line",autoSplit:!0,onSplit:C=>x(C)});if(k)return k}T=P()})};var jt=mi(Ht(),1),Bt=function(){let u=".plyr_component",l=".plyr_video",d=".plyr_cover",v="hide-cover",p=".plyr_pause-trigger",y="contain-video",f={autoplay:!1,loop:!1,mute:!1,hideControls:!0},T=".plyr--playing",S=[],x=[...document.querySelectorAll(u)];if(x.length!==0)return x.forEach((P,k)=>{let C=P.querySelector(l),M=P.querySelector(d),F=P.querySelector(p),j=R(f.loop,P.getAttribute("data-player-loop")),$=R(f.loop,P.getAttribute("data-player-autoplay")),J=R(f.mute,P.getAttribute("data-player-mute")),N=R(!1,P.getAttribute("data-player-show-cover-on-pause")),I=new jt.default(C,{controls:["play","progress","current-time","mute","fullscreen"],hideControls:f.hideControls,loop:{active:j},resetOnEnd:!0});S.push(I),M&&M.addEventListener("click",()=>{I.play()}),I.on("ended",B=>{P.classList.remove(v)}),N&&I.on("pause",B=>{P.classList.remove(v)}),I.on("play",B=>{x.forEach((ie,he)=>{ie.classList.remove(v),ie!==P&&S[he].pause()}),P.classList.add(v);let z=document.querySelector(T).closest(u);z&&z!==P&&z.find(p)[0].click()}),F.addEventListener("click",()=>{I.pause()}),I.on("ended",B=>{I.fullscreen.active&&I.fullscreen.exit()}),I.on("enterfullscreen",B=>{P.classList.add(y)}),I.on("exitfullscreen",B=>{P.classList.remove(y)})}),[S,x]};var Xe=function(){return Xe=Object.assign||function(u){for(var l,d=1,v=arguments.length;d<v;d++)for(var p in l=arguments[d])Object.prototype.hasOwnProperty.call(l,p)&&(u[p]=l[p]);return u},Xe.apply(this,arguments)},Ut=function(){function u(l,d,v){var p=this;this.endVal=d,this.options=v,this.version="2.9.0",this.defaults={startVal:0,decimalPlaces:0,duration:2,useEasing:!0,useGrouping:!0,useIndianSeparators:!1,smartEasingThreshold:999,smartEasingAmount:333,separator:",",decimal:".",prefix:"",suffix:"",enableScrollSpy:!1,scrollSpyDelay:200,scrollSpyOnce:!1},this.finalEndVal=null,this.useEasing=!0,this.countDown=!1,this.error="",this.startVal=0,this.paused=!0,this.once=!1,this.count=function(y){p.startTime||(p.startTime=y);var f=y-p.startTime;p.remaining=p.duration-f,p.useEasing?p.countDown?p.frameVal=p.startVal-p.easingFn(f,0,p.startVal-p.endVal,p.duration):p.frameVal=p.easingFn(f,p.startVal,p.endVal-p.startVal,p.duration):p.frameVal=p.startVal+(p.endVal-p.startVal)*(f/p.duration);var T=p.countDown?p.frameVal<p.endVal:p.frameVal>p.endVal;p.frameVal=T?p.endVal:p.frameVal,p.frameVal=Number(p.frameVal.toFixed(p.options.decimalPlaces)),p.printValue(p.frameVal),f<p.duration?p.rAF=requestAnimationFrame(p.count):p.finalEndVal!==null?p.update(p.finalEndVal):p.options.onCompleteCallback&&p.options.onCompleteCallback()},this.formatNumber=function(y){var f,T,S,x,P=y<0?"-":"";f=Math.abs(y).toFixed(p.options.decimalPlaces);var k=(f+="").split(".");if(T=k[0],S=k.length>1?p.options.decimal+k[1]:"",p.options.useGrouping){x="";for(var C=3,M=0,F=0,j=T.length;F<j;++F)p.options.useIndianSeparators&&F===4&&(C=2,M=1),F!==0&&M%C==0&&(x=p.options.separator+x),M++,x=T[j-F-1]+x;T=x}return p.options.numerals&&p.options.numerals.length&&(T=T.replace(/[0-9]/g,function($){return p.options.numerals[+$]}),S=S.replace(/[0-9]/g,function($){return p.options.numerals[+$]})),P+p.options.prefix+T+S+p.options.suffix},this.easeOutExpo=function(y,f,T,S){return T*(1-Math.pow(2,-10*y/S))*1024/1023+f},this.options=Xe(Xe({},this.defaults),v),this.formattingFn=this.options.formattingFn?this.options.formattingFn:this.formatNumber,this.easingFn=this.options.easingFn?this.options.easingFn:this.easeOutExpo,this.el=typeof l=="string"?document.getElementById(l):l,d=d??this.parse(this.el.innerHTML),this.startVal=this.validateValue(this.options.startVal),this.frameVal=this.startVal,this.endVal=this.validateValue(d),this.options.decimalPlaces=Math.max(this.options.decimalPlaces),this.resetDuration(),this.options.separator=String(this.options.separator),this.useEasing=this.options.useEasing,this.options.separator===""&&(this.options.useGrouping=!1),this.el?this.printValue(this.startVal):this.error="[CountUp] target is null or undefined",typeof window<"u"&&this.options.enableScrollSpy&&(this.error?console.error(this.error,l):(window.onScrollFns=window.onScrollFns||[],window.onScrollFns.push(function(){return p.handleScroll(p)}),window.onscroll=function(){window.onScrollFns.forEach(function(y){return y()})},this.handleScroll(this)))}return u.prototype.handleScroll=function(l){if(l&&window&&!l.once){var d=window.innerHeight+window.scrollY,v=l.el.getBoundingClientRect(),p=v.top+window.pageYOffset,y=v.top+v.height+window.pageYOffset;y<d&&y>window.scrollY&&l.paused?(l.paused=!1,setTimeout(function(){return l.start()},l.options.scrollSpyDelay),l.options.scrollSpyOnce&&(l.once=!0)):(window.scrollY>y||p>d)&&!l.paused&&l.reset()}},u.prototype.determineDirectionAndSmartEasing=function(){var l=this.finalEndVal?this.finalEndVal:this.endVal;this.countDown=this.startVal>l;var d=l-this.startVal;if(Math.abs(d)>this.options.smartEasingThreshold&&this.options.useEasing){this.finalEndVal=l;var v=this.countDown?1:-1;this.endVal=l+v*this.options.smartEasingAmount,this.duration=this.duration/2}else this.endVal=l,this.finalEndVal=null;this.finalEndVal!==null?this.useEasing=!1:this.useEasing=this.options.useEasing},u.prototype.start=function(l){this.error||(this.options.onStartCallback&&this.options.onStartCallback(),l&&(this.options.onCompleteCallback=l),this.duration>0?(this.determineDirectionAndSmartEasing(),this.paused=!1,this.rAF=requestAnimationFrame(this.count)):this.printValue(this.endVal))},u.prototype.pauseResume=function(){this.paused?(this.startTime=null,this.duration=this.remaining,this.startVal=this.frameVal,this.determineDirectionAndSmartEasing(),this.rAF=requestAnimationFrame(this.count)):cancelAnimationFrame(this.rAF),this.paused=!this.paused},u.prototype.reset=function(){cancelAnimationFrame(this.rAF),this.paused=!0,this.resetDuration(),this.startVal=this.validateValue(this.options.startVal),this.frameVal=this.startVal,this.printValue(this.startVal)},u.prototype.update=function(l){cancelAnimationFrame(this.rAF),this.startTime=null,this.endVal=this.validateValue(l),this.endVal!==this.frameVal&&(this.startVal=this.frameVal,this.finalEndVal==null&&this.resetDuration(),this.finalEndVal=null,this.determineDirectionAndSmartEasing(),this.rAF=requestAnimationFrame(this.count))},u.prototype.printValue=function(l){var d;if(this.el){var v=this.formattingFn(l);!((d=this.options.plugin)===null||d===void 0)&&d.render?this.options.plugin.render(this.el,v):this.el.tagName==="INPUT"?this.el.value=v:this.el.tagName==="text"||this.el.tagName==="tspan"?this.el.textContent=v:this.el.innerHTML=v}},u.prototype.ensureNumber=function(l){return typeof l=="number"&&!isNaN(l)},u.prototype.validateValue=function(l){var d=Number(l);return this.ensureNumber(d)?d:(this.error="[CountUp] invalid start or end value: ".concat(l),null)},u.prototype.resetDuration=function(){this.startTime=null,this.duration=1e3*Number(this.options.duration),this.remaining=this.duration},u.prototype.parse=function(l){var d=function(f){return f.replace(/([.,'  ])/g,"\\$1")},v=d(this.options.separator),p=d(this.options.decimal),y=l.replace(new RegExp(v,"g"),"").replace(new RegExp(p,"g"),".");return parseFloat(y)},u}();var zt=function(u){let l="countup",d='[data-ix-countup="item"]',v="data-ix-countup-start",p="data-ix-countup-duration",y="data-ix-countup-active",f="is-active";document.querySelectorAll(d).forEach(S=>{let x=S.parentElement;if(ge(S,l,u)===!1)return;let k=+S.textContent;if(!k||Number.isNaN(k))return;decimalPoints=gi(k);let C=R(2.5,S.getAttribute(p)),M=R("top bottom",S.getAttribute(v)),F=R(f,S.getAttribute(y)),j=new Ut(S,k,{useGrouping:!1,decimalPlaces:decimalPoints,duration:C}),$=gsap.timeline({scrollTrigger:{trigger:S,start:M,end:"top 10%",scrub:!0,onEnter:()=>{j.start(),x.classList.add(F),setTimeout(()=>{x.classList.remove(F)},C*1e3)}}})})};function gi(u){let d=u.toString().split(".");return d.length===1?0:d[1].length}document.addEventListener("DOMContentLoaded",function(){gsap.ScrollTrigger!==void 0&&gsap.registerPlugin(ScrollTrigger),It();let u=function(){let y="data-pricing-panel",f="data-pricing-target",T=[...document.querySelectorAll(`[${y}]`)],S=[...document.querySelectorAll(`[${f}]`)],x="is-active";if(T.length===0)return;let P=function(k){if(!k)return;let C=T.find(F=>F.classList.contains(x));C===void 0&&(C=T[0]),C.classList.remove(x),k.classList.add(x);let M=gsap.timeline({duration:.4,onComplete:()=>{}});gsap.fromTo(k,{opacity:0,scale:.95},{opacity:1,scale:1,duration:.6}),k!==C&&gsap.set(C,{opacity:0},"<.6")};P(T[0]),S.forEach(k=>{let C=k.getAttribute(f),M=document.querySelector(`[${y}="${C}"]`);k.addEventListener("click",function(F){P(M)})})};commercialsScroll=function(){let y=document.querySelector(".commercials_component");if(!y)return;let f=gsap.timeline({scrollTrigger:{markers:!1,trigger:y,start:"top 80%",end:"bottom 10%",scrub:.25},defaults:{duration:1,ease:"none"}});f.fromTo(".commercials_layout",{rotationZ:6},{rotationZ:2},"<"),f.fromTo(".commercials_row.is-top",{xPercent:20},{xPercent:-30},"<"),f.fromTo(".commercials_row.is-bottom",{xPercent:-30},{xPercent:30},"<")};let l=function(){let y="#gradient-canvas";if(document.querySelector(y)){var T=new Gradient;T.initGradient(y)}};gsap.matchMedia().add({isMobile:"(max-width: 767px)",isTablet:"(min-width: 768px)  and (max-width: 991px)",isDesktop:"(min-width: 992px)",reduceMotion:"(prefers-reduced-motion: reduce)"},y=>{let{isMobile:f,isTablet:T,isDesktop:S,reduceMotion:x}=y.conditions;l(),Bt(),zt(y),Vt(y),$t(y),qt(y),Ot(y),Rt(y),Dt(y),Ft(y),u(),x||commercialsScroll()}),function(){let y="[data-ix-reset]",f="data-ix-reset-time";document.querySelectorAll(y).forEach(function(S){S.addEventListener("click",function(x){if(ScrollTrigger.refresh(),S.hasAttribute(f)){let P=R(1e3,S.getAttribute(f));setTimeout(()=>{ScrollTrigger.refresh()},P)}})})}(),function(){let f=document.querySelector("[data-footer-year]");if(!f)return;let T=new Date().getFullYear();f.innerText=T.toString()}()});})();
+(() => {
+  var __create = Object.create;
+  var __defProp = Object.defineProperty;
+  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __getProtoOf = Object.getPrototypeOf;
+  var __hasOwnProp = Object.prototype.hasOwnProperty;
+  var __esm = (fn, res) => function __init() {
+    return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
+  };
+  var __commonJS = (cb, mod) => function __require() {
+    return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+  };
+  var __copyProps = (to, from, except, desc) => {
+    if (from && typeof from === "object" || typeof from === "function") {
+      for (let key of __getOwnPropNames(from))
+        if (!__hasOwnProp.call(to, key) && key !== except)
+          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+    }
+    return to;
+  };
+  var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+    // If the importer is in node compatibility mode or this is not an ESM
+    // file that has been converted to a CommonJS file using a Babel-
+    // compatible transform (i.e. "__esModule" has not been set), then set
+    // "default" to the CommonJS "module.exports" for node compatibility.
+    isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+    mod
+  ));
+
+  // bin/live-reload.js
+  var init_live_reload = __esm({
+    "bin/live-reload.js"() {
+      new EventSource(`http://localhost:3000/esbuild`).addEventListener(
+        "change",
+        () => location.reload()
+      );
+    }
+  });
+
+  // node_modules/plyr/dist/plyr.min.js
+  var require_plyr_min = __commonJS({
+    "node_modules/plyr/dist/plyr.min.js"(exports, module) {
+      init_live_reload();
+      "object" == typeof navigator && function(e2, t3) {
+        "object" == typeof exports && "undefined" != typeof module ? module.exports = t3() : "function" == typeof define && define.amd ? define("Plyr", t3) : (e2 = "undefined" != typeof globalThis ? globalThis : e2 || self).Plyr = t3();
+      }(exports, function() {
+        "use strict";
+        function e2(e3, t4, i3) {
+          return (t4 = function(e4) {
+            var t5 = function(e5, t6) {
+              if ("object" != typeof e5 || null === e5) return e5;
+              var i4 = e5[Symbol.toPrimitive];
+              if (void 0 !== i4) {
+                var s2 = i4.call(e5, t6 || "default");
+                if ("object" != typeof s2) return s2;
+                throw new TypeError("@@toPrimitive must return a primitive value.");
+              }
+              return ("string" === t6 ? String : Number)(e5);
+            }(e4, "string");
+            return "symbol" == typeof t5 ? t5 : String(t5);
+          }(t4)) in e3 ? Object.defineProperty(e3, t4, { value: i3, enumerable: true, configurable: true, writable: true }) : e3[t4] = i3, e3;
+        }
+        function t3(e3, t4) {
+          for (var i3 = 0; i3 < t4.length; i3++) {
+            var s2 = t4[i3];
+            s2.enumerable = s2.enumerable || false, s2.configurable = true, "value" in s2 && (s2.writable = true), Object.defineProperty(e3, s2.key, s2);
+          }
+        }
+        function i2(e3, t4, i3) {
+          return t4 in e3 ? Object.defineProperty(e3, t4, { value: i3, enumerable: true, configurable: true, writable: true }) : e3[t4] = i3, e3;
+        }
+        function s(e3, t4) {
+          var i3 = Object.keys(e3);
+          if (Object.getOwnPropertySymbols) {
+            var s2 = Object.getOwnPropertySymbols(e3);
+            t4 && (s2 = s2.filter(function(t5) {
+              return Object.getOwnPropertyDescriptor(e3, t5).enumerable;
+            })), i3.push.apply(i3, s2);
+          }
+          return i3;
+        }
+        function n(e3) {
+          for (var t4 = 1; t4 < arguments.length; t4++) {
+            var n2 = null != arguments[t4] ? arguments[t4] : {};
+            t4 % 2 ? s(Object(n2), true).forEach(function(t5) {
+              i2(e3, t5, n2[t5]);
+            }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e3, Object.getOwnPropertyDescriptors(n2)) : s(Object(n2)).forEach(function(t5) {
+              Object.defineProperty(e3, t5, Object.getOwnPropertyDescriptor(n2, t5));
+            });
+          }
+          return e3;
+        }
+        var a = { addCSS: true, thumbWidth: 15, watch: true };
+        var l = function(e3) {
+          return null != e3 ? e3.constructor : null;
+        }, r = function(e3, t4) {
+          return !!(e3 && t4 && e3 instanceof t4);
+        }, o = function(e3) {
+          return null == e3;
+        }, c = function(e3) {
+          return l(e3) === Object;
+        }, u = function(e3) {
+          return l(e3) === String;
+        }, h = function(e3) {
+          return Array.isArray(e3);
+        }, d = function(e3) {
+          return r(e3, NodeList);
+        }, m = { nullOrUndefined: o, object: c, number: function(e3) {
+          return l(e3) === Number && !Number.isNaN(e3);
+        }, string: u, boolean: function(e3) {
+          return l(e3) === Boolean;
+        }, function: function(e3) {
+          return l(e3) === Function;
+        }, array: h, nodeList: d, element: function(e3) {
+          return r(e3, Element);
+        }, event: function(e3) {
+          return r(e3, Event);
+        }, empty: function(e3) {
+          return o(e3) || (u(e3) || h(e3) || d(e3)) && !e3.length || c(e3) && !Object.keys(e3).length;
+        } };
+        function p(e3, t4) {
+          if (1 > t4) {
+            var i3 = function(e4) {
+              var t5 = "".concat(e4).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+              return t5 ? Math.max(0, (t5[1] ? t5[1].length : 0) - (t5[2] ? +t5[2] : 0)) : 0;
+            }(t4);
+            return parseFloat(e3.toFixed(i3));
+          }
+          return Math.round(e3 / t4) * t4;
+        }
+        var g = function() {
+          function e3(t4, i3) {
+            (function(e4, t5) {
+              if (!(e4 instanceof t5)) throw new TypeError("Cannot call a class as a function");
+            })(this, e3), m.element(t4) ? this.element = t4 : m.string(t4) && (this.element = document.querySelector(t4)), m.element(this.element) && m.empty(this.element.rangeTouch) && (this.config = n({}, a, {}, i3), this.init());
+          }
+          return function(e4, i3, s2) {
+            i3 && t3(e4.prototype, i3), s2 && t3(e4, s2);
+          }(e3, [{ key: "init", value: function() {
+            e3.enabled && (this.config.addCSS && (this.element.style.userSelect = "none", this.element.style.webKitUserSelect = "none", this.element.style.touchAction = "manipulation"), this.listeners(true), this.element.rangeTouch = this);
+          } }, { key: "destroy", value: function() {
+            e3.enabled && (this.config.addCSS && (this.element.style.userSelect = "", this.element.style.webKitUserSelect = "", this.element.style.touchAction = ""), this.listeners(false), this.element.rangeTouch = null);
+          } }, { key: "listeners", value: function(e4) {
+            var t4 = this, i3 = e4 ? "addEventListener" : "removeEventListener";
+            ["touchstart", "touchmove", "touchend"].forEach(function(e5) {
+              t4.element[i3](e5, function(e6) {
+                return t4.set(e6);
+              }, false);
+            });
+          } }, { key: "get", value: function(t4) {
+            if (!e3.enabled || !m.event(t4)) return null;
+            var i3, s2 = t4.target, n2 = t4.changedTouches[0], a2 = parseFloat(s2.getAttribute("min")) || 0, l2 = parseFloat(s2.getAttribute("max")) || 100, r2 = parseFloat(s2.getAttribute("step")) || 1, o2 = s2.getBoundingClientRect(), c2 = 100 / o2.width * (this.config.thumbWidth / 2) / 100;
+            return 0 > (i3 = 100 / o2.width * (n2.clientX - o2.left)) ? i3 = 0 : 100 < i3 && (i3 = 100), 50 > i3 ? i3 -= (100 - 2 * i3) * c2 : 50 < i3 && (i3 += 2 * (i3 - 50) * c2), a2 + p(i3 / 100 * (l2 - a2), r2);
+          } }, { key: "set", value: function(t4) {
+            e3.enabled && m.event(t4) && !t4.target.disabled && (t4.preventDefault(), t4.target.value = this.get(t4), function(e4, t5) {
+              if (e4 && t5) {
+                var i3 = new Event(t5, { bubbles: true });
+                e4.dispatchEvent(i3);
+              }
+            }(t4.target, "touchend" === t4.type ? "change" : "input"));
+          } }], [{ key: "setup", value: function(t4) {
+            var i3 = 1 < arguments.length && void 0 !== arguments[1] ? arguments[1] : {}, s2 = null;
+            if (m.empty(t4) || m.string(t4) ? s2 = Array.from(document.querySelectorAll(m.string(t4) ? t4 : 'input[type="range"]')) : m.element(t4) ? s2 = [t4] : m.nodeList(t4) ? s2 = Array.from(t4) : m.array(t4) && (s2 = t4.filter(m.element)), m.empty(s2)) return null;
+            var l2 = n({}, a, {}, i3);
+            if (m.string(t4) && l2.watch) {
+              var r2 = new MutationObserver(function(i4) {
+                Array.from(i4).forEach(function(i5) {
+                  Array.from(i5.addedNodes).forEach(function(i6) {
+                    m.element(i6) && function(e4, t5) {
+                      return function() {
+                        return Array.from(document.querySelectorAll(t5)).includes(this);
+                      }.call(e4, t5);
+                    }(i6, t4) && new e3(i6, l2);
+                  });
+                });
+              });
+              r2.observe(document.body, { childList: true, subtree: true });
+            }
+            return s2.map(function(t5) {
+              return new e3(t5, i3);
+            });
+          } }, { key: "enabled", get: function() {
+            return "ontouchstart" in document.documentElement;
+          } }]), e3;
+        }();
+        const f = (e3) => null != e3 ? e3.constructor : null, y = (e3, t4) => Boolean(e3 && t4 && e3 instanceof t4), b = (e3) => null == e3, v = (e3) => f(e3) === Object, w = (e3) => f(e3) === String, T = (e3) => "function" == typeof e3, k = (e3) => Array.isArray(e3), C = (e3) => y(e3, NodeList), A = (e3) => b(e3) || (w(e3) || k(e3) || C(e3)) && !e3.length || v(e3) && !Object.keys(e3).length;
+        var S = { nullOrUndefined: b, object: v, number: (e3) => f(e3) === Number && !Number.isNaN(e3), string: w, boolean: (e3) => f(e3) === Boolean, function: T, array: k, weakMap: (e3) => y(e3, WeakMap), nodeList: C, element: (e3) => null !== e3 && "object" == typeof e3 && 1 === e3.nodeType && "object" == typeof e3.style && "object" == typeof e3.ownerDocument, textNode: (e3) => f(e3) === Text, event: (e3) => y(e3, Event), keyboardEvent: (e3) => y(e3, KeyboardEvent), cue: (e3) => y(e3, window.TextTrackCue) || y(e3, window.VTTCue), track: (e3) => y(e3, TextTrack) || !b(e3) && w(e3.kind), promise: (e3) => y(e3, Promise) && T(e3.then), url: (e3) => {
+          if (y(e3, window.URL)) return true;
+          if (!w(e3)) return false;
+          let t4 = e3;
+          e3.startsWith("http://") && e3.startsWith("https://") || (t4 = `http://${e3}`);
+          try {
+            return !A(new URL(t4).hostname);
+          } catch (e4) {
+            return false;
+          }
+        }, empty: A };
+        const E = (() => {
+          const e3 = document.createElement("span"), t4 = { WebkitTransition: "webkitTransitionEnd", MozTransition: "transitionend", OTransition: "oTransitionEnd otransitionend", transition: "transitionend" }, i3 = Object.keys(t4).find((t5) => void 0 !== e3.style[t5]);
+          return !!S.string(i3) && t4[i3];
+        })();
+        function P(e3, t4) {
+          setTimeout(() => {
+            try {
+              e3.hidden = true, e3.offsetHeight, e3.hidden = false;
+            } catch (e4) {
+            }
+          }, t4);
+        }
+        var M = { isIE: Boolean(window.document.documentMode), isEdge: /Edge/g.test(navigator.userAgent), isWebKit: "WebkitAppearance" in document.documentElement.style && !/Edge/g.test(navigator.userAgent), isIPhone: /iPhone|iPod/gi.test(navigator.userAgent) && navigator.maxTouchPoints > 1, isIPadOS: "MacIntel" === navigator.platform && navigator.maxTouchPoints > 1, isIos: /iPad|iPhone|iPod/gi.test(navigator.userAgent) && navigator.maxTouchPoints > 1 };
+        function N(e3, t4) {
+          return t4.split(".").reduce((e4, t5) => e4 && e4[t5], e3);
+        }
+        function x(e3 = {}, ...t4) {
+          if (!t4.length) return e3;
+          const i3 = t4.shift();
+          return S.object(i3) ? (Object.keys(i3).forEach((t5) => {
+            S.object(i3[t5]) ? (Object.keys(e3).includes(t5) || Object.assign(e3, { [t5]: {} }), x(e3[t5], i3[t5])) : Object.assign(e3, { [t5]: i3[t5] });
+          }), x(e3, ...t4)) : e3;
+        }
+        function L(e3, t4) {
+          const i3 = e3.length ? e3 : [e3];
+          Array.from(i3).reverse().forEach((e4, i4) => {
+            const s2 = i4 > 0 ? t4.cloneNode(true) : t4, n2 = e4.parentNode, a2 = e4.nextSibling;
+            s2.appendChild(e4), a2 ? n2.insertBefore(s2, a2) : n2.appendChild(s2);
+          });
+        }
+        function I(e3, t4) {
+          S.element(e3) && !S.empty(t4) && Object.entries(t4).filter(([, e4]) => !S.nullOrUndefined(e4)).forEach(([t5, i3]) => e3.setAttribute(t5, i3));
+        }
+        function $(e3, t4, i3) {
+          const s2 = document.createElement(e3);
+          return S.object(t4) && I(s2, t4), S.string(i3) && (s2.innerText = i3), s2;
+        }
+        function _(e3, t4, i3, s2) {
+          S.element(t4) && t4.appendChild($(e3, i3, s2));
+        }
+        function O(e3) {
+          S.nodeList(e3) || S.array(e3) ? Array.from(e3).forEach(O) : S.element(e3) && S.element(e3.parentNode) && e3.parentNode.removeChild(e3);
+        }
+        function j(e3) {
+          if (!S.element(e3)) return;
+          let { length: t4 } = e3.childNodes;
+          for (; t4 > 0; ) e3.removeChild(e3.lastChild), t4 -= 1;
+        }
+        function q(e3, t4) {
+          return S.element(t4) && S.element(t4.parentNode) && S.element(e3) ? (t4.parentNode.replaceChild(e3, t4), e3) : null;
+        }
+        function D(e3, t4) {
+          if (!S.string(e3) || S.empty(e3)) return {};
+          const i3 = {}, s2 = x({}, t4);
+          return e3.split(",").forEach((e4) => {
+            const t5 = e4.trim(), n2 = t5.replace(".", ""), a2 = t5.replace(/[[\]]/g, "").split("="), [l2] = a2, r2 = a2.length > 1 ? a2[1].replace(/["']/g, "") : "";
+            switch (t5.charAt(0)) {
+              case ".":
+                S.string(s2.class) ? i3.class = `${s2.class} ${n2}` : i3.class = n2;
+                break;
+              case "#":
+                i3.id = t5.replace("#", "");
+                break;
+              case "[":
+                i3[l2] = r2;
+            }
+          }), x(s2, i3);
+        }
+        function H(e3, t4) {
+          if (!S.element(e3)) return;
+          let i3 = t4;
+          S.boolean(i3) || (i3 = !e3.hidden), e3.hidden = i3;
+        }
+        function R(e3, t4, i3) {
+          if (S.nodeList(e3)) return Array.from(e3).map((e4) => R(e4, t4, i3));
+          if (S.element(e3)) {
+            let s2 = "toggle";
+            return void 0 !== i3 && (s2 = i3 ? "add" : "remove"), e3.classList[s2](t4), e3.classList.contains(t4);
+          }
+          return false;
+        }
+        function F(e3, t4) {
+          return S.element(e3) && e3.classList.contains(t4);
+        }
+        function V(e3, t4) {
+          const { prototype: i3 } = Element;
+          return (i3.matches || i3.webkitMatchesSelector || i3.mozMatchesSelector || i3.msMatchesSelector || function() {
+            return Array.from(document.querySelectorAll(t4)).includes(this);
+          }).call(e3, t4);
+        }
+        function U(e3) {
+          return this.elements.container.querySelectorAll(e3);
+        }
+        function B(e3) {
+          return this.elements.container.querySelector(e3);
+        }
+        function W(e3 = null, t4 = false) {
+          S.element(e3) && e3.focus({ preventScroll: true, focusVisible: t4 });
+        }
+        const z = { "audio/ogg": "vorbis", "audio/wav": "1", "video/webm": "vp8, vorbis", "video/mp4": "avc1.42E01E, mp4a.40.2", "video/ogg": "theora" }, K = { audio: "canPlayType" in document.createElement("audio"), video: "canPlayType" in document.createElement("video"), check(e3, t4) {
+          const i3 = K[e3] || "html5" !== t4;
+          return { api: i3, ui: i3 && K.rangeInput };
+        }, pip: !(M.isIPhone || !S.function($("video").webkitSetPresentationMode) && (!document.pictureInPictureEnabled || $("video").disablePictureInPicture)), airplay: S.function(window.WebKitPlaybackTargetAvailabilityEvent), playsinline: "playsInline" in document.createElement("video"), mime(e3) {
+          if (S.empty(e3)) return false;
+          const [t4] = e3.split("/");
+          let i3 = e3;
+          if (!this.isHTML5 || t4 !== this.type) return false;
+          Object.keys(z).includes(i3) && (i3 += `; codecs="${z[e3]}"`);
+          try {
+            return Boolean(i3 && this.media.canPlayType(i3).replace(/no/, ""));
+          } catch (e4) {
+            return false;
+          }
+        }, textTracks: "textTracks" in document.createElement("video"), rangeInput: (() => {
+          const e3 = document.createElement("input");
+          return e3.type = "range", "range" === e3.type;
+        })(), touch: "ontouchstart" in document.documentElement, transitions: false !== E, reducedMotion: "matchMedia" in window && window.matchMedia("(prefers-reduced-motion)").matches }, Y = (() => {
+          let e3 = false;
+          try {
+            const t4 = Object.defineProperty({}, "passive", { get: () => (e3 = true, null) });
+            window.addEventListener("test", null, t4), window.removeEventListener("test", null, t4);
+          } catch (e4) {
+          }
+          return e3;
+        })();
+        function Q(e3, t4, i3, s2 = false, n2 = true, a2 = false) {
+          if (!e3 || !("addEventListener" in e3) || S.empty(t4) || !S.function(i3)) return;
+          const l2 = t4.split(" ");
+          let r2 = a2;
+          Y && (r2 = { passive: n2, capture: a2 }), l2.forEach((t5) => {
+            this && this.eventListeners && s2 && this.eventListeners.push({ element: e3, type: t5, callback: i3, options: r2 }), e3[s2 ? "addEventListener" : "removeEventListener"](t5, i3, r2);
+          });
+        }
+        function X(e3, t4 = "", i3, s2 = true, n2 = false) {
+          Q.call(this, e3, t4, i3, true, s2, n2);
+        }
+        function J(e3, t4 = "", i3, s2 = true, n2 = false) {
+          Q.call(this, e3, t4, i3, false, s2, n2);
+        }
+        function G(e3, t4 = "", i3, s2 = true, n2 = false) {
+          const a2 = (...l2) => {
+            J(e3, t4, a2, s2, n2), i3.apply(this, l2);
+          };
+          Q.call(this, e3, t4, a2, true, s2, n2);
+        }
+        function Z(e3, t4 = "", i3 = false, s2 = {}) {
+          if (!S.element(e3) || S.empty(t4)) return;
+          const n2 = new CustomEvent(t4, { bubbles: i3, detail: { ...s2, plyr: this } });
+          e3.dispatchEvent(n2);
+        }
+        function ee() {
+          this && this.eventListeners && (this.eventListeners.forEach((e3) => {
+            const { element: t4, type: i3, callback: s2, options: n2 } = e3;
+            t4.removeEventListener(i3, s2, n2);
+          }), this.eventListeners = []);
+        }
+        function te() {
+          return new Promise((e3) => this.ready ? setTimeout(e3, 0) : X.call(this, this.elements.container, "ready", e3)).then(() => {
+          });
+        }
+        function ie(e3) {
+          S.promise(e3) && e3.then(null, () => {
+          });
+        }
+        function se(e3) {
+          return S.array(e3) ? e3.filter((t4, i3) => e3.indexOf(t4) === i3) : e3;
+        }
+        function ne(e3, t4) {
+          return S.array(e3) && e3.length ? e3.reduce((e4, i3) => Math.abs(i3 - t4) < Math.abs(e4 - t4) ? i3 : e4) : null;
+        }
+        function ae(e3) {
+          return !(!window || !window.CSS) && window.CSS.supports(e3);
+        }
+        const le = [[1, 1], [4, 3], [3, 4], [5, 4], [4, 5], [3, 2], [2, 3], [16, 10], [10, 16], [16, 9], [9, 16], [21, 9], [9, 21], [32, 9], [9, 32]].reduce((e3, [t4, i3]) => ({ ...e3, [t4 / i3]: [t4, i3] }), {});
+        function re(e3) {
+          if (!(S.array(e3) || S.string(e3) && e3.includes(":"))) return false;
+          return (S.array(e3) ? e3 : e3.split(":")).map(Number).every(S.number);
+        }
+        function oe(e3) {
+          if (!S.array(e3) || !e3.every(S.number)) return null;
+          const [t4, i3] = e3, s2 = (e4, t5) => 0 === t5 ? e4 : s2(t5, e4 % t5), n2 = s2(t4, i3);
+          return [t4 / n2, i3 / n2];
+        }
+        function ce(e3) {
+          const t4 = (e4) => re(e4) ? e4.split(":").map(Number) : null;
+          let i3 = t4(e3);
+          if (null === i3 && (i3 = t4(this.config.ratio)), null === i3 && !S.empty(this.embed) && S.array(this.embed.ratio) && ({ ratio: i3 } = this.embed), null === i3 && this.isHTML5) {
+            const { videoWidth: e4, videoHeight: t5 } = this.media;
+            i3 = [e4, t5];
+          }
+          return oe(i3);
+        }
+        function ue(e3) {
+          if (!this.isVideo) return {};
+          const { wrapper: t4 } = this.elements, i3 = ce.call(this, e3);
+          if (!S.array(i3)) return {};
+          const [s2, n2] = oe(i3), a2 = 100 / s2 * n2;
+          if (ae(`aspect-ratio: ${s2}/${n2}`) ? t4.style.aspectRatio = `${s2}/${n2}` : t4.style.paddingBottom = `${a2}%`, this.isVimeo && !this.config.vimeo.premium && this.supported.ui) {
+            const e4 = 100 / this.media.offsetWidth * parseInt(window.getComputedStyle(this.media).paddingBottom, 10), i4 = (e4 - a2) / (e4 / 50);
+            this.fullscreen.active ? t4.style.paddingBottom = null : this.media.style.transform = `translateY(-${i4}%)`;
+          } else this.isHTML5 && t4.classList.add(this.config.classNames.videoFixedRatio);
+          return { padding: a2, ratio: i3 };
+        }
+        function he(e3, t4, i3 = 0.05) {
+          const s2 = e3 / t4, n2 = ne(Object.keys(le), s2);
+          return Math.abs(n2 - s2) <= i3 ? le[n2] : [e3, t4];
+        }
+        const de = { getSources() {
+          if (!this.isHTML5) return [];
+          return Array.from(this.media.querySelectorAll("source")).filter((e3) => {
+            const t4 = e3.getAttribute("type");
+            return !!S.empty(t4) || K.mime.call(this, t4);
+          });
+        }, getQualityOptions() {
+          return this.config.quality.forced ? this.config.quality.options : de.getSources.call(this).map((e3) => Number(e3.getAttribute("size"))).filter(Boolean);
+        }, setup() {
+          if (!this.isHTML5) return;
+          const e3 = this;
+          e3.options.speed = e3.config.speed.options, S.empty(this.config.ratio) || ue.call(e3), Object.defineProperty(e3.media, "quality", { get() {
+            const t4 = de.getSources.call(e3).find((t5) => t5.getAttribute("src") === e3.source);
+            return t4 && Number(t4.getAttribute("size"));
+          }, set(t4) {
+            if (e3.quality !== t4) {
+              if (e3.config.quality.forced && S.function(e3.config.quality.onChange)) e3.config.quality.onChange(t4);
+              else {
+                const i3 = de.getSources.call(e3).find((e4) => Number(e4.getAttribute("size")) === t4);
+                if (!i3) return;
+                const { currentTime: s2, paused: n2, preload: a2, readyState: l2, playbackRate: r2 } = e3.media;
+                e3.media.src = i3.getAttribute("src"), ("none" !== a2 || l2) && (e3.once("loadedmetadata", () => {
+                  e3.speed = r2, e3.currentTime = s2, n2 || ie(e3.play());
+                }), e3.media.load());
+              }
+              Z.call(e3, e3.media, "qualitychange", false, { quality: t4 });
+            }
+          } });
+        }, cancelRequests() {
+          this.isHTML5 && (O(de.getSources.call(this)), this.media.setAttribute("src", this.config.blankVideo), this.media.load(), this.debug.log("Cancelled network requests"));
+        } };
+        function me(e3, ...t4) {
+          return S.empty(e3) ? e3 : e3.toString().replace(/{(\d+)}/g, (e4, i3) => t4[i3].toString());
+        }
+        const pe = (e3 = "", t4 = "", i3 = "") => e3.replace(new RegExp(t4.toString().replace(/([.*+?^=!:${}()|[\]/\\])/g, "\\$1"), "g"), i3.toString()), ge = (e3 = "") => e3.toString().replace(/\w\S*/g, (e4) => e4.charAt(0).toUpperCase() + e4.slice(1).toLowerCase());
+        function fe(e3 = "") {
+          let t4 = e3.toString();
+          return t4 = function(e4 = "") {
+            let t5 = e4.toString();
+            return t5 = pe(t5, "-", " "), t5 = pe(t5, "_", " "), t5 = ge(t5), pe(t5, " ", "");
+          }(t4), t4.charAt(0).toLowerCase() + t4.slice(1);
+        }
+        function ye(e3) {
+          const t4 = document.createElement("div");
+          return t4.appendChild(e3), t4.innerHTML;
+        }
+        const be = { pip: "PIP", airplay: "AirPlay", html5: "HTML5", vimeo: "Vimeo", youtube: "YouTube" }, ve = { get(e3 = "", t4 = {}) {
+          if (S.empty(e3) || S.empty(t4)) return "";
+          let i3 = N(t4.i18n, e3);
+          if (S.empty(i3)) return Object.keys(be).includes(e3) ? be[e3] : "";
+          const s2 = { "{seektime}": t4.seekTime, "{title}": t4.title };
+          return Object.entries(s2).forEach(([e4, t5]) => {
+            i3 = pe(i3, e4, t5);
+          }), i3;
+        } };
+        class we {
+          constructor(t4) {
+            e2(this, "get", (e3) => {
+              if (!we.supported || !this.enabled) return null;
+              const t5 = window.localStorage.getItem(this.key);
+              if (S.empty(t5)) return null;
+              const i3 = JSON.parse(t5);
+              return S.string(e3) && e3.length ? i3[e3] : i3;
+            }), e2(this, "set", (e3) => {
+              if (!we.supported || !this.enabled) return;
+              if (!S.object(e3)) return;
+              let t5 = this.get();
+              S.empty(t5) && (t5 = {}), x(t5, e3);
+              try {
+                window.localStorage.setItem(this.key, JSON.stringify(t5));
+              } catch (e4) {
+              }
+            }), this.enabled = t4.config.storage.enabled, this.key = t4.config.storage.key;
+          }
+          static get supported() {
+            try {
+              if (!("localStorage" in window)) return false;
+              const e3 = "___test";
+              return window.localStorage.setItem(e3, e3), window.localStorage.removeItem(e3), true;
+            } catch (e3) {
+              return false;
+            }
+          }
+        }
+        function Te(e3, t4 = "text") {
+          return new Promise((i3, s2) => {
+            try {
+              const s3 = new XMLHttpRequest();
+              if (!("withCredentials" in s3)) return;
+              s3.addEventListener("load", () => {
+                if ("text" === t4) try {
+                  i3(JSON.parse(s3.responseText));
+                } catch (e4) {
+                  i3(s3.responseText);
+                }
+                else i3(s3.response);
+              }), s3.addEventListener("error", () => {
+                throw new Error(s3.status);
+              }), s3.open("GET", e3, true), s3.responseType = t4, s3.send();
+            } catch (e4) {
+              s2(e4);
+            }
+          });
+        }
+        function ke(e3, t4) {
+          if (!S.string(e3)) return;
+          const i3 = "cache", s2 = S.string(t4);
+          let n2 = false;
+          const a2 = () => null !== document.getElementById(t4), l2 = (e4, t5) => {
+            e4.innerHTML = t5, s2 && a2() || document.body.insertAdjacentElement("afterbegin", e4);
+          };
+          if (!s2 || !a2()) {
+            const a3 = we.supported, r2 = document.createElement("div");
+            if (r2.setAttribute("hidden", ""), s2 && r2.setAttribute("id", t4), a3) {
+              const e4 = window.localStorage.getItem(`${i3}-${t4}`);
+              if (n2 = null !== e4, n2) {
+                const t5 = JSON.parse(e4);
+                l2(r2, t5.content);
+              }
+            }
+            Te(e3).then((e4) => {
+              if (!S.empty(e4)) {
+                if (a3) try {
+                  window.localStorage.setItem(`${i3}-${t4}`, JSON.stringify({ content: e4 }));
+                } catch (e5) {
+                }
+                l2(r2, e4);
+              }
+            }).catch(() => {
+            });
+          }
+        }
+        const Ce = (e3) => Math.trunc(e3 / 60 / 60 % 60, 10), Ae = (e3) => Math.trunc(e3 / 60 % 60, 10), Se = (e3) => Math.trunc(e3 % 60, 10);
+        function Ee(e3 = 0, t4 = false, i3 = false) {
+          if (!S.number(e3)) return Ee(void 0, t4, i3);
+          const s2 = (e4) => `0${e4}`.slice(-2);
+          let n2 = Ce(e3);
+          const a2 = Ae(e3), l2 = Se(e3);
+          return n2 = t4 || n2 > 0 ? `${n2}:` : "", `${i3 && e3 > 0 ? "-" : ""}${n2}${s2(a2)}:${s2(l2)}`;
+        }
+        const Pe = { getIconUrl() {
+          const e3 = new URL(this.config.iconUrl, window.location), t4 = window.location.host ? window.location.host : window.top.location.host, i3 = e3.host !== t4 || M.isIE && !window.svg4everybody;
+          return { url: this.config.iconUrl, cors: i3 };
+        }, findElements() {
+          try {
+            return this.elements.controls = B.call(this, this.config.selectors.controls.wrapper), this.elements.buttons = { play: U.call(this, this.config.selectors.buttons.play), pause: B.call(this, this.config.selectors.buttons.pause), restart: B.call(this, this.config.selectors.buttons.restart), rewind: B.call(this, this.config.selectors.buttons.rewind), fastForward: B.call(this, this.config.selectors.buttons.fastForward), mute: B.call(this, this.config.selectors.buttons.mute), pip: B.call(this, this.config.selectors.buttons.pip), airplay: B.call(this, this.config.selectors.buttons.airplay), settings: B.call(this, this.config.selectors.buttons.settings), captions: B.call(this, this.config.selectors.buttons.captions), fullscreen: B.call(this, this.config.selectors.buttons.fullscreen) }, this.elements.progress = B.call(this, this.config.selectors.progress), this.elements.inputs = { seek: B.call(this, this.config.selectors.inputs.seek), volume: B.call(this, this.config.selectors.inputs.volume) }, this.elements.display = { buffer: B.call(this, this.config.selectors.display.buffer), currentTime: B.call(this, this.config.selectors.display.currentTime), duration: B.call(this, this.config.selectors.display.duration) }, S.element(this.elements.progress) && (this.elements.display.seekTooltip = this.elements.progress.querySelector(`.${this.config.classNames.tooltip}`)), true;
+          } catch (e3) {
+            return this.debug.warn("It looks like there is a problem with your custom controls HTML", e3), this.toggleNativeControls(true), false;
+          }
+        }, createIcon(e3, t4) {
+          const i3 = "http://www.w3.org/2000/svg", s2 = Pe.getIconUrl.call(this), n2 = `${s2.cors ? "" : s2.url}#${this.config.iconPrefix}`, a2 = document.createElementNS(i3, "svg");
+          I(a2, x(t4, { "aria-hidden": "true", focusable: "false" }));
+          const l2 = document.createElementNS(i3, "use"), r2 = `${n2}-${e3}`;
+          return "href" in l2 && l2.setAttributeNS("http://www.w3.org/1999/xlink", "href", r2), l2.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", r2), a2.appendChild(l2), a2;
+        }, createLabel(e3, t4 = {}) {
+          const i3 = ve.get(e3, this.config);
+          return $("span", { ...t4, class: [t4.class, this.config.classNames.hidden].filter(Boolean).join(" ") }, i3);
+        }, createBadge(e3) {
+          if (S.empty(e3)) return null;
+          const t4 = $("span", { class: this.config.classNames.menu.value });
+          return t4.appendChild($("span", { class: this.config.classNames.menu.badge }, e3)), t4;
+        }, createButton(e3, t4) {
+          const i3 = x({}, t4);
+          let s2 = fe(e3);
+          const n2 = { element: "button", toggle: false, label: null, icon: null, labelPressed: null, iconPressed: null };
+          switch (["element", "icon", "label"].forEach((e4) => {
+            Object.keys(i3).includes(e4) && (n2[e4] = i3[e4], delete i3[e4]);
+          }), "button" !== n2.element || Object.keys(i3).includes("type") || (i3.type = "button"), Object.keys(i3).includes("class") ? i3.class.split(" ").some((e4) => e4 === this.config.classNames.control) || x(i3, { class: `${i3.class} ${this.config.classNames.control}` }) : i3.class = this.config.classNames.control, e3) {
+            case "play":
+              n2.toggle = true, n2.label = "play", n2.labelPressed = "pause", n2.icon = "play", n2.iconPressed = "pause";
+              break;
+            case "mute":
+              n2.toggle = true, n2.label = "mute", n2.labelPressed = "unmute", n2.icon = "volume", n2.iconPressed = "muted";
+              break;
+            case "captions":
+              n2.toggle = true, n2.label = "enableCaptions", n2.labelPressed = "disableCaptions", n2.icon = "captions-off", n2.iconPressed = "captions-on";
+              break;
+            case "fullscreen":
+              n2.toggle = true, n2.label = "enterFullscreen", n2.labelPressed = "exitFullscreen", n2.icon = "enter-fullscreen", n2.iconPressed = "exit-fullscreen";
+              break;
+            case "play-large":
+              i3.class += ` ${this.config.classNames.control}--overlaid`, s2 = "play", n2.label = "play", n2.icon = "play";
+              break;
+            default:
+              S.empty(n2.label) && (n2.label = s2), S.empty(n2.icon) && (n2.icon = e3);
+          }
+          const a2 = $(n2.element);
+          return n2.toggle ? (a2.appendChild(Pe.createIcon.call(this, n2.iconPressed, { class: "icon--pressed" })), a2.appendChild(Pe.createIcon.call(this, n2.icon, { class: "icon--not-pressed" })), a2.appendChild(Pe.createLabel.call(this, n2.labelPressed, { class: "label--pressed" })), a2.appendChild(Pe.createLabel.call(this, n2.label, { class: "label--not-pressed" }))) : (a2.appendChild(Pe.createIcon.call(this, n2.icon)), a2.appendChild(Pe.createLabel.call(this, n2.label))), x(i3, D(this.config.selectors.buttons[s2], i3)), I(a2, i3), "play" === s2 ? (S.array(this.elements.buttons[s2]) || (this.elements.buttons[s2] = []), this.elements.buttons[s2].push(a2)) : this.elements.buttons[s2] = a2, a2;
+        }, createRange(e3, t4) {
+          const i3 = $("input", x(D(this.config.selectors.inputs[e3]), { type: "range", min: 0, max: 100, step: 0.01, value: 0, autocomplete: "off", role: "slider", "aria-label": ve.get(e3, this.config), "aria-valuemin": 0, "aria-valuemax": 100, "aria-valuenow": 0 }, t4));
+          return this.elements.inputs[e3] = i3, Pe.updateRangeFill.call(this, i3), g.setup(i3), i3;
+        }, createProgress(e3, t4) {
+          const i3 = $("progress", x(D(this.config.selectors.display[e3]), { min: 0, max: 100, value: 0, role: "progressbar", "aria-hidden": true }, t4));
+          if ("volume" !== e3) {
+            i3.appendChild($("span", null, "0"));
+            const t5 = { played: "played", buffer: "buffered" }[e3], s2 = t5 ? ve.get(t5, this.config) : "";
+            i3.innerText = `% ${s2.toLowerCase()}`;
+          }
+          return this.elements.display[e3] = i3, i3;
+        }, createTime(e3, t4) {
+          const i3 = D(this.config.selectors.display[e3], t4), s2 = $("div", x(i3, { class: `${i3.class ? i3.class : ""} ${this.config.classNames.display.time} `.trim(), "aria-label": ve.get(e3, this.config), role: "timer" }), "00:00");
+          return this.elements.display[e3] = s2, s2;
+        }, bindMenuItemShortcuts(e3, t4) {
+          X.call(this, e3, "keydown keyup", (i3) => {
+            if (![" ", "ArrowUp", "ArrowDown", "ArrowRight"].includes(i3.key)) return;
+            if (i3.preventDefault(), i3.stopPropagation(), "keydown" === i3.type) return;
+            const s2 = V(e3, '[role="menuitemradio"]');
+            if (!s2 && [" ", "ArrowRight"].includes(i3.key)) Pe.showMenuPanel.call(this, t4, true);
+            else {
+              let t5;
+              " " !== i3.key && ("ArrowDown" === i3.key || s2 && "ArrowRight" === i3.key ? (t5 = e3.nextElementSibling, S.element(t5) || (t5 = e3.parentNode.firstElementChild)) : (t5 = e3.previousElementSibling, S.element(t5) || (t5 = e3.parentNode.lastElementChild)), W.call(this, t5, true));
+            }
+          }, false), X.call(this, e3, "keyup", (e4) => {
+            "Return" === e4.key && Pe.focusFirstMenuItem.call(this, null, true);
+          });
+        }, createMenuItem({ value: e3, list: t4, type: i3, title: s2, badge: n2 = null, checked: a2 = false }) {
+          const l2 = D(this.config.selectors.inputs[i3]), r2 = $("button", x(l2, { type: "button", role: "menuitemradio", class: `${this.config.classNames.control} ${l2.class ? l2.class : ""}`.trim(), "aria-checked": a2, value: e3 })), o2 = $("span");
+          o2.innerHTML = s2, S.element(n2) && o2.appendChild(n2), r2.appendChild(o2), Object.defineProperty(r2, "checked", { enumerable: true, get: () => "true" === r2.getAttribute("aria-checked"), set(e4) {
+            e4 && Array.from(r2.parentNode.children).filter((e5) => V(e5, '[role="menuitemradio"]')).forEach((e5) => e5.setAttribute("aria-checked", "false")), r2.setAttribute("aria-checked", e4 ? "true" : "false");
+          } }), this.listeners.bind(r2, "click keyup", (t5) => {
+            if (!S.keyboardEvent(t5) || " " === t5.key) {
+              switch (t5.preventDefault(), t5.stopPropagation(), r2.checked = true, i3) {
+                case "language":
+                  this.currentTrack = Number(e3);
+                  break;
+                case "quality":
+                  this.quality = e3;
+                  break;
+                case "speed":
+                  this.speed = parseFloat(e3);
+              }
+              Pe.showMenuPanel.call(this, "home", S.keyboardEvent(t5));
+            }
+          }, i3, false), Pe.bindMenuItemShortcuts.call(this, r2, i3), t4.appendChild(r2);
+        }, formatTime(e3 = 0, t4 = false) {
+          if (!S.number(e3)) return e3;
+          return Ee(e3, Ce(this.duration) > 0, t4);
+        }, updateTimeDisplay(e3 = null, t4 = 0, i3 = false) {
+          S.element(e3) && S.number(t4) && (e3.innerText = Pe.formatTime(t4, i3));
+        }, updateVolume() {
+          this.supported.ui && (S.element(this.elements.inputs.volume) && Pe.setRange.call(this, this.elements.inputs.volume, this.muted ? 0 : this.volume), S.element(this.elements.buttons.mute) && (this.elements.buttons.mute.pressed = this.muted || 0 === this.volume));
+        }, setRange(e3, t4 = 0) {
+          S.element(e3) && (e3.value = t4, Pe.updateRangeFill.call(this, e3));
+        }, updateProgress(e3) {
+          if (!this.supported.ui || !S.event(e3)) return;
+          let t4 = 0;
+          const i3 = (e4, t5) => {
+            const i4 = S.number(t5) ? t5 : 0, s3 = S.element(e4) ? e4 : this.elements.display.buffer;
+            if (S.element(s3)) {
+              s3.value = i4;
+              const e5 = s3.getElementsByTagName("span")[0];
+              S.element(e5) && (e5.childNodes[0].nodeValue = i4);
+            }
+          };
+          if (e3) switch (e3.type) {
+            case "timeupdate":
+            case "seeking":
+            case "seeked":
+              s2 = this.currentTime, n2 = this.duration, t4 = 0 === s2 || 0 === n2 || Number.isNaN(s2) || Number.isNaN(n2) ? 0 : (s2 / n2 * 100).toFixed(2), "timeupdate" === e3.type && Pe.setRange.call(this, this.elements.inputs.seek, t4);
+              break;
+            case "playing":
+            case "progress":
+              i3(this.elements.display.buffer, 100 * this.buffered);
+          }
+          var s2, n2;
+        }, updateRangeFill(e3) {
+          const t4 = S.event(e3) ? e3.target : e3;
+          if (S.element(t4) && "range" === t4.getAttribute("type")) {
+            if (V(t4, this.config.selectors.inputs.seek)) {
+              t4.setAttribute("aria-valuenow", this.currentTime);
+              const e4 = Pe.formatTime(this.currentTime), i3 = Pe.formatTime(this.duration), s2 = ve.get("seekLabel", this.config);
+              t4.setAttribute("aria-valuetext", s2.replace("{currentTime}", e4).replace("{duration}", i3));
+            } else if (V(t4, this.config.selectors.inputs.volume)) {
+              const e4 = 100 * t4.value;
+              t4.setAttribute("aria-valuenow", e4), t4.setAttribute("aria-valuetext", `${e4.toFixed(1)}%`);
+            } else t4.setAttribute("aria-valuenow", t4.value);
+            (M.isWebKit || M.isIPadOS) && t4.style.setProperty("--value", t4.value / t4.max * 100 + "%");
+          }
+        }, updateSeekTooltip(e3) {
+          var t4, i3;
+          if (!this.config.tooltips.seek || !S.element(this.elements.inputs.seek) || !S.element(this.elements.display.seekTooltip) || 0 === this.duration) return;
+          const s2 = this.elements.display.seekTooltip, n2 = `${this.config.classNames.tooltip}--visible`, a2 = (e4) => R(s2, n2, e4);
+          if (this.touch) return void a2(false);
+          let l2 = 0;
+          const r2 = this.elements.progress.getBoundingClientRect();
+          if (S.event(e3)) l2 = 100 / r2.width * (e3.pageX - r2.left);
+          else {
+            if (!F(s2, n2)) return;
+            l2 = parseFloat(s2.style.left, 10);
+          }
+          l2 < 0 ? l2 = 0 : l2 > 100 && (l2 = 100);
+          const o2 = this.duration / 100 * l2;
+          s2.innerText = Pe.formatTime(o2);
+          const c2 = null === (t4 = this.config.markers) || void 0 === t4 || null === (i3 = t4.points) || void 0 === i3 ? void 0 : i3.find(({ time: e4 }) => e4 === Math.round(o2));
+          c2 && s2.insertAdjacentHTML("afterbegin", `${c2.label}<br>`), s2.style.left = `${l2}%`, S.event(e3) && ["mouseenter", "mouseleave"].includes(e3.type) && a2("mouseenter" === e3.type);
+        }, timeUpdate(e3) {
+          const t4 = !S.element(this.elements.display.duration) && this.config.invertTime;
+          Pe.updateTimeDisplay.call(this, this.elements.display.currentTime, t4 ? this.duration - this.currentTime : this.currentTime, t4), e3 && "timeupdate" === e3.type && this.media.seeking || Pe.updateProgress.call(this, e3);
+        }, durationUpdate() {
+          if (!this.supported.ui || !this.config.invertTime && this.currentTime) return;
+          if (this.duration >= 2 ** 32) return H(this.elements.display.currentTime, true), void H(this.elements.progress, true);
+          S.element(this.elements.inputs.seek) && this.elements.inputs.seek.setAttribute("aria-valuemax", this.duration);
+          const e3 = S.element(this.elements.display.duration);
+          !e3 && this.config.displayDuration && this.paused && Pe.updateTimeDisplay.call(this, this.elements.display.currentTime, this.duration), e3 && Pe.updateTimeDisplay.call(this, this.elements.display.duration, this.duration), this.config.markers.enabled && Pe.setMarkers.call(this), Pe.updateSeekTooltip.call(this);
+        }, toggleMenuButton(e3, t4) {
+          H(this.elements.settings.buttons[e3], !t4);
+        }, updateSetting(e3, t4, i3) {
+          const s2 = this.elements.settings.panels[e3];
+          let n2 = null, a2 = t4;
+          if ("captions" === e3) n2 = this.currentTrack;
+          else {
+            if (n2 = S.empty(i3) ? this[e3] : i3, S.empty(n2) && (n2 = this.config[e3].default), !S.empty(this.options[e3]) && !this.options[e3].includes(n2)) return void this.debug.warn(`Unsupported value of '${n2}' for ${e3}`);
+            if (!this.config[e3].options.includes(n2)) return void this.debug.warn(`Disabled value of '${n2}' for ${e3}`);
+          }
+          if (S.element(a2) || (a2 = s2 && s2.querySelector('[role="menu"]')), !S.element(a2)) return;
+          this.elements.settings.buttons[e3].querySelector(`.${this.config.classNames.menu.value}`).innerHTML = Pe.getLabel.call(this, e3, n2);
+          const l2 = a2 && a2.querySelector(`[value="${n2}"]`);
+          S.element(l2) && (l2.checked = true);
+        }, getLabel(e3, t4) {
+          switch (e3) {
+            case "speed":
+              return 1 === t4 ? ve.get("normal", this.config) : `${t4}&times;`;
+            case "quality":
+              if (S.number(t4)) {
+                const e4 = ve.get(`qualityLabel.${t4}`, this.config);
+                return e4.length ? e4 : `${t4}p`;
+              }
+              return ge(t4);
+            case "captions":
+              return xe.getLabel.call(this);
+            default:
+              return null;
+          }
+        }, setQualityMenu(e3) {
+          if (!S.element(this.elements.settings.panels.quality)) return;
+          const t4 = "quality", i3 = this.elements.settings.panels.quality.querySelector('[role="menu"]');
+          S.array(e3) && (this.options.quality = se(e3).filter((e4) => this.config.quality.options.includes(e4)));
+          const s2 = !S.empty(this.options.quality) && this.options.quality.length > 1;
+          if (Pe.toggleMenuButton.call(this, t4, s2), j(i3), Pe.checkMenu.call(this), !s2) return;
+          const n2 = (e4) => {
+            const t5 = ve.get(`qualityBadge.${e4}`, this.config);
+            return t5.length ? Pe.createBadge.call(this, t5) : null;
+          };
+          this.options.quality.sort((e4, t5) => {
+            const i4 = this.config.quality.options;
+            return i4.indexOf(e4) > i4.indexOf(t5) ? 1 : -1;
+          }).forEach((e4) => {
+            Pe.createMenuItem.call(this, { value: e4, list: i3, type: t4, title: Pe.getLabel.call(this, "quality", e4), badge: n2(e4) });
+          }), Pe.updateSetting.call(this, t4, i3);
+        }, setCaptionsMenu() {
+          if (!S.element(this.elements.settings.panels.captions)) return;
+          const e3 = "captions", t4 = this.elements.settings.panels.captions.querySelector('[role="menu"]'), i3 = xe.getTracks.call(this), s2 = Boolean(i3.length);
+          if (Pe.toggleMenuButton.call(this, e3, s2), j(t4), Pe.checkMenu.call(this), !s2) return;
+          const n2 = i3.map((e4, i4) => ({ value: i4, checked: this.captions.toggled && this.currentTrack === i4, title: xe.getLabel.call(this, e4), badge: e4.language && Pe.createBadge.call(this, e4.language.toUpperCase()), list: t4, type: "language" }));
+          n2.unshift({ value: -1, checked: !this.captions.toggled, title: ve.get("disabled", this.config), list: t4, type: "language" }), n2.forEach(Pe.createMenuItem.bind(this)), Pe.updateSetting.call(this, e3, t4);
+        }, setSpeedMenu() {
+          if (!S.element(this.elements.settings.panels.speed)) return;
+          const e3 = "speed", t4 = this.elements.settings.panels.speed.querySelector('[role="menu"]');
+          this.options.speed = this.options.speed.filter((e4) => e4 >= this.minimumSpeed && e4 <= this.maximumSpeed);
+          const i3 = !S.empty(this.options.speed) && this.options.speed.length > 1;
+          Pe.toggleMenuButton.call(this, e3, i3), j(t4), Pe.checkMenu.call(this), i3 && (this.options.speed.forEach((i4) => {
+            Pe.createMenuItem.call(this, { value: i4, list: t4, type: e3, title: Pe.getLabel.call(this, "speed", i4) });
+          }), Pe.updateSetting.call(this, e3, t4));
+        }, checkMenu() {
+          const { buttons: e3 } = this.elements.settings, t4 = !S.empty(e3) && Object.values(e3).some((e4) => !e4.hidden);
+          H(this.elements.settings.menu, !t4);
+        }, focusFirstMenuItem(e3, t4 = false) {
+          if (this.elements.settings.popup.hidden) return;
+          let i3 = e3;
+          S.element(i3) || (i3 = Object.values(this.elements.settings.panels).find((e4) => !e4.hidden));
+          const s2 = i3.querySelector('[role^="menuitem"]');
+          W.call(this, s2, t4);
+        }, toggleMenu(e3) {
+          const { popup: t4 } = this.elements.settings, i3 = this.elements.buttons.settings;
+          if (!S.element(t4) || !S.element(i3)) return;
+          const { hidden: s2 } = t4;
+          let n2 = s2;
+          if (S.boolean(e3)) n2 = e3;
+          else if (S.keyboardEvent(e3) && "Escape" === e3.key) n2 = false;
+          else if (S.event(e3)) {
+            const s3 = S.function(e3.composedPath) ? e3.composedPath()[0] : e3.target, a2 = t4.contains(s3);
+            if (a2 || !a2 && e3.target !== i3 && n2) return;
+          }
+          i3.setAttribute("aria-expanded", n2), H(t4, !n2), R(this.elements.container, this.config.classNames.menu.open, n2), n2 && S.keyboardEvent(e3) ? Pe.focusFirstMenuItem.call(this, null, true) : n2 || s2 || W.call(this, i3, S.keyboardEvent(e3));
+        }, getMenuSize(e3) {
+          const t4 = e3.cloneNode(true);
+          t4.style.position = "absolute", t4.style.opacity = 0, t4.removeAttribute("hidden"), e3.parentNode.appendChild(t4);
+          const i3 = t4.scrollWidth, s2 = t4.scrollHeight;
+          return O(t4), { width: i3, height: s2 };
+        }, showMenuPanel(e3 = "", t4 = false) {
+          const i3 = this.elements.container.querySelector(`#plyr-settings-${this.id}-${e3}`);
+          if (!S.element(i3)) return;
+          const s2 = i3.parentNode, n2 = Array.from(s2.children).find((e4) => !e4.hidden);
+          if (K.transitions && !K.reducedMotion) {
+            s2.style.width = `${n2.scrollWidth}px`, s2.style.height = `${n2.scrollHeight}px`;
+            const e4 = Pe.getMenuSize.call(this, i3), t5 = (e5) => {
+              e5.target === s2 && ["width", "height"].includes(e5.propertyName) && (s2.style.width = "", s2.style.height = "", J.call(this, s2, E, t5));
+            };
+            X.call(this, s2, E, t5), s2.style.width = `${e4.width}px`, s2.style.height = `${e4.height}px`;
+          }
+          H(n2, true), H(i3, false), Pe.focusFirstMenuItem.call(this, i3, t4);
+        }, setDownloadUrl() {
+          const e3 = this.elements.buttons.download;
+          S.element(e3) && e3.setAttribute("href", this.download);
+        }, create(e3) {
+          const { bindMenuItemShortcuts: t4, createButton: i3, createProgress: s2, createRange: n2, createTime: a2, setQualityMenu: l2, setSpeedMenu: r2, showMenuPanel: o2 } = Pe;
+          this.elements.controls = null, S.array(this.config.controls) && this.config.controls.includes("play-large") && this.elements.container.appendChild(i3.call(this, "play-large"));
+          const c2 = $("div", D(this.config.selectors.controls.wrapper));
+          this.elements.controls = c2;
+          const u2 = { class: "plyr__controls__item" };
+          return se(S.array(this.config.controls) ? this.config.controls : []).forEach((l3) => {
+            if ("restart" === l3 && c2.appendChild(i3.call(this, "restart", u2)), "rewind" === l3 && c2.appendChild(i3.call(this, "rewind", u2)), "play" === l3 && c2.appendChild(i3.call(this, "play", u2)), "fast-forward" === l3 && c2.appendChild(i3.call(this, "fast-forward", u2)), "progress" === l3) {
+              const t5 = $("div", { class: `${u2.class} plyr__progress__container` }), i4 = $("div", D(this.config.selectors.progress));
+              if (i4.appendChild(n2.call(this, "seek", { id: `plyr-seek-${e3.id}` })), i4.appendChild(s2.call(this, "buffer")), this.config.tooltips.seek) {
+                const e4 = $("span", { class: this.config.classNames.tooltip }, "00:00");
+                i4.appendChild(e4), this.elements.display.seekTooltip = e4;
+              }
+              this.elements.progress = i4, t5.appendChild(this.elements.progress), c2.appendChild(t5);
+            }
+            if ("current-time" === l3 && c2.appendChild(a2.call(this, "currentTime", u2)), "duration" === l3 && c2.appendChild(a2.call(this, "duration", u2)), "mute" === l3 || "volume" === l3) {
+              let { volume: t5 } = this.elements;
+              if (S.element(t5) && c2.contains(t5) || (t5 = $("div", x({}, u2, { class: `${u2.class} plyr__volume`.trim() })), this.elements.volume = t5, c2.appendChild(t5)), "mute" === l3 && t5.appendChild(i3.call(this, "mute")), "volume" === l3 && !M.isIos && !M.isIPadOS) {
+                const i4 = { max: 1, step: 0.05, value: this.config.volume };
+                t5.appendChild(n2.call(this, "volume", x(i4, { id: `plyr-volume-${e3.id}` })));
+              }
+            }
+            if ("captions" === l3 && c2.appendChild(i3.call(this, "captions", u2)), "settings" === l3 && !S.empty(this.config.settings)) {
+              const s3 = $("div", x({}, u2, { class: `${u2.class} plyr__menu`.trim(), hidden: "" }));
+              s3.appendChild(i3.call(this, "settings", { "aria-haspopup": true, "aria-controls": `plyr-settings-${e3.id}`, "aria-expanded": false }));
+              const n3 = $("div", { class: "plyr__menu__container", id: `plyr-settings-${e3.id}`, hidden: "" }), a3 = $("div"), l4 = $("div", { id: `plyr-settings-${e3.id}-home` }), r3 = $("div", { role: "menu" });
+              l4.appendChild(r3), a3.appendChild(l4), this.elements.settings.panels.home = l4, this.config.settings.forEach((i4) => {
+                const s4 = $("button", x(D(this.config.selectors.buttons.settings), { type: "button", class: `${this.config.classNames.control} ${this.config.classNames.control}--forward`, role: "menuitem", "aria-haspopup": true, hidden: "" }));
+                t4.call(this, s4, i4), X.call(this, s4, "click", () => {
+                  o2.call(this, i4, false);
+                });
+                const n4 = $("span", null, ve.get(i4, this.config)), l5 = $("span", { class: this.config.classNames.menu.value });
+                l5.innerHTML = e3[i4], n4.appendChild(l5), s4.appendChild(n4), r3.appendChild(s4);
+                const c3 = $("div", { id: `plyr-settings-${e3.id}-${i4}`, hidden: "" }), u3 = $("button", { type: "button", class: `${this.config.classNames.control} ${this.config.classNames.control}--back` });
+                u3.appendChild($("span", { "aria-hidden": true }, ve.get(i4, this.config))), u3.appendChild($("span", { class: this.config.classNames.hidden }, ve.get("menuBack", this.config))), X.call(this, c3, "keydown", (e4) => {
+                  "ArrowLeft" === e4.key && (e4.preventDefault(), e4.stopPropagation(), o2.call(this, "home", true));
+                }, false), X.call(this, u3, "click", () => {
+                  o2.call(this, "home", false);
+                }), c3.appendChild(u3), c3.appendChild($("div", { role: "menu" })), a3.appendChild(c3), this.elements.settings.buttons[i4] = s4, this.elements.settings.panels[i4] = c3;
+              }), n3.appendChild(a3), s3.appendChild(n3), c2.appendChild(s3), this.elements.settings.popup = n3, this.elements.settings.menu = s3;
+            }
+            if ("pip" === l3 && K.pip && c2.appendChild(i3.call(this, "pip", u2)), "airplay" === l3 && K.airplay && c2.appendChild(i3.call(this, "airplay", u2)), "download" === l3) {
+              const e4 = x({}, u2, { element: "a", href: this.download, target: "_blank" });
+              this.isHTML5 && (e4.download = "");
+              const { download: t5 } = this.config.urls;
+              !S.url(t5) && this.isEmbed && x(e4, { icon: `logo-${this.provider}`, label: this.provider }), c2.appendChild(i3.call(this, "download", e4));
+            }
+            "fullscreen" === l3 && c2.appendChild(i3.call(this, "fullscreen", u2));
+          }), this.isHTML5 && l2.call(this, de.getQualityOptions.call(this)), r2.call(this), c2;
+        }, inject() {
+          if (this.config.loadSprite) {
+            const e4 = Pe.getIconUrl.call(this);
+            e4.cors && ke(e4.url, "sprite-plyr");
+          }
+          this.id = Math.floor(1e4 * Math.random());
+          let e3 = null;
+          this.elements.controls = null;
+          const t4 = { id: this.id, seektime: this.config.seekTime, title: this.config.title };
+          let i3 = true;
+          S.function(this.config.controls) && (this.config.controls = this.config.controls.call(this, t4)), this.config.controls || (this.config.controls = []), S.element(this.config.controls) || S.string(this.config.controls) ? e3 = this.config.controls : (e3 = Pe.create.call(this, { id: this.id, seektime: this.config.seekTime, speed: this.speed, quality: this.quality, captions: xe.getLabel.call(this) }), i3 = false);
+          let s2;
+          i3 && S.string(this.config.controls) && (e3 = ((e4) => {
+            let i4 = e4;
+            return Object.entries(t4).forEach(([e5, t5]) => {
+              i4 = pe(i4, `{${e5}}`, t5);
+            }), i4;
+          })(e3)), S.string(this.config.selectors.controls.container) && (s2 = document.querySelector(this.config.selectors.controls.container)), S.element(s2) || (s2 = this.elements.container);
+          if (s2[S.element(e3) ? "insertAdjacentElement" : "insertAdjacentHTML"]("afterbegin", e3), S.element(this.elements.controls) || Pe.findElements.call(this), !S.empty(this.elements.buttons)) {
+            const e4 = (e5) => {
+              const t5 = this.config.classNames.controlPressed;
+              e5.setAttribute("aria-pressed", "false"), Object.defineProperty(e5, "pressed", { configurable: true, enumerable: true, get: () => F(e5, t5), set(i4 = false) {
+                R(e5, t5, i4), e5.setAttribute("aria-pressed", i4 ? "true" : "false");
+              } });
+            };
+            Object.values(this.elements.buttons).filter(Boolean).forEach((t5) => {
+              S.array(t5) || S.nodeList(t5) ? Array.from(t5).filter(Boolean).forEach(e4) : e4(t5);
+            });
+          }
+          if (M.isEdge && P(s2), this.config.tooltips.controls) {
+            const { classNames: e4, selectors: t5 } = this.config, i4 = `${t5.controls.wrapper} ${t5.labels} .${e4.hidden}`, s3 = U.call(this, i4);
+            Array.from(s3).forEach((e5) => {
+              R(e5, this.config.classNames.hidden, false), R(e5, this.config.classNames.tooltip, true);
+            });
+          }
+        }, setMediaMetadata() {
+          try {
+            "mediaSession" in navigator && (navigator.mediaSession.metadata = new window.MediaMetadata({ title: this.config.mediaMetadata.title, artist: this.config.mediaMetadata.artist, album: this.config.mediaMetadata.album, artwork: this.config.mediaMetadata.artwork }));
+          } catch (e3) {
+          }
+        }, setMarkers() {
+          var e3, t4;
+          if (!this.duration || this.elements.markers) return;
+          const i3 = null === (e3 = this.config.markers) || void 0 === e3 || null === (t4 = e3.points) || void 0 === t4 ? void 0 : t4.filter(({ time: e4 }) => e4 > 0 && e4 < this.duration);
+          if (null == i3 || !i3.length) return;
+          const s2 = document.createDocumentFragment(), n2 = document.createDocumentFragment();
+          let a2 = null;
+          const l2 = `${this.config.classNames.tooltip}--visible`, r2 = (e4) => R(a2, l2, e4);
+          i3.forEach((e4) => {
+            const t5 = $("span", { class: this.config.classNames.marker }, ""), i4 = e4.time / this.duration * 100 + "%";
+            a2 && (t5.addEventListener("mouseenter", () => {
+              e4.label || (a2.style.left = i4, a2.innerHTML = e4.label, r2(true));
+            }), t5.addEventListener("mouseleave", () => {
+              r2(false);
+            })), t5.addEventListener("click", () => {
+              this.currentTime = e4.time;
+            }), t5.style.left = i4, n2.appendChild(t5);
+          }), s2.appendChild(n2), this.config.tooltips.seek || (a2 = $("span", { class: this.config.classNames.tooltip }, ""), s2.appendChild(a2)), this.elements.markers = { points: n2, tip: a2 }, this.elements.progress.appendChild(s2);
+        } };
+        function Me(e3, t4 = true) {
+          let i3 = e3;
+          if (t4) {
+            const e4 = document.createElement("a");
+            e4.href = i3, i3 = e4.href;
+          }
+          try {
+            return new URL(i3);
+          } catch (e4) {
+            return null;
+          }
+        }
+        function Ne(e3) {
+          const t4 = new URLSearchParams();
+          return S.object(e3) && Object.entries(e3).forEach(([e4, i3]) => {
+            t4.set(e4, i3);
+          }), t4;
+        }
+        const xe = { setup() {
+          if (!this.supported.ui) return;
+          if (!this.isVideo || this.isYouTube || this.isHTML5 && !K.textTracks) return void (S.array(this.config.controls) && this.config.controls.includes("settings") && this.config.settings.includes("captions") && Pe.setCaptionsMenu.call(this));
+          var e3, t4;
+          if (S.element(this.elements.captions) || (this.elements.captions = $("div", D(this.config.selectors.captions)), this.elements.captions.setAttribute("dir", "auto"), e3 = this.elements.captions, t4 = this.elements.wrapper, S.element(e3) && S.element(t4) && t4.parentNode.insertBefore(e3, t4.nextSibling)), M.isIE && window.URL) {
+            const e4 = this.media.querySelectorAll("track");
+            Array.from(e4).forEach((e5) => {
+              const t5 = e5.getAttribute("src"), i4 = Me(t5);
+              null !== i4 && i4.hostname !== window.location.href.hostname && ["http:", "https:"].includes(i4.protocol) && Te(t5, "blob").then((t6) => {
+                e5.setAttribute("src", window.URL.createObjectURL(t6));
+              }).catch(() => {
+                O(e5);
+              });
+            });
+          }
+          const i3 = se((navigator.languages || [navigator.language || navigator.userLanguage || "en"]).map((e4) => e4.split("-")[0]));
+          let s2 = (this.storage.get("language") || this.config.captions.language || "auto").toLowerCase();
+          "auto" === s2 && ([s2] = i3);
+          let n2 = this.storage.get("captions");
+          if (S.boolean(n2) || ({ active: n2 } = this.config.captions), Object.assign(this.captions, { toggled: false, active: n2, language: s2, languages: i3 }), this.isHTML5) {
+            const e4 = this.config.captions.update ? "addtrack removetrack" : "removetrack";
+            X.call(this, this.media.textTracks, e4, xe.update.bind(this));
+          }
+          setTimeout(xe.update.bind(this), 0);
+        }, update() {
+          const e3 = xe.getTracks.call(this, true), { active: t4, language: i3, meta: s2, currentTrackNode: n2 } = this.captions, a2 = Boolean(e3.find((e4) => e4.language === i3));
+          this.isHTML5 && this.isVideo && e3.filter((e4) => !s2.get(e4)).forEach((e4) => {
+            this.debug.log("Track added", e4), s2.set(e4, { default: "showing" === e4.mode }), "showing" === e4.mode && (e4.mode = "hidden"), X.call(this, e4, "cuechange", () => xe.updateCues.call(this));
+          }), (a2 && this.language !== i3 || !e3.includes(n2)) && (xe.setLanguage.call(this, i3), xe.toggle.call(this, t4 && a2)), this.elements && R(this.elements.container, this.config.classNames.captions.enabled, !S.empty(e3)), S.array(this.config.controls) && this.config.controls.includes("settings") && this.config.settings.includes("captions") && Pe.setCaptionsMenu.call(this);
+        }, toggle(e3, t4 = true) {
+          if (!this.supported.ui) return;
+          const { toggled: i3 } = this.captions, s2 = this.config.classNames.captions.active, n2 = S.nullOrUndefined(e3) ? !i3 : e3;
+          if (n2 !== i3) {
+            if (t4 || (this.captions.active = n2, this.storage.set({ captions: n2 })), !this.language && n2 && !t4) {
+              const e4 = xe.getTracks.call(this), t5 = xe.findTrack.call(this, [this.captions.language, ...this.captions.languages], true);
+              return this.captions.language = t5.language, void xe.set.call(this, e4.indexOf(t5));
+            }
+            this.elements.buttons.captions && (this.elements.buttons.captions.pressed = n2), R(this.elements.container, s2, n2), this.captions.toggled = n2, Pe.updateSetting.call(this, "captions"), Z.call(this, this.media, n2 ? "captionsenabled" : "captionsdisabled");
+          }
+          setTimeout(() => {
+            n2 && this.captions.toggled && (this.captions.currentTrackNode.mode = "hidden");
+          });
+        }, set(e3, t4 = true) {
+          const i3 = xe.getTracks.call(this);
+          if (-1 !== e3) if (S.number(e3)) if (e3 in i3) {
+            if (this.captions.currentTrack !== e3) {
+              this.captions.currentTrack = e3;
+              const s2 = i3[e3], { language: n2 } = s2 || {};
+              this.captions.currentTrackNode = s2, Pe.updateSetting.call(this, "captions"), t4 || (this.captions.language = n2, this.storage.set({ language: n2 })), this.isVimeo && this.embed.enableTextTrack(n2), Z.call(this, this.media, "languagechange");
+            }
+            xe.toggle.call(this, true, t4), this.isHTML5 && this.isVideo && xe.updateCues.call(this);
+          } else this.debug.warn("Track not found", e3);
+          else this.debug.warn("Invalid caption argument", e3);
+          else xe.toggle.call(this, false, t4);
+        }, setLanguage(e3, t4 = true) {
+          if (!S.string(e3)) return void this.debug.warn("Invalid language argument", e3);
+          const i3 = e3.toLowerCase();
+          this.captions.language = i3;
+          const s2 = xe.getTracks.call(this), n2 = xe.findTrack.call(this, [i3]);
+          xe.set.call(this, s2.indexOf(n2), t4);
+        }, getTracks(e3 = false) {
+          return Array.from((this.media || {}).textTracks || []).filter((t4) => !this.isHTML5 || e3 || this.captions.meta.has(t4)).filter((e4) => ["captions", "subtitles"].includes(e4.kind));
+        }, findTrack(e3, t4 = false) {
+          const i3 = xe.getTracks.call(this), s2 = (e4) => Number((this.captions.meta.get(e4) || {}).default), n2 = Array.from(i3).sort((e4, t5) => s2(t5) - s2(e4));
+          let a2;
+          return e3.every((e4) => (a2 = n2.find((t5) => t5.language === e4), !a2)), a2 || (t4 ? n2[0] : void 0);
+        }, getCurrentTrack() {
+          return xe.getTracks.call(this)[this.currentTrack];
+        }, getLabel(e3) {
+          let t4 = e3;
+          return !S.track(t4) && K.textTracks && this.captions.toggled && (t4 = xe.getCurrentTrack.call(this)), S.track(t4) ? S.empty(t4.label) ? S.empty(t4.language) ? ve.get("enabled", this.config) : e3.language.toUpperCase() : t4.label : ve.get("disabled", this.config);
+        }, updateCues(e3) {
+          if (!this.supported.ui) return;
+          if (!S.element(this.elements.captions)) return void this.debug.warn("No captions element to render to");
+          if (!S.nullOrUndefined(e3) && !Array.isArray(e3)) return void this.debug.warn("updateCues: Invalid input", e3);
+          let t4 = e3;
+          if (!t4) {
+            const e4 = xe.getCurrentTrack.call(this);
+            t4 = Array.from((e4 || {}).activeCues || []).map((e5) => e5.getCueAsHTML()).map(ye);
+          }
+          const i3 = t4.map((e4) => e4.trim()).join("\n");
+          if (i3 !== this.elements.captions.innerHTML) {
+            j(this.elements.captions);
+            const e4 = $("span", D(this.config.selectors.caption));
+            e4.innerHTML = i3, this.elements.captions.appendChild(e4), Z.call(this, this.media, "cuechange");
+          }
+        } }, Le = { enabled: true, title: "", debug: false, autoplay: false, autopause: true, playsinline: true, seekTime: 10, volume: 1, muted: false, duration: null, displayDuration: true, invertTime: true, toggleInvert: true, ratio: null, clickToPlay: true, hideControls: true, resetOnEnd: false, disableContextMenu: true, loadSprite: true, iconPrefix: "plyr", iconUrl: "https://cdn.plyr.io/3.7.8/plyr.svg", blankVideo: "https://cdn.plyr.io/static/blank.mp4", quality: { default: 576, options: [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240], forced: false, onChange: null }, loop: { active: false }, speed: { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 4] }, keyboard: { focused: true, global: false }, tooltips: { controls: false, seek: true }, captions: { active: false, language: "auto", update: false }, fullscreen: { enabled: true, fallback: true, iosNative: false }, storage: { enabled: true, key: "plyr" }, controls: ["play-large", "play", "progress", "current-time", "mute", "volume", "captions", "settings", "pip", "airplay", "fullscreen"], settings: ["captions", "quality", "speed"], i18n: { restart: "Restart", rewind: "Rewind {seektime}s", play: "Play", pause: "Pause", fastForward: "Forward {seektime}s", seek: "Seek", seekLabel: "{currentTime} of {duration}", played: "Played", buffered: "Buffered", currentTime: "Current time", duration: "Duration", volume: "Volume", mute: "Mute", unmute: "Unmute", enableCaptions: "Enable captions", disableCaptions: "Disable captions", download: "Download", enterFullscreen: "Enter fullscreen", exitFullscreen: "Exit fullscreen", frameTitle: "Player for {title}", captions: "Captions", settings: "Settings", pip: "PIP", menuBack: "Go back to previous menu", speed: "Speed", normal: "Normal", quality: "Quality", loop: "Loop", start: "Start", end: "End", all: "All", reset: "Reset", disabled: "Disabled", enabled: "Enabled", advertisement: "Ad", qualityBadge: { 2160: "4K", 1440: "HD", 1080: "HD", 720: "HD", 576: "SD", 480: "SD" } }, urls: { download: null, vimeo: { sdk: "https://player.vimeo.com/api/player.js", iframe: "https://player.vimeo.com/video/{0}?{1}", api: "https://vimeo.com/api/oembed.json?url={0}" }, youtube: { sdk: "https://www.youtube.com/iframe_api", api: "https://noembed.com/embed?url=https://www.youtube.com/watch?v={0}" }, googleIMA: { sdk: "https://imasdk.googleapis.com/js/sdkloader/ima3.js" } }, listeners: { seek: null, play: null, pause: null, restart: null, rewind: null, fastForward: null, mute: null, volume: null, captions: null, download: null, fullscreen: null, pip: null, airplay: null, speed: null, quality: null, loop: null, language: null }, events: ["ended", "progress", "stalled", "playing", "waiting", "canplay", "canplaythrough", "loadstart", "loadeddata", "loadedmetadata", "timeupdate", "volumechange", "play", "pause", "error", "seeking", "seeked", "emptied", "ratechange", "cuechange", "download", "enterfullscreen", "exitfullscreen", "captionsenabled", "captionsdisabled", "languagechange", "controlshidden", "controlsshown", "ready", "statechange", "qualitychange", "adsloaded", "adscontentpause", "adscontentresume", "adstarted", "adsmidpoint", "adscomplete", "adsallcomplete", "adsimpression", "adsclick"], selectors: { editable: "input, textarea, select, [contenteditable]", container: ".plyr", controls: { container: null, wrapper: ".plyr__controls" }, labels: "[data-plyr]", buttons: { play: '[data-plyr="play"]', pause: '[data-plyr="pause"]', restart: '[data-plyr="restart"]', rewind: '[data-plyr="rewind"]', fastForward: '[data-plyr="fast-forward"]', mute: '[data-plyr="mute"]', captions: '[data-plyr="captions"]', download: '[data-plyr="download"]', fullscreen: '[data-plyr="fullscreen"]', pip: '[data-plyr="pip"]', airplay: '[data-plyr="airplay"]', settings: '[data-plyr="settings"]', loop: '[data-plyr="loop"]' }, inputs: { seek: '[data-plyr="seek"]', volume: '[data-plyr="volume"]', speed: '[data-plyr="speed"]', language: '[data-plyr="language"]', quality: '[data-plyr="quality"]' }, display: { currentTime: ".plyr__time--current", duration: ".plyr__time--duration", buffer: ".plyr__progress__buffer", loop: ".plyr__progress__loop", volume: ".plyr__volume--display" }, progress: ".plyr__progress", captions: ".plyr__captions", caption: ".plyr__caption" }, classNames: { type: "plyr--{0}", provider: "plyr--{0}", video: "plyr__video-wrapper", embed: "plyr__video-embed", videoFixedRatio: "plyr__video-wrapper--fixed-ratio", embedContainer: "plyr__video-embed__container", poster: "plyr__poster", posterEnabled: "plyr__poster-enabled", ads: "plyr__ads", control: "plyr__control", controlPressed: "plyr__control--pressed", playing: "plyr--playing", paused: "plyr--paused", stopped: "plyr--stopped", loading: "plyr--loading", hover: "plyr--hover", tooltip: "plyr__tooltip", cues: "plyr__cues", marker: "plyr__progress__marker", hidden: "plyr__sr-only", hideControls: "plyr--hide-controls", isTouch: "plyr--is-touch", uiSupported: "plyr--full-ui", noTransition: "plyr--no-transition", display: { time: "plyr__time" }, menu: { value: "plyr__menu__value", badge: "plyr__badge", open: "plyr--menu-open" }, captions: { enabled: "plyr--captions-enabled", active: "plyr--captions-active" }, fullscreen: { enabled: "plyr--fullscreen-enabled", fallback: "plyr--fullscreen-fallback" }, pip: { supported: "plyr--pip-supported", active: "plyr--pip-active" }, airplay: { supported: "plyr--airplay-supported", active: "plyr--airplay-active" }, previewThumbnails: { thumbContainer: "plyr__preview-thumb", thumbContainerShown: "plyr__preview-thumb--is-shown", imageContainer: "plyr__preview-thumb__image-container", timeContainer: "plyr__preview-thumb__time-container", scrubbingContainer: "plyr__preview-scrubbing", scrubbingContainerShown: "plyr__preview-scrubbing--is-shown" } }, attributes: { embed: { provider: "data-plyr-provider", id: "data-plyr-embed-id", hash: "data-plyr-embed-hash" } }, ads: { enabled: false, publisherId: "", tagUrl: "" }, previewThumbnails: { enabled: false, src: "" }, vimeo: { byline: false, portrait: false, title: false, speed: true, transparent: false, customControls: true, referrerPolicy: null, premium: false }, youtube: { rel: 0, showinfo: 0, iv_load_policy: 3, modestbranding: 1, customControls: true, noCookie: false }, mediaMetadata: { title: "", artist: "", album: "", artwork: [] }, markers: { enabled: false, points: [] } }, Ie = "picture-in-picture", $e = "inline", _e = { html5: "html5", youtube: "youtube", vimeo: "vimeo" }, Oe = "audio", je = "video";
+        const qe = () => {
+        };
+        class De {
+          constructor(e3 = false) {
+            this.enabled = window.console && e3, this.enabled && this.log("Debugging enabled");
+          }
+          get log() {
+            return this.enabled ? Function.prototype.bind.call(console.log, console) : qe;
+          }
+          get warn() {
+            return this.enabled ? Function.prototype.bind.call(console.warn, console) : qe;
+          }
+          get error() {
+            return this.enabled ? Function.prototype.bind.call(console.error, console) : qe;
+          }
+        }
+        class He {
+          constructor(t4) {
+            e2(this, "onChange", () => {
+              if (!this.supported) return;
+              const e3 = this.player.elements.buttons.fullscreen;
+              S.element(e3) && (e3.pressed = this.active);
+              const t5 = this.target === this.player.media ? this.target : this.player.elements.container;
+              Z.call(this.player, t5, this.active ? "enterfullscreen" : "exitfullscreen", true);
+            }), e2(this, "toggleFallback", (e3 = false) => {
+              if (e3 ? this.scrollPosition = { x: window.scrollX ?? 0, y: window.scrollY ?? 0 } : window.scrollTo(this.scrollPosition.x, this.scrollPosition.y), document.body.style.overflow = e3 ? "hidden" : "", R(this.target, this.player.config.classNames.fullscreen.fallback, e3), M.isIos) {
+                let t5 = document.head.querySelector('meta[name="viewport"]');
+                const i3 = "viewport-fit=cover";
+                t5 || (t5 = document.createElement("meta"), t5.setAttribute("name", "viewport"));
+                const s2 = S.string(t5.content) && t5.content.includes(i3);
+                e3 ? (this.cleanupViewport = !s2, s2 || (t5.content += `,${i3}`)) : this.cleanupViewport && (t5.content = t5.content.split(",").filter((e4) => e4.trim() !== i3).join(","));
+              }
+              this.onChange();
+            }), e2(this, "trapFocus", (e3) => {
+              if (M.isIos || M.isIPadOS || !this.active || "Tab" !== e3.key) return;
+              const t5 = document.activeElement, i3 = U.call(this.player, "a[href], button:not(:disabled), input:not(:disabled), [tabindex]"), [s2] = i3, n2 = i3[i3.length - 1];
+              t5 !== n2 || e3.shiftKey ? t5 === s2 && e3.shiftKey && (n2.focus(), e3.preventDefault()) : (s2.focus(), e3.preventDefault());
+            }), e2(this, "update", () => {
+              if (this.supported) {
+                let e3;
+                e3 = this.forceFallback ? "Fallback (forced)" : He.nativeSupported ? "Native" : "Fallback", this.player.debug.log(`${e3} fullscreen enabled`);
+              } else this.player.debug.log("Fullscreen not supported and fallback disabled");
+              R(this.player.elements.container, this.player.config.classNames.fullscreen.enabled, this.supported);
+            }), e2(this, "enter", () => {
+              this.supported && (M.isIos && this.player.config.fullscreen.iosNative ? this.player.isVimeo ? this.player.embed.requestFullscreen() : this.target.webkitEnterFullscreen() : !He.nativeSupported || this.forceFallback ? this.toggleFallback(true) : this.prefix ? S.empty(this.prefix) || this.target[`${this.prefix}Request${this.property}`]() : this.target.requestFullscreen({ navigationUI: "hide" }));
+            }), e2(this, "exit", () => {
+              if (this.supported) if (M.isIos && this.player.config.fullscreen.iosNative) this.player.isVimeo ? this.player.embed.exitFullscreen() : this.target.webkitEnterFullscreen(), ie(this.player.play());
+              else if (!He.nativeSupported || this.forceFallback) this.toggleFallback(false);
+              else if (this.prefix) {
+                if (!S.empty(this.prefix)) {
+                  const e3 = "moz" === this.prefix ? "Cancel" : "Exit";
+                  document[`${this.prefix}${e3}${this.property}`]();
+                }
+              } else (document.cancelFullScreen || document.exitFullscreen).call(document);
+            }), e2(this, "toggle", () => {
+              this.active ? this.exit() : this.enter();
+            }), this.player = t4, this.prefix = He.prefix, this.property = He.property, this.scrollPosition = { x: 0, y: 0 }, this.forceFallback = "force" === t4.config.fullscreen.fallback, this.player.elements.fullscreen = t4.config.fullscreen.container && function(e3, t5) {
+              const { prototype: i3 } = Element;
+              return (i3.closest || function() {
+                let e4 = this;
+                do {
+                  if (V.matches(e4, t5)) return e4;
+                  e4 = e4.parentElement || e4.parentNode;
+                } while (null !== e4 && 1 === e4.nodeType);
+                return null;
+              }).call(e3, t5);
+            }(this.player.elements.container, t4.config.fullscreen.container), X.call(this.player, document, "ms" === this.prefix ? "MSFullscreenChange" : `${this.prefix}fullscreenchange`, () => {
+              this.onChange();
+            }), X.call(this.player, this.player.elements.container, "dblclick", (e3) => {
+              S.element(this.player.elements.controls) && this.player.elements.controls.contains(e3.target) || this.player.listeners.proxy(e3, this.toggle, "fullscreen");
+            }), X.call(this, this.player.elements.container, "keydown", (e3) => this.trapFocus(e3)), this.update();
+          }
+          static get nativeSupported() {
+            return !!(document.fullscreenEnabled || document.webkitFullscreenEnabled || document.mozFullScreenEnabled || document.msFullscreenEnabled);
+          }
+          get useNative() {
+            return He.nativeSupported && !this.forceFallback;
+          }
+          static get prefix() {
+            if (S.function(document.exitFullscreen)) return "";
+            let e3 = "";
+            return ["webkit", "moz", "ms"].some((t4) => !(!S.function(document[`${t4}ExitFullscreen`]) && !S.function(document[`${t4}CancelFullScreen`])) && (e3 = t4, true)), e3;
+          }
+          static get property() {
+            return "moz" === this.prefix ? "FullScreen" : "Fullscreen";
+          }
+          get supported() {
+            return [this.player.config.fullscreen.enabled, this.player.isVideo, He.nativeSupported || this.player.config.fullscreen.fallback, !this.player.isYouTube || He.nativeSupported || !M.isIos || this.player.config.playsinline && !this.player.config.fullscreen.iosNative].every(Boolean);
+          }
+          get active() {
+            if (!this.supported) return false;
+            if (!He.nativeSupported || this.forceFallback) return F(this.target, this.player.config.classNames.fullscreen.fallback);
+            const e3 = this.prefix ? this.target.getRootNode()[`${this.prefix}${this.property}Element`] : this.target.getRootNode().fullscreenElement;
+            return e3 && e3.shadowRoot ? e3 === this.target.getRootNode().host : e3 === this.target;
+          }
+          get target() {
+            return M.isIos && this.player.config.fullscreen.iosNative ? this.player.media : this.player.elements.fullscreen ?? this.player.elements.container;
+          }
+        }
+        function Re(e3, t4 = 1) {
+          return new Promise((i3, s2) => {
+            const n2 = new Image(), a2 = () => {
+              delete n2.onload, delete n2.onerror, (n2.naturalWidth >= t4 ? i3 : s2)(n2);
+            };
+            Object.assign(n2, { onload: a2, onerror: a2, src: e3 });
+          });
+        }
+        const Fe = { addStyleHook() {
+          R(this.elements.container, this.config.selectors.container.replace(".", ""), true), R(this.elements.container, this.config.classNames.uiSupported, this.supported.ui);
+        }, toggleNativeControls(e3 = false) {
+          e3 && this.isHTML5 ? this.media.setAttribute("controls", "") : this.media.removeAttribute("controls");
+        }, build() {
+          if (this.listeners.media(), !this.supported.ui) return this.debug.warn(`Basic support only for ${this.provider} ${this.type}`), void Fe.toggleNativeControls.call(this, true);
+          S.element(this.elements.controls) || (Pe.inject.call(this), this.listeners.controls()), Fe.toggleNativeControls.call(this), this.isHTML5 && xe.setup.call(this), this.volume = null, this.muted = null, this.loop = null, this.quality = null, this.speed = null, Pe.updateVolume.call(this), Pe.timeUpdate.call(this), Pe.durationUpdate.call(this), Fe.checkPlaying.call(this), R(this.elements.container, this.config.classNames.pip.supported, K.pip && this.isHTML5 && this.isVideo), R(this.elements.container, this.config.classNames.airplay.supported, K.airplay && this.isHTML5), R(this.elements.container, this.config.classNames.isTouch, this.touch), this.ready = true, setTimeout(() => {
+            Z.call(this, this.media, "ready");
+          }, 0), Fe.setTitle.call(this), this.poster && Fe.setPoster.call(this, this.poster, false).catch(() => {
+          }), this.config.duration && Pe.durationUpdate.call(this), this.config.mediaMetadata && Pe.setMediaMetadata.call(this);
+        }, setTitle() {
+          let e3 = ve.get("play", this.config);
+          if (S.string(this.config.title) && !S.empty(this.config.title) && (e3 += `, ${this.config.title}`), Array.from(this.elements.buttons.play || []).forEach((t4) => {
+            t4.setAttribute("aria-label", e3);
+          }), this.isEmbed) {
+            const e4 = B.call(this, "iframe");
+            if (!S.element(e4)) return;
+            const t4 = S.empty(this.config.title) ? "video" : this.config.title, i3 = ve.get("frameTitle", this.config);
+            e4.setAttribute("title", i3.replace("{title}", t4));
+          }
+        }, togglePoster(e3) {
+          R(this.elements.container, this.config.classNames.posterEnabled, e3);
+        }, setPoster(e3, t4 = true) {
+          return t4 && this.poster ? Promise.reject(new Error("Poster already set")) : (this.media.setAttribute("data-poster", e3), this.elements.poster.removeAttribute("hidden"), te.call(this).then(() => Re(e3)).catch((t5) => {
+            throw e3 === this.poster && Fe.togglePoster.call(this, false), t5;
+          }).then(() => {
+            if (e3 !== this.poster) throw new Error("setPoster cancelled by later call to setPoster");
+          }).then(() => (Object.assign(this.elements.poster.style, { backgroundImage: `url('${e3}')`, backgroundSize: "" }), Fe.togglePoster.call(this, true), e3)));
+        }, checkPlaying(e3) {
+          R(this.elements.container, this.config.classNames.playing, this.playing), R(this.elements.container, this.config.classNames.paused, this.paused), R(this.elements.container, this.config.classNames.stopped, this.stopped), Array.from(this.elements.buttons.play || []).forEach((e4) => {
+            Object.assign(e4, { pressed: this.playing }), e4.setAttribute("aria-label", ve.get(this.playing ? "pause" : "play", this.config));
+          }), S.event(e3) && "timeupdate" === e3.type || Fe.toggleControls.call(this);
+        }, checkLoading(e3) {
+          this.loading = ["stalled", "waiting"].includes(e3.type), clearTimeout(this.timers.loading), this.timers.loading = setTimeout(() => {
+            R(this.elements.container, this.config.classNames.loading, this.loading), Fe.toggleControls.call(this);
+          }, this.loading ? 250 : 0);
+        }, toggleControls(e3) {
+          const { controls: t4 } = this.elements;
+          if (t4 && this.config.hideControls) {
+            const i3 = this.touch && this.lastSeekTime + 2e3 > Date.now();
+            this.toggleControls(Boolean(e3 || this.loading || this.paused || t4.pressed || t4.hover || i3));
+          }
+        }, migrateStyles() {
+          Object.values({ ...this.media.style }).filter((e3) => !S.empty(e3) && S.string(e3) && e3.startsWith("--plyr")).forEach((e3) => {
+            this.elements.container.style.setProperty(e3, this.media.style.getPropertyValue(e3)), this.media.style.removeProperty(e3);
+          }), S.empty(this.media.style) && this.media.removeAttribute("style");
+        } };
+        class Ve {
+          constructor(t4) {
+            e2(this, "firstTouch", () => {
+              const { player: e3 } = this, { elements: t5 } = e3;
+              e3.touch = true, R(t5.container, e3.config.classNames.isTouch, true);
+            }), e2(this, "global", (e3 = true) => {
+              const { player: t5 } = this;
+              t5.config.keyboard.global && Q.call(t5, window, "keydown keyup", this.handleKey, e3, false), Q.call(t5, document.body, "click", this.toggleMenu, e3), G.call(t5, document.body, "touchstart", this.firstTouch);
+            }), e2(this, "container", () => {
+              const { player: e3 } = this, { config: t5, elements: i3, timers: s2 } = e3;
+              !t5.keyboard.global && t5.keyboard.focused && X.call(e3, i3.container, "keydown keyup", this.handleKey, false), X.call(e3, i3.container, "mousemove mouseleave touchstart touchmove enterfullscreen exitfullscreen", (t6) => {
+                const { controls: n3 } = i3;
+                n3 && "enterfullscreen" === t6.type && (n3.pressed = false, n3.hover = false);
+                let a3 = 0;
+                ["touchstart", "touchmove", "mousemove"].includes(t6.type) && (Fe.toggleControls.call(e3, true), a3 = e3.touch ? 3e3 : 2e3), clearTimeout(s2.controls), s2.controls = setTimeout(() => Fe.toggleControls.call(e3, false), a3);
+              });
+              const n2 = () => {
+                if (!e3.isVimeo || e3.config.vimeo.premium) return;
+                const t6 = i3.wrapper, { active: s3 } = e3.fullscreen, [n3, a3] = ce.call(e3), l2 = ae(`aspect-ratio: ${n3} / ${a3}`);
+                if (!s3) return void (l2 ? (t6.style.width = null, t6.style.height = null) : (t6.style.maxWidth = null, t6.style.margin = null));
+                const [r2, o2] = [Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0), Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)], c2 = r2 / o2 > n3 / a3;
+                l2 ? (t6.style.width = c2 ? "auto" : "100%", t6.style.height = c2 ? "100%" : "auto") : (t6.style.maxWidth = c2 ? o2 / a3 * n3 + "px" : null, t6.style.margin = c2 ? "0 auto" : null);
+              }, a2 = () => {
+                clearTimeout(s2.resized), s2.resized = setTimeout(n2, 50);
+              };
+              X.call(e3, i3.container, "enterfullscreen exitfullscreen", (t6) => {
+                const { target: s3 } = e3.fullscreen;
+                if (s3 !== i3.container) return;
+                if (!e3.isEmbed && S.empty(e3.config.ratio)) return;
+                n2();
+                ("enterfullscreen" === t6.type ? X : J).call(e3, window, "resize", a2);
+              });
+            }), e2(this, "media", () => {
+              const { player: e3 } = this, { elements: t5 } = e3;
+              if (X.call(e3, e3.media, "timeupdate seeking seeked", (t6) => Pe.timeUpdate.call(e3, t6)), X.call(e3, e3.media, "durationchange loadeddata loadedmetadata", (t6) => Pe.durationUpdate.call(e3, t6)), X.call(e3, e3.media, "ended", () => {
+                e3.isHTML5 && e3.isVideo && e3.config.resetOnEnd && (e3.restart(), e3.pause());
+              }), X.call(e3, e3.media, "progress playing seeking seeked", (t6) => Pe.updateProgress.call(e3, t6)), X.call(e3, e3.media, "volumechange", (t6) => Pe.updateVolume.call(e3, t6)), X.call(e3, e3.media, "playing play pause ended emptied timeupdate", (t6) => Fe.checkPlaying.call(e3, t6)), X.call(e3, e3.media, "waiting canplay seeked playing", (t6) => Fe.checkLoading.call(e3, t6)), e3.supported.ui && e3.config.clickToPlay && !e3.isAudio) {
+                const i4 = B.call(e3, `.${e3.config.classNames.video}`);
+                if (!S.element(i4)) return;
+                X.call(e3, t5.container, "click", (s2) => {
+                  ([t5.container, i4].includes(s2.target) || i4.contains(s2.target)) && (e3.touch && e3.config.hideControls || (e3.ended ? (this.proxy(s2, e3.restart, "restart"), this.proxy(s2, () => {
+                    ie(e3.play());
+                  }, "play")) : this.proxy(s2, () => {
+                    ie(e3.togglePlay());
+                  }, "play")));
+                });
+              }
+              e3.supported.ui && e3.config.disableContextMenu && X.call(e3, t5.wrapper, "contextmenu", (e4) => {
+                e4.preventDefault();
+              }, false), X.call(e3, e3.media, "volumechange", () => {
+                e3.storage.set({ volume: e3.volume, muted: e3.muted });
+              }), X.call(e3, e3.media, "ratechange", () => {
+                Pe.updateSetting.call(e3, "speed"), e3.storage.set({ speed: e3.speed });
+              }), X.call(e3, e3.media, "qualitychange", (t6) => {
+                Pe.updateSetting.call(e3, "quality", null, t6.detail.quality);
+              }), X.call(e3, e3.media, "ready qualitychange", () => {
+                Pe.setDownloadUrl.call(e3);
+              });
+              const i3 = e3.config.events.concat(["keyup", "keydown"]).join(" ");
+              X.call(e3, e3.media, i3, (i4) => {
+                let { detail: s2 = {} } = i4;
+                "error" === i4.type && (s2 = e3.media.error), Z.call(e3, t5.container, i4.type, true, s2);
+              });
+            }), e2(this, "proxy", (e3, t5, i3) => {
+              const { player: s2 } = this, n2 = s2.config.listeners[i3];
+              let a2 = true;
+              S.function(n2) && (a2 = n2.call(s2, e3)), false !== a2 && S.function(t5) && t5.call(s2, e3);
+            }), e2(this, "bind", (e3, t5, i3, s2, n2 = true) => {
+              const { player: a2 } = this, l2 = a2.config.listeners[s2], r2 = S.function(l2);
+              X.call(a2, e3, t5, (e4) => this.proxy(e4, i3, s2), n2 && !r2);
+            }), e2(this, "controls", () => {
+              const { player: e3 } = this, { elements: t5 } = e3, i3 = M.isIE ? "change" : "input";
+              if (t5.buttons.play && Array.from(t5.buttons.play).forEach((t6) => {
+                this.bind(t6, "click", () => {
+                  ie(e3.togglePlay());
+                }, "play");
+              }), this.bind(t5.buttons.restart, "click", e3.restart, "restart"), this.bind(t5.buttons.rewind, "click", () => {
+                e3.lastSeekTime = Date.now(), e3.rewind();
+              }, "rewind"), this.bind(t5.buttons.fastForward, "click", () => {
+                e3.lastSeekTime = Date.now(), e3.forward();
+              }, "fastForward"), this.bind(t5.buttons.mute, "click", () => {
+                e3.muted = !e3.muted;
+              }, "mute"), this.bind(t5.buttons.captions, "click", () => e3.toggleCaptions()), this.bind(t5.buttons.download, "click", () => {
+                Z.call(e3, e3.media, "download");
+              }, "download"), this.bind(t5.buttons.fullscreen, "click", () => {
+                e3.fullscreen.toggle();
+              }, "fullscreen"), this.bind(t5.buttons.pip, "click", () => {
+                e3.pip = "toggle";
+              }, "pip"), this.bind(t5.buttons.airplay, "click", e3.airplay, "airplay"), this.bind(t5.buttons.settings, "click", (t6) => {
+                t6.stopPropagation(), t6.preventDefault(), Pe.toggleMenu.call(e3, t6);
+              }, null, false), this.bind(t5.buttons.settings, "keyup", (t6) => {
+                [" ", "Enter"].includes(t6.key) && ("Enter" !== t6.key ? (t6.preventDefault(), t6.stopPropagation(), Pe.toggleMenu.call(e3, t6)) : Pe.focusFirstMenuItem.call(e3, null, true));
+              }, null, false), this.bind(t5.settings.menu, "keydown", (t6) => {
+                "Escape" === t6.key && Pe.toggleMenu.call(e3, t6);
+              }), this.bind(t5.inputs.seek, "mousedown mousemove", (e4) => {
+                const i4 = t5.progress.getBoundingClientRect(), s2 = 100 / i4.width * (e4.pageX - i4.left);
+                e4.currentTarget.setAttribute("seek-value", s2);
+              }), this.bind(t5.inputs.seek, "mousedown mouseup keydown keyup touchstart touchend", (t6) => {
+                const i4 = t6.currentTarget, s2 = "play-on-seeked";
+                if (S.keyboardEvent(t6) && !["ArrowLeft", "ArrowRight"].includes(t6.key)) return;
+                e3.lastSeekTime = Date.now();
+                const n2 = i4.hasAttribute(s2), a2 = ["mouseup", "touchend", "keyup"].includes(t6.type);
+                n2 && a2 ? (i4.removeAttribute(s2), ie(e3.play())) : !a2 && e3.playing && (i4.setAttribute(s2, ""), e3.pause());
+              }), M.isIos) {
+                const t6 = U.call(e3, 'input[type="range"]');
+                Array.from(t6).forEach((e4) => this.bind(e4, i3, (e5) => P(e5.target)));
+              }
+              this.bind(t5.inputs.seek, i3, (t6) => {
+                const i4 = t6.currentTarget;
+                let s2 = i4.getAttribute("seek-value");
+                S.empty(s2) && (s2 = i4.value), i4.removeAttribute("seek-value"), e3.currentTime = s2 / i4.max * e3.duration;
+              }, "seek"), this.bind(t5.progress, "mouseenter mouseleave mousemove", (t6) => Pe.updateSeekTooltip.call(e3, t6)), this.bind(t5.progress, "mousemove touchmove", (t6) => {
+                const { previewThumbnails: i4 } = e3;
+                i4 && i4.loaded && i4.startMove(t6);
+              }), this.bind(t5.progress, "mouseleave touchend click", () => {
+                const { previewThumbnails: t6 } = e3;
+                t6 && t6.loaded && t6.endMove(false, true);
+              }), this.bind(t5.progress, "mousedown touchstart", (t6) => {
+                const { previewThumbnails: i4 } = e3;
+                i4 && i4.loaded && i4.startScrubbing(t6);
+              }), this.bind(t5.progress, "mouseup touchend", (t6) => {
+                const { previewThumbnails: i4 } = e3;
+                i4 && i4.loaded && i4.endScrubbing(t6);
+              }), M.isWebKit && Array.from(U.call(e3, 'input[type="range"]')).forEach((t6) => {
+                this.bind(t6, "input", (t7) => Pe.updateRangeFill.call(e3, t7.target));
+              }), e3.config.toggleInvert && !S.element(t5.display.duration) && this.bind(t5.display.currentTime, "click", () => {
+                0 !== e3.currentTime && (e3.config.invertTime = !e3.config.invertTime, Pe.timeUpdate.call(e3));
+              }), this.bind(t5.inputs.volume, i3, (t6) => {
+                e3.volume = t6.target.value;
+              }, "volume"), this.bind(t5.controls, "mouseenter mouseleave", (i4) => {
+                t5.controls.hover = !e3.touch && "mouseenter" === i4.type;
+              }), t5.fullscreen && Array.from(t5.fullscreen.children).filter((e4) => !e4.contains(t5.container)).forEach((i4) => {
+                this.bind(i4, "mouseenter mouseleave", (i5) => {
+                  t5.controls && (t5.controls.hover = !e3.touch && "mouseenter" === i5.type);
+                });
+              }), this.bind(t5.controls, "mousedown mouseup touchstart touchend touchcancel", (e4) => {
+                t5.controls.pressed = ["mousedown", "touchstart"].includes(e4.type);
+              }), this.bind(t5.controls, "focusin", () => {
+                const { config: i4, timers: s2 } = e3;
+                R(t5.controls, i4.classNames.noTransition, true), Fe.toggleControls.call(e3, true), setTimeout(() => {
+                  R(t5.controls, i4.classNames.noTransition, false);
+                }, 0);
+                const n2 = this.touch ? 3e3 : 4e3;
+                clearTimeout(s2.controls), s2.controls = setTimeout(() => Fe.toggleControls.call(e3, false), n2);
+              }), this.bind(t5.inputs.volume, "wheel", (t6) => {
+                const i4 = t6.webkitDirectionInvertedFromDevice, [s2, n2] = [t6.deltaX, -t6.deltaY].map((e4) => i4 ? -e4 : e4), a2 = Math.sign(Math.abs(s2) > Math.abs(n2) ? s2 : n2);
+                e3.increaseVolume(a2 / 50);
+                const { volume: l2 } = e3.media;
+                (1 === a2 && l2 < 1 || -1 === a2 && l2 > 0) && t6.preventDefault();
+              }, "volume", false);
+            }), this.player = t4, this.lastKey = null, this.focusTimer = null, this.lastKeyDown = null, this.handleKey = this.handleKey.bind(this), this.toggleMenu = this.toggleMenu.bind(this), this.firstTouch = this.firstTouch.bind(this);
+          }
+          handleKey(e3) {
+            const { player: t4 } = this, { elements: i3 } = t4, { key: s2, type: n2, altKey: a2, ctrlKey: l2, metaKey: r2, shiftKey: o2 } = e3, c2 = "keydown" === n2, u2 = c2 && s2 === this.lastKey;
+            if (a2 || l2 || r2 || o2) return;
+            if (!s2) return;
+            if (c2) {
+              const n3 = document.activeElement;
+              if (S.element(n3)) {
+                const { editable: s3 } = t4.config.selectors, { seek: a3 } = i3.inputs;
+                if (n3 !== a3 && V(n3, s3)) return;
+                if (" " === e3.key && V(n3, 'button, [role^="menuitem"]')) return;
+              }
+              switch ([" ", "ArrowLeft", "ArrowUp", "ArrowRight", "ArrowDown", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "c", "f", "k", "l", "m"].includes(s2) && (e3.preventDefault(), e3.stopPropagation()), s2) {
+                case "0":
+                case "1":
+                case "2":
+                case "3":
+                case "4":
+                case "5":
+                case "6":
+                case "7":
+                case "8":
+                case "9":
+                  u2 || (h2 = parseInt(s2, 10), t4.currentTime = t4.duration / 10 * h2);
+                  break;
+                case " ":
+                case "k":
+                  u2 || ie(t4.togglePlay());
+                  break;
+                case "ArrowUp":
+                  t4.increaseVolume(0.1);
+                  break;
+                case "ArrowDown":
+                  t4.decreaseVolume(0.1);
+                  break;
+                case "m":
+                  u2 || (t4.muted = !t4.muted);
+                  break;
+                case "ArrowRight":
+                  t4.forward();
+                  break;
+                case "ArrowLeft":
+                  t4.rewind();
+                  break;
+                case "f":
+                  t4.fullscreen.toggle();
+                  break;
+                case "c":
+                  u2 || t4.toggleCaptions();
+                  break;
+                case "l":
+                  t4.loop = !t4.loop;
+              }
+              "Escape" === s2 && !t4.fullscreen.usingNative && t4.fullscreen.active && t4.fullscreen.toggle(), this.lastKey = s2;
+            } else this.lastKey = null;
+            var h2;
+          }
+          toggleMenu(e3) {
+            Pe.toggleMenu.call(this.player, e3);
+          }
+        }
+        "undefined" != typeof globalThis ? globalThis : "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof self && self;
+        var Ue = function(e3, t4) {
+          return e3(t4 = { exports: {} }, t4.exports), t4.exports;
+        }(function(e3, t4) {
+          e3.exports = function() {
+            var e4 = function() {
+            }, t5 = {}, i3 = {}, s2 = {};
+            function n2(e5, t6) {
+              e5 = e5.push ? e5 : [e5];
+              var n3, a3, l3, r3 = [], o3 = e5.length, c3 = o3;
+              for (n3 = function(e6, i4) {
+                i4.length && r3.push(e6), --c3 || t6(r3);
+              }; o3--; ) a3 = e5[o3], (l3 = i3[a3]) ? n3(a3, l3) : (s2[a3] = s2[a3] || []).push(n3);
+            }
+            function a2(e5, t6) {
+              if (e5) {
+                var n3 = s2[e5];
+                if (i3[e5] = t6, n3) for (; n3.length; ) n3[0](e5, t6), n3.splice(0, 1);
+              }
+            }
+            function l2(t6, i4) {
+              t6.call && (t6 = { success: t6 }), i4.length ? (t6.error || e4)(i4) : (t6.success || e4)(t6);
+            }
+            function r2(t6, i4, s3, n3) {
+              var a3, l3, o3 = document, c3 = s3.async, u2 = (s3.numRetries || 0) + 1, h2 = s3.before || e4, d2 = t6.replace(/[\?|#].*$/, ""), m2 = t6.replace(/^(css|img)!/, "");
+              n3 = n3 || 0, /(^css!|\.css$)/.test(d2) ? ((l3 = o3.createElement("link")).rel = "stylesheet", l3.href = m2, (a3 = "hideFocus" in l3) && l3.relList && (a3 = 0, l3.rel = "preload", l3.as = "style")) : /(^img!|\.(png|gif|jpg|svg|webp)$)/.test(d2) ? (l3 = o3.createElement("img")).src = m2 : ((l3 = o3.createElement("script")).src = t6, l3.async = void 0 === c3 || c3), l3.onload = l3.onerror = l3.onbeforeload = function(e5) {
+                var o4 = e5.type[0];
+                if (a3) try {
+                  l3.sheet.cssText.length || (o4 = "e");
+                } catch (e6) {
+                  18 != e6.code && (o4 = "e");
+                }
+                if ("e" == o4) {
+                  if ((n3 += 1) < u2) return r2(t6, i4, s3, n3);
+                } else if ("preload" == l3.rel && "style" == l3.as) return l3.rel = "stylesheet";
+                i4(t6, o4, e5.defaultPrevented);
+              }, false !== h2(t6, l3) && o3.head.appendChild(l3);
+            }
+            function o2(e5, t6, i4) {
+              var s3, n3, a3 = (e5 = e5.push ? e5 : [e5]).length, l3 = a3, o3 = [];
+              for (s3 = function(e6, i5, s4) {
+                if ("e" == i5 && o3.push(e6), "b" == i5) {
+                  if (!s4) return;
+                  o3.push(e6);
+                }
+                --a3 || t6(o3);
+              }, n3 = 0; n3 < l3; n3++) r2(e5[n3], s3, i4);
+            }
+            function c2(e5, i4, s3) {
+              var n3, r3;
+              if (i4 && i4.trim && (n3 = i4), r3 = (n3 ? s3 : i4) || {}, n3) {
+                if (n3 in t5) throw "LoadJS";
+                t5[n3] = true;
+              }
+              function c3(t6, i5) {
+                o2(e5, function(e6) {
+                  l2(r3, e6), t6 && l2({ success: t6, error: i5 }, e6), a2(n3, e6);
+                }, r3);
+              }
+              if (r3.returnPromise) return new Promise(c3);
+              c3();
+            }
+            return c2.ready = function(e5, t6) {
+              return n2(e5, function(e6) {
+                l2(t6, e6);
+              }), c2;
+            }, c2.done = function(e5) {
+              a2(e5, []);
+            }, c2.reset = function() {
+              t5 = {}, i3 = {}, s2 = {};
+            }, c2.isDefined = function(e5) {
+              return e5 in t5;
+            }, c2;
+          }();
+        });
+        function Be(e3) {
+          return new Promise((t4, i3) => {
+            Ue(e3, { success: t4, error: i3 });
+          });
+        }
+        function We(e3) {
+          e3 && !this.embed.hasPlayed && (this.embed.hasPlayed = true), this.media.paused === e3 && (this.media.paused = !e3, Z.call(this, this.media, e3 ? "play" : "pause"));
+        }
+        const ze = { setup() {
+          const e3 = this;
+          R(e3.elements.wrapper, e3.config.classNames.embed, true), e3.options.speed = e3.config.speed.options, ue.call(e3), S.object(window.Vimeo) ? ze.ready.call(e3) : Be(e3.config.urls.vimeo.sdk).then(() => {
+            ze.ready.call(e3);
+          }).catch((t4) => {
+            e3.debug.warn("Vimeo SDK (player.js) failed to load", t4);
+          });
+        }, ready() {
+          const e3 = this, t4 = e3.config.vimeo, { premium: i3, referrerPolicy: s2, ...n2 } = t4;
+          let a2 = e3.media.getAttribute("src"), l2 = "";
+          S.empty(a2) ? (a2 = e3.media.getAttribute(e3.config.attributes.embed.id), l2 = e3.media.getAttribute(e3.config.attributes.embed.hash)) : l2 = function(e4) {
+            const t5 = e4.match(/^.*(vimeo.com\/|video\/)(\d+)(\?.*&*h=|\/)+([\d,a-f]+)/);
+            return t5 && 5 === t5.length ? t5[4] : null;
+          }(a2);
+          const r2 = l2 ? { h: l2 } : {};
+          i3 && Object.assign(n2, { controls: false, sidedock: false });
+          const o2 = Ne({ loop: e3.config.loop.active, autoplay: e3.autoplay, muted: e3.muted, gesture: "media", playsinline: e3.config.playsinline, ...r2, ...n2 }), c2 = (u2 = a2, S.empty(u2) ? null : S.number(Number(u2)) ? u2 : u2.match(/^.*(vimeo.com\/|video\/)(\d+).*/) ? RegExp.$2 : u2);
+          var u2;
+          const h2 = $("iframe"), d2 = me(e3.config.urls.vimeo.iframe, c2, o2);
+          if (h2.setAttribute("src", d2), h2.setAttribute("allowfullscreen", ""), h2.setAttribute("allow", ["autoplay", "fullscreen", "picture-in-picture", "encrypted-media", "accelerometer", "gyroscope"].join("; ")), S.empty(s2) || h2.setAttribute("referrerPolicy", s2), i3 || !t4.customControls) h2.setAttribute("data-poster", e3.poster), e3.media = q(h2, e3.media);
+          else {
+            const t5 = $("div", { class: e3.config.classNames.embedContainer, "data-poster": e3.poster });
+            t5.appendChild(h2), e3.media = q(t5, e3.media);
+          }
+          t4.customControls || Te(me(e3.config.urls.vimeo.api, d2)).then((t5) => {
+            !S.empty(t5) && t5.thumbnail_url && Fe.setPoster.call(e3, t5.thumbnail_url).catch(() => {
+            });
+          }), e3.embed = new window.Vimeo.Player(h2, { autopause: e3.config.autopause, muted: e3.muted }), e3.media.paused = true, e3.media.currentTime = 0, e3.supported.ui && e3.embed.disableTextTrack(), e3.media.play = () => (We.call(e3, true), e3.embed.play()), e3.media.pause = () => (We.call(e3, false), e3.embed.pause()), e3.media.stop = () => {
+            e3.pause(), e3.currentTime = 0;
+          };
+          let { currentTime: m2 } = e3.media;
+          Object.defineProperty(e3.media, "currentTime", { get: () => m2, set(t5) {
+            const { embed: i4, media: s3, paused: n3, volume: a3 } = e3, l3 = n3 && !i4.hasPlayed;
+            s3.seeking = true, Z.call(e3, s3, "seeking"), Promise.resolve(l3 && i4.setVolume(0)).then(() => i4.setCurrentTime(t5)).then(() => l3 && i4.pause()).then(() => l3 && i4.setVolume(a3)).catch(() => {
+            });
+          } });
+          let p2 = e3.config.speed.selected;
+          Object.defineProperty(e3.media, "playbackRate", { get: () => p2, set(t5) {
+            e3.embed.setPlaybackRate(t5).then(() => {
+              p2 = t5, Z.call(e3, e3.media, "ratechange");
+            }).catch(() => {
+              e3.options.speed = [1];
+            });
+          } });
+          let { volume: g2 } = e3.config;
+          Object.defineProperty(e3.media, "volume", { get: () => g2, set(t5) {
+            e3.embed.setVolume(t5).then(() => {
+              g2 = t5, Z.call(e3, e3.media, "volumechange");
+            });
+          } });
+          let { muted: f2 } = e3.config;
+          Object.defineProperty(e3.media, "muted", { get: () => f2, set(t5) {
+            const i4 = !!S.boolean(t5) && t5;
+            e3.embed.setMuted(!!i4 || e3.config.muted).then(() => {
+              f2 = i4, Z.call(e3, e3.media, "volumechange");
+            });
+          } });
+          let y2, { loop: b2 } = e3.config;
+          Object.defineProperty(e3.media, "loop", { get: () => b2, set(t5) {
+            const i4 = S.boolean(t5) ? t5 : e3.config.loop.active;
+            e3.embed.setLoop(i4).then(() => {
+              b2 = i4;
+            });
+          } }), e3.embed.getVideoUrl().then((t5) => {
+            y2 = t5, Pe.setDownloadUrl.call(e3);
+          }).catch((e4) => {
+            this.debug.warn(e4);
+          }), Object.defineProperty(e3.media, "currentSrc", { get: () => y2 }), Object.defineProperty(e3.media, "ended", { get: () => e3.currentTime === e3.duration }), Promise.all([e3.embed.getVideoWidth(), e3.embed.getVideoHeight()]).then((t5) => {
+            const [i4, s3] = t5;
+            e3.embed.ratio = he(i4, s3), ue.call(this);
+          }), e3.embed.setAutopause(e3.config.autopause).then((t5) => {
+            e3.config.autopause = t5;
+          }), e3.embed.getVideoTitle().then((t5) => {
+            e3.config.title = t5, Fe.setTitle.call(this);
+          }), e3.embed.getCurrentTime().then((t5) => {
+            m2 = t5, Z.call(e3, e3.media, "timeupdate");
+          }), e3.embed.getDuration().then((t5) => {
+            e3.media.duration = t5, Z.call(e3, e3.media, "durationchange");
+          }), e3.embed.getTextTracks().then((t5) => {
+            e3.media.textTracks = t5, xe.setup.call(e3);
+          }), e3.embed.on("cuechange", ({ cues: t5 = [] }) => {
+            const i4 = t5.map((e4) => function(e5) {
+              const t6 = document.createDocumentFragment(), i5 = document.createElement("div");
+              return t6.appendChild(i5), i5.innerHTML = e5, t6.firstChild.innerText;
+            }(e4.text));
+            xe.updateCues.call(e3, i4);
+          }), e3.embed.on("loaded", () => {
+            if (e3.embed.getPaused().then((t5) => {
+              We.call(e3, !t5), t5 || Z.call(e3, e3.media, "playing");
+            }), S.element(e3.embed.element) && e3.supported.ui) {
+              e3.embed.element.setAttribute("tabindex", -1);
+            }
+          }), e3.embed.on("bufferstart", () => {
+            Z.call(e3, e3.media, "waiting");
+          }), e3.embed.on("bufferend", () => {
+            Z.call(e3, e3.media, "playing");
+          }), e3.embed.on("play", () => {
+            We.call(e3, true), Z.call(e3, e3.media, "playing");
+          }), e3.embed.on("pause", () => {
+            We.call(e3, false);
+          }), e3.embed.on("timeupdate", (t5) => {
+            e3.media.seeking = false, m2 = t5.seconds, Z.call(e3, e3.media, "timeupdate");
+          }), e3.embed.on("progress", (t5) => {
+            e3.media.buffered = t5.percent, Z.call(e3, e3.media, "progress"), 1 === parseInt(t5.percent, 10) && Z.call(e3, e3.media, "canplaythrough"), e3.embed.getDuration().then((t6) => {
+              t6 !== e3.media.duration && (e3.media.duration = t6, Z.call(e3, e3.media, "durationchange"));
+            });
+          }), e3.embed.on("seeked", () => {
+            e3.media.seeking = false, Z.call(e3, e3.media, "seeked");
+          }), e3.embed.on("ended", () => {
+            e3.media.paused = true, Z.call(e3, e3.media, "ended");
+          }), e3.embed.on("error", (t5) => {
+            e3.media.error = t5, Z.call(e3, e3.media, "error");
+          }), t4.customControls && setTimeout(() => Fe.build.call(e3), 0);
+        } };
+        function Ke(e3) {
+          e3 && !this.embed.hasPlayed && (this.embed.hasPlayed = true), this.media.paused === e3 && (this.media.paused = !e3, Z.call(this, this.media, e3 ? "play" : "pause"));
+        }
+        function Ye(e3) {
+          return e3.noCookie ? "https://www.youtube-nocookie.com" : "http:" === window.location.protocol ? "http://www.youtube.com" : void 0;
+        }
+        const Qe = { setup() {
+          if (R(this.elements.wrapper, this.config.classNames.embed, true), S.object(window.YT) && S.function(window.YT.Player)) Qe.ready.call(this);
+          else {
+            const e3 = window.onYouTubeIframeAPIReady;
+            window.onYouTubeIframeAPIReady = () => {
+              S.function(e3) && e3(), Qe.ready.call(this);
+            }, Be(this.config.urls.youtube.sdk).catch((e4) => {
+              this.debug.warn("YouTube API failed to load", e4);
+            });
+          }
+        }, getTitle(e3) {
+          Te(me(this.config.urls.youtube.api, e3)).then((e4) => {
+            if (S.object(e4)) {
+              const { title: t4, height: i3, width: s2 } = e4;
+              this.config.title = t4, Fe.setTitle.call(this), this.embed.ratio = he(s2, i3);
+            }
+            ue.call(this);
+          }).catch(() => {
+            ue.call(this);
+          });
+        }, ready() {
+          const e3 = this, t4 = e3.config.youtube, i3 = e3.media && e3.media.getAttribute("id");
+          if (!S.empty(i3) && i3.startsWith("youtube-")) return;
+          let s2 = e3.media.getAttribute("src");
+          S.empty(s2) && (s2 = e3.media.getAttribute(this.config.attributes.embed.id));
+          const n2 = (a2 = s2, S.empty(a2) ? null : a2.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/) ? RegExp.$2 : a2);
+          var a2;
+          const l2 = $("div", { id: `${e3.provider}-${Math.floor(1e4 * Math.random())}`, "data-poster": t4.customControls ? e3.poster : void 0 });
+          if (e3.media = q(l2, e3.media), t4.customControls) {
+            const t5 = (e4) => `https://i.ytimg.com/vi/${n2}/${e4}default.jpg`;
+            Re(t5("maxres"), 121).catch(() => Re(t5("sd"), 121)).catch(() => Re(t5("hq"))).then((t6) => Fe.setPoster.call(e3, t6.src)).then((t6) => {
+              t6.includes("maxres") || (e3.elements.poster.style.backgroundSize = "cover");
+            }).catch(() => {
+            });
+          }
+          e3.embed = new window.YT.Player(e3.media, { videoId: n2, host: Ye(t4), playerVars: x({}, { autoplay: e3.config.autoplay ? 1 : 0, hl: e3.config.hl, controls: e3.supported.ui && t4.customControls ? 0 : 1, disablekb: 1, playsinline: e3.config.playsinline && !e3.config.fullscreen.iosNative ? 1 : 0, cc_load_policy: e3.captions.active ? 1 : 0, cc_lang_pref: e3.config.captions.language, widget_referrer: window ? window.location.href : null }, t4), events: { onError(t5) {
+            if (!e3.media.error) {
+              const i4 = t5.data, s3 = { 2: "The request contains an invalid parameter value. For example, this error occurs if you specify a video ID that does not have 11 characters, or if the video ID contains invalid characters, such as exclamation points or asterisks.", 5: "The requested content cannot be played in an HTML5 player or another error related to the HTML5 player has occurred.", 100: "The video requested was not found. This error occurs when a video has been removed (for any reason) or has been marked as private.", 101: "The owner of the requested video does not allow it to be played in embedded players.", 150: "The owner of the requested video does not allow it to be played in embedded players." }[i4] || "An unknown error occurred";
+              e3.media.error = { code: i4, message: s3 }, Z.call(e3, e3.media, "error");
+            }
+          }, onPlaybackRateChange(t5) {
+            const i4 = t5.target;
+            e3.media.playbackRate = i4.getPlaybackRate(), Z.call(e3, e3.media, "ratechange");
+          }, onReady(i4) {
+            if (S.function(e3.media.play)) return;
+            const s3 = i4.target;
+            Qe.getTitle.call(e3, n2), e3.media.play = () => {
+              Ke.call(e3, true), s3.playVideo();
+            }, e3.media.pause = () => {
+              Ke.call(e3, false), s3.pauseVideo();
+            }, e3.media.stop = () => {
+              s3.stopVideo();
+            }, e3.media.duration = s3.getDuration(), e3.media.paused = true, e3.media.currentTime = 0, Object.defineProperty(e3.media, "currentTime", { get: () => Number(s3.getCurrentTime()), set(t5) {
+              e3.paused && !e3.embed.hasPlayed && e3.embed.mute(), e3.media.seeking = true, Z.call(e3, e3.media, "seeking"), s3.seekTo(t5);
+            } }), Object.defineProperty(e3.media, "playbackRate", { get: () => s3.getPlaybackRate(), set(e4) {
+              s3.setPlaybackRate(e4);
+            } });
+            let { volume: a3 } = e3.config;
+            Object.defineProperty(e3.media, "volume", { get: () => a3, set(t5) {
+              a3 = t5, s3.setVolume(100 * a3), Z.call(e3, e3.media, "volumechange");
+            } });
+            let { muted: l3 } = e3.config;
+            Object.defineProperty(e3.media, "muted", { get: () => l3, set(t5) {
+              const i5 = S.boolean(t5) ? t5 : l3;
+              l3 = i5, s3[i5 ? "mute" : "unMute"](), s3.setVolume(100 * a3), Z.call(e3, e3.media, "volumechange");
+            } }), Object.defineProperty(e3.media, "currentSrc", { get: () => s3.getVideoUrl() }), Object.defineProperty(e3.media, "ended", { get: () => e3.currentTime === e3.duration });
+            const r2 = s3.getAvailablePlaybackRates();
+            e3.options.speed = r2.filter((t5) => e3.config.speed.options.includes(t5)), e3.supported.ui && t4.customControls && e3.media.setAttribute("tabindex", -1), Z.call(e3, e3.media, "timeupdate"), Z.call(e3, e3.media, "durationchange"), clearInterval(e3.timers.buffering), e3.timers.buffering = setInterval(() => {
+              e3.media.buffered = s3.getVideoLoadedFraction(), (null === e3.media.lastBuffered || e3.media.lastBuffered < e3.media.buffered) && Z.call(e3, e3.media, "progress"), e3.media.lastBuffered = e3.media.buffered, 1 === e3.media.buffered && (clearInterval(e3.timers.buffering), Z.call(e3, e3.media, "canplaythrough"));
+            }, 200), t4.customControls && setTimeout(() => Fe.build.call(e3), 50);
+          }, onStateChange(i4) {
+            const s3 = i4.target;
+            clearInterval(e3.timers.playing);
+            switch (e3.media.seeking && [1, 2].includes(i4.data) && (e3.media.seeking = false, Z.call(e3, e3.media, "seeked")), i4.data) {
+              case -1:
+                Z.call(e3, e3.media, "timeupdate"), e3.media.buffered = s3.getVideoLoadedFraction(), Z.call(e3, e3.media, "progress");
+                break;
+              case 0:
+                Ke.call(e3, false), e3.media.loop ? (s3.stopVideo(), s3.playVideo()) : Z.call(e3, e3.media, "ended");
+                break;
+              case 1:
+                t4.customControls && !e3.config.autoplay && e3.media.paused && !e3.embed.hasPlayed ? e3.media.pause() : (Ke.call(e3, true), Z.call(e3, e3.media, "playing"), e3.timers.playing = setInterval(() => {
+                  Z.call(e3, e3.media, "timeupdate");
+                }, 50), e3.media.duration !== s3.getDuration() && (e3.media.duration = s3.getDuration(), Z.call(e3, e3.media, "durationchange")));
+                break;
+              case 2:
+                e3.muted || e3.embed.unMute(), Ke.call(e3, false);
+                break;
+              case 3:
+                Z.call(e3, e3.media, "waiting");
+            }
+            Z.call(e3, e3.elements.container, "statechange", false, { code: i4.data });
+          } } });
+        } }, Xe = { setup() {
+          this.media ? (R(this.elements.container, this.config.classNames.type.replace("{0}", this.type), true), R(this.elements.container, this.config.classNames.provider.replace("{0}", this.provider), true), this.isEmbed && R(this.elements.container, this.config.classNames.type.replace("{0}", "video"), true), this.isVideo && (this.elements.wrapper = $("div", { class: this.config.classNames.video }), L(this.media, this.elements.wrapper), this.elements.poster = $("div", { class: this.config.classNames.poster }), this.elements.wrapper.appendChild(this.elements.poster)), this.isHTML5 ? de.setup.call(this) : this.isYouTube ? Qe.setup.call(this) : this.isVimeo && ze.setup.call(this)) : this.debug.warn("No media element found!");
+        } };
+        class Je {
+          constructor(t4) {
+            e2(this, "load", () => {
+              this.enabled && (S.object(window.google) && S.object(window.google.ima) ? this.ready() : Be(this.player.config.urls.googleIMA.sdk).then(() => {
+                this.ready();
+              }).catch(() => {
+                this.trigger("error", new Error("Google IMA SDK failed to load"));
+              }));
+            }), e2(this, "ready", () => {
+              var e3;
+              this.enabled || ((e3 = this).manager && e3.manager.destroy(), e3.elements.displayContainer && e3.elements.displayContainer.destroy(), e3.elements.container.remove()), this.startSafetyTimer(12e3, "ready()"), this.managerPromise.then(() => {
+                this.clearSafetyTimer("onAdsManagerLoaded()");
+              }), this.listeners(), this.setupIMA();
+            }), e2(this, "setupIMA", () => {
+              this.elements.container = $("div", { class: this.player.config.classNames.ads }), this.player.elements.container.appendChild(this.elements.container), google.ima.settings.setVpaidMode(google.ima.ImaSdkSettings.VpaidMode.ENABLED), google.ima.settings.setLocale(this.player.config.ads.language), google.ima.settings.setDisableCustomPlaybackForIOS10Plus(this.player.config.playsinline), this.elements.displayContainer = new google.ima.AdDisplayContainer(this.elements.container, this.player.media), this.loader = new google.ima.AdsLoader(this.elements.displayContainer), this.loader.addEventListener(google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED, (e3) => this.onAdsManagerLoaded(e3), false), this.loader.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, (e3) => this.onAdError(e3), false), this.requestAds();
+            }), e2(this, "requestAds", () => {
+              const { container: e3 } = this.player.elements;
+              try {
+                const t5 = new google.ima.AdsRequest();
+                t5.adTagUrl = this.tagUrl, t5.linearAdSlotWidth = e3.offsetWidth, t5.linearAdSlotHeight = e3.offsetHeight, t5.nonLinearAdSlotWidth = e3.offsetWidth, t5.nonLinearAdSlotHeight = e3.offsetHeight, t5.forceNonLinearFullSlot = false, t5.setAdWillPlayMuted(!this.player.muted), this.loader.requestAds(t5);
+              } catch (e4) {
+                this.onAdError(e4);
+              }
+            }), e2(this, "pollCountdown", (e3 = false) => {
+              if (!e3) return clearInterval(this.countdownTimer), void this.elements.container.removeAttribute("data-badge-text");
+              this.countdownTimer = setInterval(() => {
+                const e4 = Ee(Math.max(this.manager.getRemainingTime(), 0)), t5 = `${ve.get("advertisement", this.player.config)} - ${e4}`;
+                this.elements.container.setAttribute("data-badge-text", t5);
+              }, 100);
+            }), e2(this, "onAdsManagerLoaded", (e3) => {
+              if (!this.enabled) return;
+              const t5 = new google.ima.AdsRenderingSettings();
+              t5.restoreCustomPlaybackStateOnAdBreakComplete = true, t5.enablePreloading = true, this.manager = e3.getAdsManager(this.player, t5), this.cuePoints = this.manager.getCuePoints(), this.manager.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, (e4) => this.onAdError(e4)), Object.keys(google.ima.AdEvent.Type).forEach((e4) => {
+                this.manager.addEventListener(google.ima.AdEvent.Type[e4], (e5) => this.onAdEvent(e5));
+              }), this.trigger("loaded");
+            }), e2(this, "addCuePoints", () => {
+              S.empty(this.cuePoints) || this.cuePoints.forEach((e3) => {
+                if (0 !== e3 && -1 !== e3 && e3 < this.player.duration) {
+                  const t5 = this.player.elements.progress;
+                  if (S.element(t5)) {
+                    const i3 = 100 / this.player.duration * e3, s2 = $("span", { class: this.player.config.classNames.cues });
+                    s2.style.left = `${i3.toString()}%`, t5.appendChild(s2);
+                  }
+                }
+              });
+            }), e2(this, "onAdEvent", (e3) => {
+              const { container: t5 } = this.player.elements, i3 = e3.getAd(), s2 = e3.getAdData();
+              switch (((e4) => {
+                Z.call(this.player, this.player.media, `ads${e4.replace(/_/g, "").toLowerCase()}`);
+              })(e3.type), e3.type) {
+                case google.ima.AdEvent.Type.LOADED:
+                  this.trigger("loaded"), this.pollCountdown(true), i3.isLinear() || (i3.width = t5.offsetWidth, i3.height = t5.offsetHeight);
+                  break;
+                case google.ima.AdEvent.Type.STARTED:
+                  this.manager.setVolume(this.player.volume);
+                  break;
+                case google.ima.AdEvent.Type.ALL_ADS_COMPLETED:
+                  this.player.ended ? this.loadAds() : this.loader.contentComplete();
+                  break;
+                case google.ima.AdEvent.Type.CONTENT_PAUSE_REQUESTED:
+                  this.pauseContent();
+                  break;
+                case google.ima.AdEvent.Type.CONTENT_RESUME_REQUESTED:
+                  this.pollCountdown(), this.resumeContent();
+                  break;
+                case google.ima.AdEvent.Type.LOG:
+                  s2.adError && this.player.debug.warn(`Non-fatal ad error: ${s2.adError.getMessage()}`);
+              }
+            }), e2(this, "onAdError", (e3) => {
+              this.cancel(), this.player.debug.warn("Ads error", e3);
+            }), e2(this, "listeners", () => {
+              const { container: e3 } = this.player.elements;
+              let t5;
+              this.player.on("canplay", () => {
+                this.addCuePoints();
+              }), this.player.on("ended", () => {
+                this.loader.contentComplete();
+              }), this.player.on("timeupdate", () => {
+                t5 = this.player.currentTime;
+              }), this.player.on("seeked", () => {
+                const e4 = this.player.currentTime;
+                S.empty(this.cuePoints) || this.cuePoints.forEach((i3, s2) => {
+                  t5 < i3 && i3 < e4 && (this.manager.discardAdBreak(), this.cuePoints.splice(s2, 1));
+                });
+              }), window.addEventListener("resize", () => {
+                this.manager && this.manager.resize(e3.offsetWidth, e3.offsetHeight, google.ima.ViewMode.NORMAL);
+              });
+            }), e2(this, "play", () => {
+              const { container: e3 } = this.player.elements;
+              this.managerPromise || this.resumeContent(), this.managerPromise.then(() => {
+                this.manager.setVolume(this.player.volume), this.elements.displayContainer.initialize();
+                try {
+                  this.initialized || (this.manager.init(e3.offsetWidth, e3.offsetHeight, google.ima.ViewMode.NORMAL), this.manager.start()), this.initialized = true;
+                } catch (e4) {
+                  this.onAdError(e4);
+                }
+              }).catch(() => {
+              });
+            }), e2(this, "resumeContent", () => {
+              this.elements.container.style.zIndex = "", this.playing = false, ie(this.player.media.play());
+            }), e2(this, "pauseContent", () => {
+              this.elements.container.style.zIndex = 3, this.playing = true, this.player.media.pause();
+            }), e2(this, "cancel", () => {
+              this.initialized && this.resumeContent(), this.trigger("error"), this.loadAds();
+            }), e2(this, "loadAds", () => {
+              this.managerPromise.then(() => {
+                this.manager && this.manager.destroy(), this.managerPromise = new Promise((e3) => {
+                  this.on("loaded", e3), this.player.debug.log(this.manager);
+                }), this.initialized = false, this.requestAds();
+              }).catch(() => {
+              });
+            }), e2(this, "trigger", (e3, ...t5) => {
+              const i3 = this.events[e3];
+              S.array(i3) && i3.forEach((e4) => {
+                S.function(e4) && e4.apply(this, t5);
+              });
+            }), e2(this, "on", (e3, t5) => (S.array(this.events[e3]) || (this.events[e3] = []), this.events[e3].push(t5), this)), e2(this, "startSafetyTimer", (e3, t5) => {
+              this.player.debug.log(`Safety timer invoked from: ${t5}`), this.safetyTimer = setTimeout(() => {
+                this.cancel(), this.clearSafetyTimer("startSafetyTimer()");
+              }, e3);
+            }), e2(this, "clearSafetyTimer", (e3) => {
+              S.nullOrUndefined(this.safetyTimer) || (this.player.debug.log(`Safety timer cleared from: ${e3}`), clearTimeout(this.safetyTimer), this.safetyTimer = null);
+            }), this.player = t4, this.config = t4.config.ads, this.playing = false, this.initialized = false, this.elements = { container: null, displayContainer: null }, this.manager = null, this.loader = null, this.cuePoints = null, this.events = {}, this.safetyTimer = null, this.countdownTimer = null, this.managerPromise = new Promise((e3, t5) => {
+              this.on("loaded", e3), this.on("error", t5);
+            }), this.load();
+          }
+          get enabled() {
+            const { config: e3 } = this;
+            return this.player.isHTML5 && this.player.isVideo && e3.enabled && (!S.empty(e3.publisherId) || S.url(e3.tagUrl));
+          }
+          get tagUrl() {
+            const { config: e3 } = this;
+            if (S.url(e3.tagUrl)) return e3.tagUrl;
+            return `https://go.aniview.com/api/adserver6/vast/?${Ne({ AV_PUBLISHERID: "58c25bb0073ef448b1087ad6", AV_CHANNELID: "5a0458dc28a06145e4519d21", AV_URL: window.location.hostname, cb: Date.now(), AV_WIDTH: 640, AV_HEIGHT: 480, AV_CDIM2: e3.publisherId })}`;
+          }
+        }
+        function Ge(e3 = 0, t4 = 0, i3 = 255) {
+          return Math.min(Math.max(e3, t4), i3);
+        }
+        const Ze = (e3) => {
+          const t4 = [];
+          return e3.split(/\r\n\r\n|\n\n|\r\r/).forEach((e4) => {
+            const i3 = {};
+            e4.split(/\r\n|\n|\r/).forEach((e5) => {
+              if (S.number(i3.startTime)) {
+                if (!S.empty(e5.trim()) && S.empty(i3.text)) {
+                  const t5 = e5.trim().split("#xywh=");
+                  [i3.text] = t5, t5[1] && ([i3.x, i3.y, i3.w, i3.h] = t5[1].split(","));
+                }
+              } else {
+                const t5 = e5.match(/([0-9]{2})?:?([0-9]{2}):([0-9]{2}).([0-9]{2,3})( ?--> ?)([0-9]{2})?:?([0-9]{2}):([0-9]{2}).([0-9]{2,3})/);
+                t5 && (i3.startTime = 60 * Number(t5[1] || 0) * 60 + 60 * Number(t5[2]) + Number(t5[3]) + Number(`0.${t5[4]}`), i3.endTime = 60 * Number(t5[6] || 0) * 60 + 60 * Number(t5[7]) + Number(t5[8]) + Number(`0.${t5[9]}`));
+              }
+            }), i3.text && t4.push(i3);
+          }), t4;
+        }, et = (e3, t4) => {
+          const i3 = {};
+          return e3 > t4.width / t4.height ? (i3.width = t4.width, i3.height = 1 / e3 * t4.width) : (i3.height = t4.height, i3.width = e3 * t4.height), i3;
+        };
+        class tt {
+          constructor(t4) {
+            e2(this, "load", () => {
+              this.player.elements.display.seekTooltip && (this.player.elements.display.seekTooltip.hidden = this.enabled), this.enabled && this.getThumbnails().then(() => {
+                this.enabled && (this.render(), this.determineContainerAutoSizing(), this.listeners(), this.loaded = true);
+              });
+            }), e2(this, "getThumbnails", () => new Promise((e3) => {
+              const { src: t5 } = this.player.config.previewThumbnails;
+              if (S.empty(t5)) throw new Error("Missing previewThumbnails.src config attribute");
+              const i3 = () => {
+                this.thumbnails.sort((e4, t6) => e4.height - t6.height), this.player.debug.log("Preview thumbnails", this.thumbnails), e3();
+              };
+              if (S.function(t5)) t5((e4) => {
+                this.thumbnails = e4, i3();
+              });
+              else {
+                const e4 = (S.string(t5) ? [t5] : t5).map((e5) => this.getThumbnail(e5));
+                Promise.all(e4).then(i3);
+              }
+            })), e2(this, "getThumbnail", (e3) => new Promise((t5) => {
+              Te(e3).then((i3) => {
+                const s2 = { frames: Ze(i3), height: null, urlPrefix: "" };
+                s2.frames[0].text.startsWith("/") || s2.frames[0].text.startsWith("http://") || s2.frames[0].text.startsWith("https://") || (s2.urlPrefix = e3.substring(0, e3.lastIndexOf("/") + 1));
+                const n2 = new Image();
+                n2.onload = () => {
+                  s2.height = n2.naturalHeight, s2.width = n2.naturalWidth, this.thumbnails.push(s2), t5();
+                }, n2.src = s2.urlPrefix + s2.frames[0].text;
+              });
+            })), e2(this, "startMove", (e3) => {
+              if (this.loaded && S.event(e3) && ["touchmove", "mousemove"].includes(e3.type) && this.player.media.duration) {
+                if ("touchmove" === e3.type) this.seekTime = this.player.media.duration * (this.player.elements.inputs.seek.value / 100);
+                else {
+                  var t5, i3;
+                  const s2 = this.player.elements.progress.getBoundingClientRect(), n2 = 100 / s2.width * (e3.pageX - s2.left);
+                  this.seekTime = this.player.media.duration * (n2 / 100), this.seekTime < 0 && (this.seekTime = 0), this.seekTime > this.player.media.duration - 1 && (this.seekTime = this.player.media.duration - 1), this.mousePosX = e3.pageX, this.elements.thumb.time.innerText = Ee(this.seekTime);
+                  const a2 = null === (t5 = this.player.config.markers) || void 0 === t5 || null === (i3 = t5.points) || void 0 === i3 ? void 0 : i3.find(({ time: e4 }) => e4 === Math.round(this.seekTime));
+                  a2 && this.elements.thumb.time.insertAdjacentHTML("afterbegin", `${a2.label}<br>`);
+                }
+                this.showImageAtCurrentTime();
+              }
+            }), e2(this, "endMove", () => {
+              this.toggleThumbContainer(false, true);
+            }), e2(this, "startScrubbing", (e3) => {
+              (S.nullOrUndefined(e3.button) || false === e3.button || 0 === e3.button) && (this.mouseDown = true, this.player.media.duration && (this.toggleScrubbingContainer(true), this.toggleThumbContainer(false, true), this.showImageAtCurrentTime()));
+            }), e2(this, "endScrubbing", () => {
+              this.mouseDown = false, Math.ceil(this.lastTime) === Math.ceil(this.player.media.currentTime) ? this.toggleScrubbingContainer(false) : G.call(this.player, this.player.media, "timeupdate", () => {
+                this.mouseDown || this.toggleScrubbingContainer(false);
+              });
+            }), e2(this, "listeners", () => {
+              this.player.on("play", () => {
+                this.toggleThumbContainer(false, true);
+              }), this.player.on("seeked", () => {
+                this.toggleThumbContainer(false);
+              }), this.player.on("timeupdate", () => {
+                this.lastTime = this.player.media.currentTime;
+              });
+            }), e2(this, "render", () => {
+              this.elements.thumb.container = $("div", { class: this.player.config.classNames.previewThumbnails.thumbContainer }), this.elements.thumb.imageContainer = $("div", { class: this.player.config.classNames.previewThumbnails.imageContainer }), this.elements.thumb.container.appendChild(this.elements.thumb.imageContainer);
+              const e3 = $("div", { class: this.player.config.classNames.previewThumbnails.timeContainer });
+              this.elements.thumb.time = $("span", {}, "00:00"), e3.appendChild(this.elements.thumb.time), this.elements.thumb.imageContainer.appendChild(e3), S.element(this.player.elements.progress) && this.player.elements.progress.appendChild(this.elements.thumb.container), this.elements.scrubbing.container = $("div", { class: this.player.config.classNames.previewThumbnails.scrubbingContainer }), this.player.elements.wrapper.appendChild(this.elements.scrubbing.container);
+            }), e2(this, "destroy", () => {
+              this.elements.thumb.container && this.elements.thumb.container.remove(), this.elements.scrubbing.container && this.elements.scrubbing.container.remove();
+            }), e2(this, "showImageAtCurrentTime", () => {
+              this.mouseDown ? this.setScrubbingContainerSize() : this.setThumbContainerSizeAndPos();
+              const e3 = this.thumbnails[0].frames.findIndex((e4) => this.seekTime >= e4.startTime && this.seekTime <= e4.endTime), t5 = e3 >= 0;
+              let i3 = 0;
+              this.mouseDown || this.toggleThumbContainer(t5), t5 && (this.thumbnails.forEach((t6, s2) => {
+                this.loadedImages.includes(t6.frames[e3].text) && (i3 = s2);
+              }), e3 !== this.showingThumb && (this.showingThumb = e3, this.loadImage(i3)));
+            }), e2(this, "loadImage", (e3 = 0) => {
+              const t5 = this.showingThumb, i3 = this.thumbnails[e3], { urlPrefix: s2 } = i3, n2 = i3.frames[t5], a2 = i3.frames[t5].text, l2 = s2 + a2;
+              if (this.currentImageElement && this.currentImageElement.dataset.filename === a2) this.showImage(this.currentImageElement, n2, e3, t5, a2, false), this.currentImageElement.dataset.index = t5, this.removeOldImages(this.currentImageElement);
+              else {
+                this.loadingImage && this.usingSprites && (this.loadingImage.onload = null);
+                const i4 = new Image();
+                i4.src = l2, i4.dataset.index = t5, i4.dataset.filename = a2, this.showingThumbFilename = a2, this.player.debug.log(`Loading image: ${l2}`), i4.onload = () => this.showImage(i4, n2, e3, t5, a2, true), this.loadingImage = i4, this.removeOldImages(i4);
+              }
+            }), e2(this, "showImage", (e3, t5, i3, s2, n2, a2 = true) => {
+              this.player.debug.log(`Showing thumb: ${n2}. num: ${s2}. qual: ${i3}. newimg: ${a2}`), this.setImageSizeAndOffset(e3, t5), a2 && (this.currentImageContainer.appendChild(e3), this.currentImageElement = e3, this.loadedImages.includes(n2) || this.loadedImages.push(n2)), this.preloadNearby(s2, true).then(this.preloadNearby(s2, false)).then(this.getHigherQuality(i3, e3, t5, n2));
+            }), e2(this, "removeOldImages", (e3) => {
+              Array.from(this.currentImageContainer.children).forEach((t5) => {
+                if ("img" !== t5.tagName.toLowerCase()) return;
+                const i3 = this.usingSprites ? 500 : 1e3;
+                if (t5.dataset.index !== e3.dataset.index && !t5.dataset.deleting) {
+                  t5.dataset.deleting = true;
+                  const { currentImageContainer: e4 } = this;
+                  setTimeout(() => {
+                    e4.removeChild(t5), this.player.debug.log(`Removing thumb: ${t5.dataset.filename}`);
+                  }, i3);
+                }
+              });
+            }), e2(this, "preloadNearby", (e3, t5 = true) => new Promise((i3) => {
+              setTimeout(() => {
+                const s2 = this.thumbnails[0].frames[e3].text;
+                if (this.showingThumbFilename === s2) {
+                  let n2;
+                  n2 = t5 ? this.thumbnails[0].frames.slice(e3) : this.thumbnails[0].frames.slice(0, e3).reverse();
+                  let a2 = false;
+                  n2.forEach((e4) => {
+                    const t6 = e4.text;
+                    if (t6 !== s2 && !this.loadedImages.includes(t6)) {
+                      a2 = true, this.player.debug.log(`Preloading thumb filename: ${t6}`);
+                      const { urlPrefix: e5 } = this.thumbnails[0], s3 = e5 + t6, n3 = new Image();
+                      n3.src = s3, n3.onload = () => {
+                        this.player.debug.log(`Preloaded thumb filename: ${t6}`), this.loadedImages.includes(t6) || this.loadedImages.push(t6), i3();
+                      };
+                    }
+                  }), a2 || i3();
+                }
+              }, 300);
+            })), e2(this, "getHigherQuality", (e3, t5, i3, s2) => {
+              if (e3 < this.thumbnails.length - 1) {
+                let n2 = t5.naturalHeight;
+                this.usingSprites && (n2 = i3.h), n2 < this.thumbContainerHeight && setTimeout(() => {
+                  this.showingThumbFilename === s2 && (this.player.debug.log(`Showing higher quality thumb for: ${s2}`), this.loadImage(e3 + 1));
+                }, 300);
+              }
+            }), e2(this, "toggleThumbContainer", (e3 = false, t5 = false) => {
+              const i3 = this.player.config.classNames.previewThumbnails.thumbContainerShown;
+              this.elements.thumb.container.classList.toggle(i3, e3), !e3 && t5 && (this.showingThumb = null, this.showingThumbFilename = null);
+            }), e2(this, "toggleScrubbingContainer", (e3 = false) => {
+              const t5 = this.player.config.classNames.previewThumbnails.scrubbingContainerShown;
+              this.elements.scrubbing.container.classList.toggle(t5, e3), e3 || (this.showingThumb = null, this.showingThumbFilename = null);
+            }), e2(this, "determineContainerAutoSizing", () => {
+              (this.elements.thumb.imageContainer.clientHeight > 20 || this.elements.thumb.imageContainer.clientWidth > 20) && (this.sizeSpecifiedInCSS = true);
+            }), e2(this, "setThumbContainerSizeAndPos", () => {
+              const { imageContainer: e3 } = this.elements.thumb;
+              if (this.sizeSpecifiedInCSS) {
+                if (e3.clientHeight > 20 && e3.clientWidth < 20) {
+                  const t5 = Math.floor(e3.clientHeight * this.thumbAspectRatio);
+                  e3.style.width = `${t5}px`;
+                } else if (e3.clientHeight < 20 && e3.clientWidth > 20) {
+                  const t5 = Math.floor(e3.clientWidth / this.thumbAspectRatio);
+                  e3.style.height = `${t5}px`;
+                }
+              } else {
+                const t5 = Math.floor(this.thumbContainerHeight * this.thumbAspectRatio);
+                e3.style.height = `${this.thumbContainerHeight}px`, e3.style.width = `${t5}px`;
+              }
+              this.setThumbContainerPos();
+            }), e2(this, "setThumbContainerPos", () => {
+              const e3 = this.player.elements.progress.getBoundingClientRect(), t5 = this.player.elements.container.getBoundingClientRect(), { container: i3 } = this.elements.thumb, s2 = t5.left - e3.left + 10, n2 = t5.right - e3.left - i3.clientWidth - 10, a2 = this.mousePosX - e3.left - i3.clientWidth / 2, l2 = Ge(a2, s2, n2);
+              i3.style.left = `${l2}px`, i3.style.setProperty("--preview-arrow-offset", a2 - l2 + "px");
+            }), e2(this, "setScrubbingContainerSize", () => {
+              const { width: e3, height: t5 } = et(this.thumbAspectRatio, { width: this.player.media.clientWidth, height: this.player.media.clientHeight });
+              this.elements.scrubbing.container.style.width = `${e3}px`, this.elements.scrubbing.container.style.height = `${t5}px`;
+            }), e2(this, "setImageSizeAndOffset", (e3, t5) => {
+              if (!this.usingSprites) return;
+              const i3 = this.thumbContainerHeight / t5.h;
+              e3.style.height = e3.naturalHeight * i3 + "px", e3.style.width = e3.naturalWidth * i3 + "px", e3.style.left = `-${t5.x * i3}px`, e3.style.top = `-${t5.y * i3}px`;
+            }), this.player = t4, this.thumbnails = [], this.loaded = false, this.lastMouseMoveTime = Date.now(), this.mouseDown = false, this.loadedImages = [], this.elements = { thumb: {}, scrubbing: {} }, this.load();
+          }
+          get enabled() {
+            return this.player.isHTML5 && this.player.isVideo && this.player.config.previewThumbnails.enabled;
+          }
+          get currentImageContainer() {
+            return this.mouseDown ? this.elements.scrubbing.container : this.elements.thumb.imageContainer;
+          }
+          get usingSprites() {
+            return Object.keys(this.thumbnails[0].frames[0]).includes("w");
+          }
+          get thumbAspectRatio() {
+            return this.usingSprites ? this.thumbnails[0].frames[0].w / this.thumbnails[0].frames[0].h : this.thumbnails[0].width / this.thumbnails[0].height;
+          }
+          get thumbContainerHeight() {
+            if (this.mouseDown) {
+              const { height: e3 } = et(this.thumbAspectRatio, { width: this.player.media.clientWidth, height: this.player.media.clientHeight });
+              return e3;
+            }
+            return this.sizeSpecifiedInCSS ? this.elements.thumb.imageContainer.clientHeight : Math.floor(this.player.media.clientWidth / this.thumbAspectRatio / 4);
+          }
+          get currentImageElement() {
+            return this.mouseDown ? this.currentScrubbingImageElement : this.currentThumbnailImageElement;
+          }
+          set currentImageElement(e3) {
+            this.mouseDown ? this.currentScrubbingImageElement = e3 : this.currentThumbnailImageElement = e3;
+          }
+        }
+        const it = { insertElements(e3, t4) {
+          S.string(t4) ? _(e3, this.media, { src: t4 }) : S.array(t4) && t4.forEach((t5) => {
+            _(e3, this.media, t5);
+          });
+        }, change(e3) {
+          N(e3, "sources.length") ? (de.cancelRequests.call(this), this.destroy.call(this, () => {
+            this.options.quality = [], O(this.media), this.media = null, S.element(this.elements.container) && this.elements.container.removeAttribute("class");
+            const { sources: t4, type: i3 } = e3, [{ provider: s2 = _e.html5, src: n2 }] = t4, a2 = "html5" === s2 ? i3 : "div", l2 = "html5" === s2 ? {} : { src: n2 };
+            Object.assign(this, { provider: s2, type: i3, supported: K.check(i3, s2, this.config.playsinline), media: $(a2, l2) }), this.elements.container.appendChild(this.media), S.boolean(e3.autoplay) && (this.config.autoplay = e3.autoplay), this.isHTML5 && (this.config.crossorigin && this.media.setAttribute("crossorigin", ""), this.config.autoplay && this.media.setAttribute("autoplay", ""), S.empty(e3.poster) || (this.poster = e3.poster), this.config.loop.active && this.media.setAttribute("loop", ""), this.config.muted && this.media.setAttribute("muted", ""), this.config.playsinline && this.media.setAttribute("playsinline", "")), Fe.addStyleHook.call(this), this.isHTML5 && it.insertElements.call(this, "source", t4), this.config.title = e3.title, Xe.setup.call(this), this.isHTML5 && Object.keys(e3).includes("tracks") && it.insertElements.call(this, "track", e3.tracks), (this.isHTML5 || this.isEmbed && !this.supported.ui) && Fe.build.call(this), this.isHTML5 && this.media.load(), S.empty(e3.previewThumbnails) || (Object.assign(this.config.previewThumbnails, e3.previewThumbnails), this.previewThumbnails && this.previewThumbnails.loaded && (this.previewThumbnails.destroy(), this.previewThumbnails = null), this.config.previewThumbnails.enabled && (this.previewThumbnails = new tt(this))), this.fullscreen.update();
+          }, true)) : this.debug.warn("Invalid source format");
+        } };
+        class st {
+          constructor(t4, i3) {
+            if (e2(this, "play", () => S.function(this.media.play) ? (this.ads && this.ads.enabled && this.ads.managerPromise.then(() => this.ads.play()).catch(() => ie(this.media.play())), this.media.play()) : null), e2(this, "pause", () => this.playing && S.function(this.media.pause) ? this.media.pause() : null), e2(this, "togglePlay", (e3) => (S.boolean(e3) ? e3 : !this.playing) ? this.play() : this.pause()), e2(this, "stop", () => {
+              this.isHTML5 ? (this.pause(), this.restart()) : S.function(this.media.stop) && this.media.stop();
+            }), e2(this, "restart", () => {
+              this.currentTime = 0;
+            }), e2(this, "rewind", (e3) => {
+              this.currentTime -= S.number(e3) ? e3 : this.config.seekTime;
+            }), e2(this, "forward", (e3) => {
+              this.currentTime += S.number(e3) ? e3 : this.config.seekTime;
+            }), e2(this, "increaseVolume", (e3) => {
+              const t5 = this.media.muted ? 0 : this.volume;
+              this.volume = t5 + (S.number(e3) ? e3 : 0);
+            }), e2(this, "decreaseVolume", (e3) => {
+              this.increaseVolume(-e3);
+            }), e2(this, "airplay", () => {
+              K.airplay && this.media.webkitShowPlaybackTargetPicker();
+            }), e2(this, "toggleControls", (e3) => {
+              if (this.supported.ui && !this.isAudio) {
+                const t5 = F(this.elements.container, this.config.classNames.hideControls), i4 = void 0 === e3 ? void 0 : !e3, s3 = R(this.elements.container, this.config.classNames.hideControls, i4);
+                if (s3 && S.array(this.config.controls) && this.config.controls.includes("settings") && !S.empty(this.config.settings) && Pe.toggleMenu.call(this, false), s3 !== t5) {
+                  const e4 = s3 ? "controlshidden" : "controlsshown";
+                  Z.call(this, this.media, e4);
+                }
+                return !s3;
+              }
+              return false;
+            }), e2(this, "on", (e3, t5) => {
+              X.call(this, this.elements.container, e3, t5);
+            }), e2(this, "once", (e3, t5) => {
+              G.call(this, this.elements.container, e3, t5);
+            }), e2(this, "off", (e3, t5) => {
+              J(this.elements.container, e3, t5);
+            }), e2(this, "destroy", (e3, t5 = false) => {
+              if (!this.ready) return;
+              const i4 = () => {
+                document.body.style.overflow = "", this.embed = null, t5 ? (Object.keys(this.elements).length && (O(this.elements.buttons.play), O(this.elements.captions), O(this.elements.controls), O(this.elements.wrapper), this.elements.buttons.play = null, this.elements.captions = null, this.elements.controls = null, this.elements.wrapper = null), S.function(e3) && e3()) : (ee.call(this), de.cancelRequests.call(this), q(this.elements.original, this.elements.container), Z.call(this, this.elements.original, "destroyed", true), S.function(e3) && e3.call(this.elements.original), this.ready = false, setTimeout(() => {
+                  this.elements = null, this.media = null;
+                }, 200));
+              };
+              this.stop(), clearTimeout(this.timers.loading), clearTimeout(this.timers.controls), clearTimeout(this.timers.resized), this.isHTML5 ? (Fe.toggleNativeControls.call(this, true), i4()) : this.isYouTube ? (clearInterval(this.timers.buffering), clearInterval(this.timers.playing), null !== this.embed && S.function(this.embed.destroy) && this.embed.destroy(), i4()) : this.isVimeo && (null !== this.embed && this.embed.unload().then(i4), setTimeout(i4, 200));
+            }), e2(this, "supports", (e3) => K.mime.call(this, e3)), this.timers = {}, this.ready = false, this.loading = false, this.failed = false, this.touch = K.touch, this.media = t4, S.string(this.media) && (this.media = document.querySelectorAll(this.media)), (window.jQuery && this.media instanceof jQuery || S.nodeList(this.media) || S.array(this.media)) && (this.media = this.media[0]), this.config = x({}, Le, st.defaults, i3 || {}, (() => {
+              try {
+                return JSON.parse(this.media.getAttribute("data-plyr-config"));
+              } catch (e3) {
+                return {};
+              }
+            })()), this.elements = { container: null, fullscreen: null, captions: null, buttons: {}, display: {}, progress: {}, inputs: {}, settings: { popup: null, menu: null, panels: {}, buttons: {} } }, this.captions = { active: null, currentTrack: -1, meta: /* @__PURE__ */ new WeakMap() }, this.fullscreen = { active: false }, this.options = { speed: [], quality: [] }, this.debug = new De(this.config.debug), this.debug.log("Config", this.config), this.debug.log("Support", K), S.nullOrUndefined(this.media) || !S.element(this.media)) return void this.debug.error("Setup failed: no suitable element passed");
+            if (this.media.plyr) return void this.debug.warn("Target already setup");
+            if (!this.config.enabled) return void this.debug.error("Setup failed: disabled by config");
+            if (!K.check().api) return void this.debug.error("Setup failed: no support");
+            const s2 = this.media.cloneNode(true);
+            s2.autoplay = false, this.elements.original = s2;
+            const n2 = this.media.tagName.toLowerCase();
+            let a2 = null, l2 = null;
+            switch (n2) {
+              case "div":
+                if (a2 = this.media.querySelector("iframe"), S.element(a2)) {
+                  if (l2 = Me(a2.getAttribute("src")), this.provider = function(e3) {
+                    return /^(https?:\/\/)?(www\.)?(youtube\.com|youtube-nocookie\.com|youtu\.?be)\/.+$/.test(e3) ? _e.youtube : /^https?:\/\/player.vimeo.com\/video\/\d{0,9}(?=\b|\/)/.test(e3) ? _e.vimeo : null;
+                  }(l2.toString()), this.elements.container = this.media, this.media = a2, this.elements.container.className = "", l2.search.length) {
+                    const e3 = ["1", "true"];
+                    e3.includes(l2.searchParams.get("autoplay")) && (this.config.autoplay = true), e3.includes(l2.searchParams.get("loop")) && (this.config.loop.active = true), this.isYouTube ? (this.config.playsinline = e3.includes(l2.searchParams.get("playsinline")), this.config.youtube.hl = l2.searchParams.get("hl")) : this.config.playsinline = true;
+                  }
+                } else this.provider = this.media.getAttribute(this.config.attributes.embed.provider), this.media.removeAttribute(this.config.attributes.embed.provider);
+                if (S.empty(this.provider) || !Object.values(_e).includes(this.provider)) return void this.debug.error("Setup failed: Invalid provider");
+                this.type = je;
+                break;
+              case "video":
+              case "audio":
+                this.type = n2, this.provider = _e.html5, this.media.hasAttribute("crossorigin") && (this.config.crossorigin = true), this.media.hasAttribute("autoplay") && (this.config.autoplay = true), (this.media.hasAttribute("playsinline") || this.media.hasAttribute("webkit-playsinline")) && (this.config.playsinline = true), this.media.hasAttribute("muted") && (this.config.muted = true), this.media.hasAttribute("loop") && (this.config.loop.active = true);
+                break;
+              default:
+                return void this.debug.error("Setup failed: unsupported type");
+            }
+            this.supported = K.check(this.type, this.provider), this.supported.api ? (this.eventListeners = [], this.listeners = new Ve(this), this.storage = new we(this), this.media.plyr = this, S.element(this.elements.container) || (this.elements.container = $("div"), L(this.media, this.elements.container)), Fe.migrateStyles.call(this), Fe.addStyleHook.call(this), Xe.setup.call(this), this.config.debug && X.call(this, this.elements.container, this.config.events.join(" "), (e3) => {
+              this.debug.log(`event: ${e3.type}`);
+            }), this.fullscreen = new He(this), (this.isHTML5 || this.isEmbed && !this.supported.ui) && Fe.build.call(this), this.listeners.container(), this.listeners.global(), this.config.ads.enabled && (this.ads = new Je(this)), this.isHTML5 && this.config.autoplay && this.once("canplay", () => ie(this.play())), this.lastSeekTime = 0, this.config.previewThumbnails.enabled && (this.previewThumbnails = new tt(this))) : this.debug.error("Setup failed: no support");
+          }
+          get isHTML5() {
+            return this.provider === _e.html5;
+          }
+          get isEmbed() {
+            return this.isYouTube || this.isVimeo;
+          }
+          get isYouTube() {
+            return this.provider === _e.youtube;
+          }
+          get isVimeo() {
+            return this.provider === _e.vimeo;
+          }
+          get isVideo() {
+            return this.type === je;
+          }
+          get isAudio() {
+            return this.type === Oe;
+          }
+          get playing() {
+            return Boolean(this.ready && !this.paused && !this.ended);
+          }
+          get paused() {
+            return Boolean(this.media.paused);
+          }
+          get stopped() {
+            return Boolean(this.paused && 0 === this.currentTime);
+          }
+          get ended() {
+            return Boolean(this.media.ended);
+          }
+          set currentTime(e3) {
+            if (!this.duration) return;
+            const t4 = S.number(e3) && e3 > 0;
+            this.media.currentTime = t4 ? Math.min(e3, this.duration) : 0, this.debug.log(`Seeking to ${this.currentTime} seconds`);
+          }
+          get currentTime() {
+            return Number(this.media.currentTime);
+          }
+          get buffered() {
+            const { buffered: e3 } = this.media;
+            return S.number(e3) ? e3 : e3 && e3.length && this.duration > 0 ? e3.end(0) / this.duration : 0;
+          }
+          get seeking() {
+            return Boolean(this.media.seeking);
+          }
+          get duration() {
+            const e3 = parseFloat(this.config.duration), t4 = (this.media || {}).duration, i3 = S.number(t4) && t4 !== 1 / 0 ? t4 : 0;
+            return e3 || i3;
+          }
+          set volume(e3) {
+            let t4 = e3;
+            S.string(t4) && (t4 = Number(t4)), S.number(t4) || (t4 = this.storage.get("volume")), S.number(t4) || ({ volume: t4 } = this.config), t4 > 1 && (t4 = 1), t4 < 0 && (t4 = 0), this.config.volume = t4, this.media.volume = t4, !S.empty(e3) && this.muted && t4 > 0 && (this.muted = false);
+          }
+          get volume() {
+            return Number(this.media.volume);
+          }
+          set muted(e3) {
+            let t4 = e3;
+            S.boolean(t4) || (t4 = this.storage.get("muted")), S.boolean(t4) || (t4 = this.config.muted), this.config.muted = t4, this.media.muted = t4;
+          }
+          get muted() {
+            return Boolean(this.media.muted);
+          }
+          get hasAudio() {
+            return !this.isHTML5 || (!!this.isAudio || (Boolean(this.media.mozHasAudio) || Boolean(this.media.webkitAudioDecodedByteCount) || Boolean(this.media.audioTracks && this.media.audioTracks.length)));
+          }
+          set speed(e3) {
+            let t4 = null;
+            S.number(e3) && (t4 = e3), S.number(t4) || (t4 = this.storage.get("speed")), S.number(t4) || (t4 = this.config.speed.selected);
+            const { minimumSpeed: i3, maximumSpeed: s2 } = this;
+            t4 = Ge(t4, i3, s2), this.config.speed.selected = t4, setTimeout(() => {
+              this.media && (this.media.playbackRate = t4);
+            }, 0);
+          }
+          get speed() {
+            return Number(this.media.playbackRate);
+          }
+          get minimumSpeed() {
+            return this.isYouTube ? Math.min(...this.options.speed) : this.isVimeo ? 0.5 : 0.0625;
+          }
+          get maximumSpeed() {
+            return this.isYouTube ? Math.max(...this.options.speed) : this.isVimeo ? 2 : 16;
+          }
+          set quality(e3) {
+            const t4 = this.config.quality, i3 = this.options.quality;
+            if (!i3.length) return;
+            let s2 = [!S.empty(e3) && Number(e3), this.storage.get("quality"), t4.selected, t4.default].find(S.number), n2 = true;
+            if (!i3.includes(s2)) {
+              const e4 = ne(i3, s2);
+              this.debug.warn(`Unsupported quality option: ${s2}, using ${e4} instead`), s2 = e4, n2 = false;
+            }
+            t4.selected = s2, this.media.quality = s2, n2 && this.storage.set({ quality: s2 });
+          }
+          get quality() {
+            return this.media.quality;
+          }
+          set loop(e3) {
+            const t4 = S.boolean(e3) ? e3 : this.config.loop.active;
+            this.config.loop.active = t4, this.media.loop = t4;
+          }
+          get loop() {
+            return Boolean(this.media.loop);
+          }
+          set source(e3) {
+            it.change.call(this, e3);
+          }
+          get source() {
+            return this.media.currentSrc;
+          }
+          get download() {
+            const { download: e3 } = this.config.urls;
+            return S.url(e3) ? e3 : this.source;
+          }
+          set download(e3) {
+            S.url(e3) && (this.config.urls.download = e3, Pe.setDownloadUrl.call(this));
+          }
+          set poster(e3) {
+            this.isVideo ? Fe.setPoster.call(this, e3, false).catch(() => {
+            }) : this.debug.warn("Poster can only be set for video");
+          }
+          get poster() {
+            return this.isVideo ? this.media.getAttribute("poster") || this.media.getAttribute("data-poster") : null;
+          }
+          get ratio() {
+            if (!this.isVideo) return null;
+            const e3 = oe(ce.call(this));
+            return S.array(e3) ? e3.join(":") : e3;
+          }
+          set ratio(e3) {
+            this.isVideo ? S.string(e3) && re(e3) ? (this.config.ratio = oe(e3), ue.call(this)) : this.debug.error(`Invalid aspect ratio specified (${e3})`) : this.debug.warn("Aspect ratio can only be set for video");
+          }
+          set autoplay(e3) {
+            this.config.autoplay = S.boolean(e3) ? e3 : this.config.autoplay;
+          }
+          get autoplay() {
+            return Boolean(this.config.autoplay);
+          }
+          toggleCaptions(e3) {
+            xe.toggle.call(this, e3, false);
+          }
+          set currentTrack(e3) {
+            xe.set.call(this, e3, false), xe.setup.call(this);
+          }
+          get currentTrack() {
+            const { toggled: e3, currentTrack: t4 } = this.captions;
+            return e3 ? t4 : -1;
+          }
+          set language(e3) {
+            xe.setLanguage.call(this, e3, false);
+          }
+          get language() {
+            return (xe.getCurrentTrack.call(this) || {}).language;
+          }
+          set pip(e3) {
+            if (!K.pip) return;
+            const t4 = S.boolean(e3) ? e3 : !this.pip;
+            S.function(this.media.webkitSetPresentationMode) && this.media.webkitSetPresentationMode(t4 ? Ie : $e), S.function(this.media.requestPictureInPicture) && (!this.pip && t4 ? this.media.requestPictureInPicture() : this.pip && !t4 && document.exitPictureInPicture());
+          }
+          get pip() {
+            return K.pip ? S.empty(this.media.webkitPresentationMode) ? this.media === document.pictureInPictureElement : this.media.webkitPresentationMode === Ie : null;
+          }
+          setPreviewThumbnails(e3) {
+            this.previewThumbnails && this.previewThumbnails.loaded && (this.previewThumbnails.destroy(), this.previewThumbnails = null), Object.assign(this.config.previewThumbnails, e3), this.config.previewThumbnails.enabled && (this.previewThumbnails = new tt(this));
+          }
+          static supported(e3, t4) {
+            return K.check(e3, t4);
+          }
+          static loadSprite(e3, t4) {
+            return ke(e3, t4);
+          }
+          static setup(e3, t4 = {}) {
+            let i3 = null;
+            return S.string(e3) ? i3 = Array.from(document.querySelectorAll(e3)) : S.nodeList(e3) ? i3 = Array.from(e3) : S.array(e3) && (i3 = e3.filter(S.element)), S.empty(i3) ? null : i3.map((e4) => new st(e4, t4));
+          }
+        }
+        var nt;
+        return st.defaults = (nt = Le, JSON.parse(JSON.stringify(nt))), st;
+      });
+    }
+  });
+
+  // src/index.js
+  init_live_reload();
+
+  // src/interactions/lenis.js
+  init_live_reload();
+
+  // node_modules/@studio-freight/lenis/dist/lenis.mjs
+  init_live_reload();
+  function t(t3, e2, i2) {
+    return Math.max(t3, Math.min(e2, i2));
+  }
+  var Animate = class {
+    advance(e2) {
+      if (!this.isRunning) return;
+      let i2 = false;
+      if (this.lerp) this.value = (s = this.value, o = this.to, n = 60 * this.lerp, r = e2, function(t3, e3, i3) {
+        return (1 - i3) * t3 + i3 * e3;
+      }(s, o, 1 - Math.exp(-n * r))), Math.round(this.value) === this.to && (this.value = this.to, i2 = true);
+      else {
+        this.currentTime += e2;
+        const s2 = t(0, this.currentTime / this.duration, 1);
+        i2 = s2 >= 1;
+        const o2 = i2 ? 1 : this.easing(s2);
+        this.value = this.from + (this.to - this.from) * o2;
+      }
+      var s, o, n, r;
+      this.onUpdate?.(this.value, i2), i2 && this.stop();
+    }
+    stop() {
+      this.isRunning = false;
+    }
+    fromTo(t3, e2, { lerp: i2 = 0.1, duration: s = 1, easing: o = (t4) => t4, onStart: n, onUpdate: r }) {
+      this.from = this.value = t3, this.to = e2, this.lerp = i2, this.duration = s, this.easing = o, this.currentTime = 0, this.isRunning = true, n?.(), this.onUpdate = r;
+    }
+  };
+  var Dimensions = class {
+    constructor({ wrapper: t3, content: e2, autoResize: i2 = true, debounce: s = 250 } = {}) {
+      this.wrapper = t3, this.content = e2, i2 && (this.debouncedResize = /* @__PURE__ */ function(t4, e3) {
+        let i3;
+        return function() {
+          let s2 = arguments, o = this;
+          clearTimeout(i3), i3 = setTimeout(function() {
+            t4.apply(o, s2);
+          }, e3);
+        };
+      }(this.resize, s), this.wrapper === window ? window.addEventListener("resize", this.debouncedResize, false) : (this.wrapperResizeObserver = new ResizeObserver(this.debouncedResize), this.wrapperResizeObserver.observe(this.wrapper)), this.contentResizeObserver = new ResizeObserver(this.debouncedResize), this.contentResizeObserver.observe(this.content)), this.resize();
+    }
+    destroy() {
+      this.wrapperResizeObserver?.disconnect(), this.contentResizeObserver?.disconnect(), window.removeEventListener("resize", this.debouncedResize, false);
+    }
+    resize = () => {
+      this.onWrapperResize(), this.onContentResize();
+    };
+    onWrapperResize = () => {
+      this.wrapper === window ? (this.width = window.innerWidth, this.height = window.innerHeight) : (this.width = this.wrapper.clientWidth, this.height = this.wrapper.clientHeight);
+    };
+    onContentResize = () => {
+      this.wrapper === window ? (this.scrollHeight = this.content.scrollHeight, this.scrollWidth = this.content.scrollWidth) : (this.scrollHeight = this.wrapper.scrollHeight, this.scrollWidth = this.wrapper.scrollWidth);
+    };
+    get limit() {
+      return { x: this.scrollWidth - this.width, y: this.scrollHeight - this.height };
+    }
+  };
+  var Emitter = class {
+    constructor() {
+      this.events = {};
+    }
+    emit(t3, ...e2) {
+      let i2 = this.events[t3] || [];
+      for (let t4 = 0, s = i2.length; t4 < s; t4++) i2[t4](...e2);
+    }
+    on(t3, e2) {
+      return this.events[t3]?.push(e2) || (this.events[t3] = [e2]), () => {
+        this.events[t3] = this.events[t3]?.filter((t4) => e2 !== t4);
+      };
+    }
+    off(t3, e2) {
+      this.events[t3] = this.events[t3]?.filter((t4) => e2 !== t4);
+    }
+    destroy() {
+      this.events = {};
+    }
+  };
+  var e = 100 / 6;
+  var VirtualScroll = class {
+    constructor(t3, { wheelMultiplier: e2 = 1, touchMultiplier: i2 = 1 }) {
+      this.element = t3, this.wheelMultiplier = e2, this.touchMultiplier = i2, this.touchStart = { x: null, y: null }, this.emitter = new Emitter(), window.addEventListener("resize", this.onWindowResize, false), this.onWindowResize(), this.element.addEventListener("wheel", this.onWheel, { passive: false }), this.element.addEventListener("touchstart", this.onTouchStart, { passive: false }), this.element.addEventListener("touchmove", this.onTouchMove, { passive: false }), this.element.addEventListener("touchend", this.onTouchEnd, { passive: false });
+    }
+    on(t3, e2) {
+      return this.emitter.on(t3, e2);
+    }
+    destroy() {
+      this.emitter.destroy(), window.removeEventListener("resize", this.onWindowResize, false), this.element.removeEventListener("wheel", this.onWheel, { passive: false }), this.element.removeEventListener("touchstart", this.onTouchStart, { passive: false }), this.element.removeEventListener("touchmove", this.onTouchMove, { passive: false }), this.element.removeEventListener("touchend", this.onTouchEnd, { passive: false });
+    }
+    onTouchStart = (t3) => {
+      const { clientX: e2, clientY: i2 } = t3.targetTouches ? t3.targetTouches[0] : t3;
+      this.touchStart.x = e2, this.touchStart.y = i2, this.lastDelta = { x: 0, y: 0 }, this.emitter.emit("scroll", { deltaX: 0, deltaY: 0, event: t3 });
+    };
+    onTouchMove = (t3) => {
+      const { clientX: e2, clientY: i2 } = t3.targetTouches ? t3.targetTouches[0] : t3, s = -(e2 - this.touchStart.x) * this.touchMultiplier, o = -(i2 - this.touchStart.y) * this.touchMultiplier;
+      this.touchStart.x = e2, this.touchStart.y = i2, this.lastDelta = { x: s, y: o }, this.emitter.emit("scroll", { deltaX: s, deltaY: o, event: t3 });
+    };
+    onTouchEnd = (t3) => {
+      this.emitter.emit("scroll", { deltaX: this.lastDelta.x, deltaY: this.lastDelta.y, event: t3 });
+    };
+    onWheel = (t3) => {
+      let { deltaX: i2, deltaY: s, deltaMode: o } = t3;
+      i2 *= 1 === o ? e : 2 === o ? this.windowWidth : 1, s *= 1 === o ? e : 2 === o ? this.windowHeight : 1, i2 *= this.wheelMultiplier, s *= this.wheelMultiplier, this.emitter.emit("scroll", { deltaX: i2, deltaY: s, event: t3 });
+    };
+    onWindowResize = () => {
+      this.windowWidth = window.innerWidth, this.windowHeight = window.innerHeight;
+    };
+  };
+  var Lenis = class {
+    constructor({ wrapper: t3 = window, content: e2 = document.documentElement, wheelEventsTarget: i2 = t3, eventsTarget: s = i2, smoothWheel: o = true, syncTouch: n = false, syncTouchLerp: r = 0.075, touchInertiaMultiplier: l = 35, duration: h, easing: a = (t4) => Math.min(1, 1.001 - Math.pow(2, -10 * t4)), lerp: c = !h && 0.1, infinite: d = false, orientation: p = "vertical", gestureOrientation: u = "vertical", touchMultiplier: m = 1, wheelMultiplier: v = 1, autoResize: g = true, __experimental__naiveDimensions: S = false } = {}) {
+      this.__isSmooth = false, this.__isScrolling = false, this.__isStopped = false, this.__isLocked = false, this.onVirtualScroll = ({ deltaX: t4, deltaY: e3, event: i3 }) => {
+        if (i3.ctrlKey) return;
+        const s2 = i3.type.includes("touch"), o2 = i3.type.includes("wheel");
+        if (this.options.syncTouch && s2 && "touchstart" === i3.type && !this.isStopped && !this.isLocked) return void this.reset();
+        const n2 = 0 === t4 && 0 === e3, r2 = "vertical" === this.options.gestureOrientation && 0 === e3 || "horizontal" === this.options.gestureOrientation && 0 === t4;
+        if (n2 || r2) return;
+        let l2 = i3.composedPath();
+        if (l2 = l2.slice(0, l2.indexOf(this.rootElement)), l2.find((t5) => {
+          var e4, i4, n3, r3, l3;
+          return (null === (e4 = t5.hasAttribute) || void 0 === e4 ? void 0 : e4.call(t5, "data-lenis-prevent")) || s2 && (null === (i4 = t5.hasAttribute) || void 0 === i4 ? void 0 : i4.call(t5, "data-lenis-prevent-touch")) || o2 && (null === (n3 = t5.hasAttribute) || void 0 === n3 ? void 0 : n3.call(t5, "data-lenis-prevent-wheel")) || (null === (r3 = t5.classList) || void 0 === r3 ? void 0 : r3.contains("lenis")) && !(null === (l3 = t5.classList) || void 0 === l3 ? void 0 : l3.contains("lenis-stopped"));
+        })) return;
+        if (this.isStopped || this.isLocked) return void i3.preventDefault();
+        if (this.isSmooth = this.options.syncTouch && s2 || this.options.smoothWheel && o2, !this.isSmooth) return this.isScrolling = false, void this.animate.stop();
+        i3.preventDefault();
+        let h2 = e3;
+        "both" === this.options.gestureOrientation ? h2 = Math.abs(e3) > Math.abs(t4) ? e3 : t4 : "horizontal" === this.options.gestureOrientation && (h2 = t4);
+        const a2 = s2 && this.options.syncTouch, c2 = s2 && "touchend" === i3.type && Math.abs(h2) > 5;
+        c2 && (h2 = this.velocity * this.options.touchInertiaMultiplier), this.scrollTo(this.targetScroll + h2, Object.assign({ programmatic: false }, a2 ? { lerp: c2 ? this.options.syncTouchLerp : 1 } : { lerp: this.options.lerp, duration: this.options.duration, easing: this.options.easing }));
+      }, this.onNativeScroll = () => {
+        if (!this.__preventNextScrollEvent && !this.isScrolling) {
+          const t4 = this.animatedScroll;
+          this.animatedScroll = this.targetScroll = this.actualScroll, this.velocity = 0, this.direction = Math.sign(this.animatedScroll - t4), this.emit();
+        }
+      }, window.lenisVersion = "1.0.42", t3 !== document.documentElement && t3 !== document.body || (t3 = window), this.options = { wrapper: t3, content: e2, wheelEventsTarget: i2, eventsTarget: s, smoothWheel: o, syncTouch: n, syncTouchLerp: r, touchInertiaMultiplier: l, duration: h, easing: a, lerp: c, infinite: d, gestureOrientation: u, orientation: p, touchMultiplier: m, wheelMultiplier: v, autoResize: g, __experimental__naiveDimensions: S }, this.animate = new Animate(), this.emitter = new Emitter(), this.dimensions = new Dimensions({ wrapper: t3, content: e2, autoResize: g }), this.toggleClassName("lenis", true), this.velocity = 0, this.isLocked = false, this.isStopped = false, this.isSmooth = n || o, this.isScrolling = false, this.targetScroll = this.animatedScroll = this.actualScroll, this.options.wrapper.addEventListener("scroll", this.onNativeScroll, false), this.virtualScroll = new VirtualScroll(s, { touchMultiplier: m, wheelMultiplier: v }), this.virtualScroll.on("scroll", this.onVirtualScroll);
+    }
+    destroy() {
+      this.emitter.destroy(), this.options.wrapper.removeEventListener("scroll", this.onNativeScroll, false), this.virtualScroll.destroy(), this.dimensions.destroy(), this.toggleClassName("lenis", false), this.toggleClassName("lenis-smooth", false), this.toggleClassName("lenis-scrolling", false), this.toggleClassName("lenis-stopped", false), this.toggleClassName("lenis-locked", false);
+    }
+    on(t3, e2) {
+      return this.emitter.on(t3, e2);
+    }
+    off(t3, e2) {
+      return this.emitter.off(t3, e2);
+    }
+    setScroll(t3) {
+      this.isHorizontal ? this.rootElement.scrollLeft = t3 : this.rootElement.scrollTop = t3;
+    }
+    resize() {
+      this.dimensions.resize();
+    }
+    emit() {
+      this.emitter.emit("scroll", this);
+    }
+    reset() {
+      this.isLocked = false, this.isScrolling = false, this.animatedScroll = this.targetScroll = this.actualScroll, this.velocity = 0, this.animate.stop();
+    }
+    start() {
+      this.isStopped && (this.isStopped = false, this.reset());
+    }
+    stop() {
+      this.isStopped || (this.isStopped = true, this.animate.stop(), this.reset());
+    }
+    raf(t3) {
+      const e2 = t3 - (this.time || t3);
+      this.time = t3, this.animate.advance(1e-3 * e2);
+    }
+    scrollTo(e2, { offset: i2 = 0, immediate: s = false, lock: o = false, duration: n = this.options.duration, easing: r = this.options.easing, lerp: l = !n && this.options.lerp, onComplete: h, force: a = false, programmatic: c = true } = {}) {
+      if (!this.isStopped && !this.isLocked || a) {
+        if (["top", "left", "start"].includes(e2)) e2 = 0;
+        else if (["bottom", "right", "end"].includes(e2)) e2 = this.limit;
+        else {
+          let t3;
+          if ("string" == typeof e2 ? t3 = document.querySelector(e2) : (null == e2 ? void 0 : e2.nodeType) && (t3 = e2), t3) {
+            if (this.options.wrapper !== window) {
+              const t4 = this.options.wrapper.getBoundingClientRect();
+              i2 -= this.isHorizontal ? t4.left : t4.top;
+            }
+            const s2 = t3.getBoundingClientRect();
+            e2 = (this.isHorizontal ? s2.left : s2.top) + this.animatedScroll;
+          }
+        }
+        if ("number" == typeof e2) {
+          if (e2 += i2, e2 = Math.round(e2), this.options.infinite ? c && (this.targetScroll = this.animatedScroll = this.scroll) : e2 = t(0, e2, this.limit), s) return this.animatedScroll = this.targetScroll = e2, this.setScroll(this.scroll), this.reset(), void (null == h || h(this));
+          if (!c) {
+            if (e2 === this.targetScroll) return;
+            this.targetScroll = e2;
+          }
+          this.animate.fromTo(this.animatedScroll, e2, { duration: n, easing: r, lerp: l, onStart: () => {
+            o && (this.isLocked = true), this.isScrolling = true;
+          }, onUpdate: (t3, e3) => {
+            this.isScrolling = true, this.velocity = t3 - this.animatedScroll, this.direction = Math.sign(this.velocity), this.animatedScroll = t3, this.setScroll(this.scroll), c && (this.targetScroll = t3), e3 || this.emit(), e3 && (this.reset(), this.emit(), null == h || h(this), this.__preventNextScrollEvent = true, requestAnimationFrame(() => {
+              delete this.__preventNextScrollEvent;
+            }));
+          } });
+        }
+      }
+    }
+    get rootElement() {
+      return this.options.wrapper === window ? document.documentElement : this.options.wrapper;
+    }
+    get limit() {
+      return this.options.__experimental__naiveDimensions ? this.isHorizontal ? this.rootElement.scrollWidth - this.rootElement.clientWidth : this.rootElement.scrollHeight - this.rootElement.clientHeight : this.dimensions.limit[this.isHorizontal ? "x" : "y"];
+    }
+    get isHorizontal() {
+      return "horizontal" === this.options.orientation;
+    }
+    get actualScroll() {
+      return this.isHorizontal ? this.rootElement.scrollLeft : this.rootElement.scrollTop;
+    }
+    get scroll() {
+      return this.options.infinite ? (t3 = this.animatedScroll, e2 = this.limit, (t3 % e2 + e2) % e2) : this.animatedScroll;
+      var t3, e2;
+    }
+    get progress() {
+      return 0 === this.limit ? 1 : this.scroll / this.limit;
+    }
+    get isSmooth() {
+      return this.__isSmooth;
+    }
+    set isSmooth(t3) {
+      this.__isSmooth !== t3 && (this.__isSmooth = t3, this.toggleClassName("lenis-smooth", t3));
+    }
+    get isScrolling() {
+      return this.__isScrolling;
+    }
+    set isScrolling(t3) {
+      this.__isScrolling !== t3 && (this.__isScrolling = t3, this.toggleClassName("lenis-scrolling", t3));
+    }
+    get isStopped() {
+      return this.__isStopped;
+    }
+    set isStopped(t3) {
+      this.__isStopped !== t3 && (this.__isStopped = t3, this.toggleClassName("lenis-stopped", t3));
+    }
+    get isLocked() {
+      return this.__isLocked;
+    }
+    set isLocked(t3) {
+      this.__isLocked !== t3 && (this.__isLocked = t3, this.toggleClassName("lenis-locked", t3));
+    }
+    get className() {
+      let t3 = "lenis";
+      return this.isStopped && (t3 += " lenis-stopped"), this.isLocked && (t3 += " lenis-locked"), this.isScrolling && (t3 += " lenis-scrolling"), this.isSmooth && (t3 += " lenis-smooth"), t3;
+    }
+    toggleClassName(t3, e2) {
+      this.rootElement.classList.toggle(t3, e2), this.emitter.emit("className change", this);
+    }
+  };
+
+  // src/interactions/lenis.js
+  var initLenis = function() {
+    const lenis = new Lenis({
+      duration: 1,
+      easing: (t3) => t3 === 1 ? 1 : 1 - Math.pow(2, -10 * t3),
+      // https://easings.net
+      touchMultiplier: 1.5
+    });
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    lenis.on("scroll", () => {
+      if (!ScrollTrigger) return;
+      ScrollTrigger.update();
+    });
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1e3);
+    });
+    gsap.ticker.lagSmoothing(0);
+    function anchorLinks() {
+      const anchorLinks2 = document.querySelectorAll("[scroll-to]");
+      if (anchorLinks2 == null) {
+        return;
+      }
+      anchorLinks2.forEach((item2) => {
+        const targetID = item2.getAttribute("scroll-to");
+        const target = document.getElementById(targetID);
+        if (!target) return;
+        item2.addEventListener("click", (event) => {
+          lenis.scrollTo(target, {
+            duration: 1.85,
+            easing: (t3) => t3 === 1 ? 1 : 1 - Math.pow(2, -10 * t3)
+          });
+        });
+      });
+    }
+    anchorLinks();
+    function stopScroll() {
+      const stopScrollLinks = document.querySelectorAll('[scroll="stop"]');
+      if (stopScrollLinks == null) {
+        return;
+      }
+      stopScrollLinks.forEach((item2) => {
+        item2.addEventListener("click", (event) => {
+          lenis.stop();
+        });
+      });
+    }
+    stopScroll();
+    function startScroll() {
+      const startScrollLinks = document.querySelectorAll('[scroll="start"]');
+      if (startScrollLinks == null) {
+        return;
+      }
+      startScrollLinks.forEach((item2) => {
+        item2.addEventListener("click", (event) => {
+          lenis.start();
+        });
+      });
+    }
+    startScroll();
+    function toggleScroll() {
+      const toggleScrollLinks = document.querySelectorAll('[scroll="toggle"]');
+      if (toggleScrollLinks == null) {
+        return;
+      }
+      toggleScrollLinks.forEach((item2) => {
+        let stopScroll2 = false;
+        item2.addEventListener("click", (event) => {
+          stopScroll2 = !stopScroll2;
+          if (stopScroll2) lenis.stop();
+          else lenis.start();
+        });
+      });
+    }
+    toggleScroll();
+  };
+
+  // src/interactions/load.js
+  init_live_reload();
+
+  // src/utilities.js
+  init_live_reload();
+  var attr = function(defaultVal, attrVal) {
+    const defaultValType = typeof defaultVal;
+    if (typeof attrVal !== "string" || attrVal.trim() === "") return defaultVal;
+    if (attrVal === "true" && defaultValType === "boolean") return true;
+    if (attrVal === "false" && defaultValType === "boolean") return false;
+    if (isNaN(attrVal) && defaultValType === "string") return attrVal;
+    if (!isNaN(attrVal) && defaultValType === "number") return +attrVal;
+    return defaultVal;
+  };
+  var checkBreakpoints = function(item2, animationID, gsapContext) {
+    if (!item2 || !animationID || !gsapContext) {
+      console.error(`GSAP checkBreakpoints Error in ${animationID}`);
+      return;
+    }
+    let { isMobile, isTablet, isDesktop, reduceMotion } = gsapContext.conditions;
+    if (isMobile === void 0 || isTablet === void 0 || isDesktop === void 0) {
+      console.error(`GSAP Match Media Conditions Not Defined`);
+      return;
+    }
+    const RUN_DESKTOP = `data-ix-${animationID}-desktop`;
+    const RUN_TABLET = `data-ix-${animationID}-tablet`;
+    const RUN_MOBILE = `data-ix-${animationID}-mobile`;
+    const RUN_ALL = `data-ix-${animationID}-run`;
+    runAll = attr(true, item2.getAttribute(RUN_ALL));
+    runMobile = attr(true, item2.getAttribute(RUN_MOBILE));
+    runTablet = attr(true, item2.getAttribute(RUN_TABLET));
+    runDesktop = attr(true, item2.getAttribute(RUN_DESKTOP));
+    if (runAll === false) return false;
+    if (runMobile === false && isMobile) return false;
+    if (runTablet === false && isTablet) return false;
+    if (runDesktop === false && isDesktop) return false;
+    return true;
+  };
+  var getClipDirection = function(attributeValue) {
+    let clipMask = attributeValue;
+    const clipDirections = {
+      left: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
+      right: "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)",
+      top: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
+      bottom: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
+      full: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)"
+    };
+    if (attributeValue === "left") {
+      clipMask = clipDirections.left;
+    }
+    if (attributeValue === "right") {
+      clipMask = clipDirections.right;
+    }
+    if (attributeValue === "top") {
+      clipMask = clipDirections.top;
+    }
+    if (attributeValue === "bottom") {
+      clipMask = clipDirections.bottom;
+    }
+    if (attributeValue === "full") {
+      clipMask = clipDirections.full;
+    }
+    return clipMask;
+  };
+
+  // src/interactions/load.js
+  var load = function(gsapContext) {
+    const ANIMATION_ID = "load";
+    const ATTRIBUTE = "data-ix-load";
+    const HEADING = "heading";
+    const ITEM = "item";
+    const IMAGE = "image";
+    const LINE = "line";
+    const STAGGER = "stagger";
+    const POSITION = "data-ix-load-position";
+    const DEFAULT_STAGGER = "<0.2";
+    const items = gsap.utils.toArray(`[${ATTRIBUTE}]`);
+    if (items.length === 0) return;
+    const tl = gsap.timeline({
+      paused: true,
+      defaults: {
+        ease: "power1.out",
+        duration: 0.8
+      }
+    });
+    const loadHeading = function(item2) {
+      gsap.set(item2, { autoAlpha: 1 });
+      const position = attr(0, item2.getAttribute(POSITION));
+      if (item2.classList.contains("w-richtext")) {
+        item2 = item2.children;
+      }
+      SplitText.create(item2, {
+        type: "words",
+        // linesClass: 'line',
+        wordsClass: "word",
+        // charsClass: "char",
+        // mask: 'lines',
+        autoSplit: true,
+        onSplit: (self2) => {
+          return tl.from(
+            self2.words,
+            {
+              y: "50%",
+              rotateX: 45,
+              autoAlpha: 0,
+              stagger: 0.075
+            },
+            position
+          );
+        }
+      });
+    };
+    const loadImage = function(item2) {
+      const position = attr(DEFAULT_STAGGER, item2.getAttribute(POSITION));
+      tl.fromTo(item2, { autoAlpha: 0, scale: 0.7 }, { autoAlpha: 1, scale: 1 }, position);
+    };
+    const loadLine = function(item2) {
+      const position = attr(DEFAULT_STAGGER, item2.getAttribute(POSITION));
+      tl.fromTo(
+        item2,
+        { clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)" },
+        { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)" },
+        position
+      );
+    };
+    const loadItem = function(item2) {
+      const position = attr(DEFAULT_STAGGER, item2.getAttribute(POSITION));
+      tl.fromTo(item2, { autoAlpha: 0, y: "2rem" }, { autoAlpha: 1, y: "0rem" }, position);
+    };
+    const loadStagger = function(item2) {
+      if (!item2) return;
+      const children = gsap.utils.toArray(item2.children);
+      if (children.length === 0) return;
+      children.forEach((child, index) => {
+        if (index === 0) {
+          gsap.set(item2, { autoAlpha: 1 });
+        }
+        loadItem(child);
+      });
+    };
+    const loadSimple = function(item2) {
+      if (!item2) return;
+      tl.fromTo(
+        item2,
+        {
+          autoAlpha: 0
+        },
+        {
+          autoAlpha: 1,
+          ease: "power1.out",
+          duration: 1.2
+        },
+        "<"
+      );
+    };
+    items.forEach((item2) => {
+      if (!item2) return;
+      const loadType = item2.getAttribute(ATTRIBUTE);
+      let runOnBreakpoint = checkBreakpoints(item2, ANIMATION_ID, gsapContext);
+      if (runOnBreakpoint === false && item2.getAttribute("data-ix-load-run") === "false") return;
+      let { isMobile, isTablet, isDesktop, reduceMotion } = gsapContext.conditions;
+      if (reduceMotion || runOnBreakpoint === false && item2.getAttribute("data-ix-load-run") === "true") {
+        if (loadType === STAGGER) {
+          loadSimple(item2.children);
+        } else {
+          loadSimple(item2);
+        }
+      } else {
+        if (loadType === HEADING) {
+          loadHeading(item2);
+        }
+        if (loadType === IMAGE) {
+          loadImage(item2);
+        }
+        if (loadType === LINE) {
+          loadLine(item2);
+        }
+        if (loadType === ITEM) {
+          loadItem(item2);
+        }
+        if (loadType === STAGGER) {
+          loadStagger(item2);
+        }
+      }
+    });
+    document.fonts.ready.then(() => {
+      tl.play(0);
+    });
+    return tl;
+  };
+
+  // src/interactions/scrollin.js
+  init_live_reload();
+  var scrollIn = function(gsapContext) {
+    const ANIMATION_ID = "scrollin";
+    const ELEMENT = "data-ix-scrollin";
+    const HEADING = "heading";
+    const ITEM = "item";
+    const CONTAINER = "container";
+    const STAGGER = "stagger";
+    const RICH_TEXT = "rich-text";
+    const IMAGE_WRAP = "image-wrap";
+    const IMAGE = "image";
+    const LINE = "line";
+    const SCROLL_TOGGLE_ACTIONS = "data-ix-scrollin-toggle-actions";
+    const SCROLL_SCRUB = "data-ix-scrollin-scrub";
+    const SCROLL_START = "data-ix-scrollin-start";
+    const SCROLL_END = "data-ix-scrollin-end";
+    const CLIP_DIRECTION = "data-ix-scrollin-clip-direction";
+    const SCROLL_STAGGER = "data-ix-scrollin-stagger";
+    const EASE_SMALL = 0.1;
+    const EASE_LARGE = 0.3;
+    const DURATION = 0.6;
+    const EASE = "power1.out";
+    const scrollInTL = function(item2) {
+      const settings = {
+        scrub: false,
+        toggleActions: "play none none none",
+        start: "top 90%",
+        end: "top 75%"
+      };
+      settings.toggleActions = attr(settings.toggleActions, item2.getAttribute(SCROLL_TOGGLE_ACTIONS));
+      settings.scrub = attr(settings.scrub, item2.getAttribute(SCROLL_SCRUB));
+      settings.start = attr(settings.start, item2.getAttribute(SCROLL_START));
+      settings.end = attr(settings.end, item2.getAttribute(SCROLL_END));
+      const tl = gsap.timeline({
+        defaults: {
+          duration: DURATION,
+          ease: EASE
+        },
+        scrollTrigger: {
+          trigger: item2,
+          start: settings.start,
+          end: settings.end,
+          toggleActions: settings.toggleActions,
+          scrub: settings.scrub
+        }
+      });
+      return tl;
+    };
+    const defaultTween = function(item2, tl, options = {}) {
+      const varsFrom = {
+        autoAlpha: 0,
+        y: "2rem"
+      };
+      const varsTo = {
+        autoAlpha: 1,
+        y: "0rem"
+      };
+      if (options.stagger) {
+        varsTo.stagger = { each: options.stagger, from: "start" };
+      }
+      if (options.stagger === "small") {
+        varsTo.stagger = { each: EASE_SMALL, from: "start" };
+      }
+      if (options.stagger === "large") {
+        varsTo.stagger = { each: EASE_LARGE, from: "start" };
+      }
+      const tween2 = tl.fromTo(item2, varsFrom, varsTo);
+      return tween2;
+    };
+    const scrollInHeading = function(item2) {
+      if (item2.classList.contains("w-richtext")) {
+        item2 = item2.firstChild;
+      }
+      SplitText.create(item2, {
+        type: "words",
+        // 'chars, words, lines
+        // linesClass: "line",
+        wordsClass: "word",
+        // charsClass: "char",
+        // mask: 'lines',
+        autoSplit: true,
+        //have it auto adjust based on width
+        // mask: 'lines',
+        onSplit(self2) {
+          const tl = scrollInTL(item2);
+          tween = defaultTween(self2.words, tl, { stagger: "small" });
+          const revertText = function(self3) {
+            self3.revert();
+          };
+          tween.eventCallback("onComplete", revertText, [self2]);
+          return tween;
+        }
+      });
+    };
+    const scrollInItem = function(item2) {
+      if (!item2) return;
+      if (item2.classList.contains("w-richtext")) {
+        const children = gsap.utils.toArray(item2.children);
+        if (children.length === 0) return;
+        children.forEach((child) => {
+          const tl = scrollInTL(child);
+          const tween2 = defaultTween(child, tl);
+        });
+      } else {
+        const tl = scrollInTL(item2);
+        const tween2 = defaultTween(item2, tl);
+      }
+    };
+    const scrollInImage = function(item2) {
+      if (!item2) return;
+      const child = item2.firstChild;
+      const tl = scrollInTL(item2);
+      tl.fromTo(
+        child,
+        {
+          scale: 1.2
+        },
+        {
+          scale: 1,
+          duration: 1
+        }
+      );
+      tl.fromTo(
+        item2,
+        {
+          scale: 0.9
+        },
+        {
+          scale: 1,
+          duration: 1
+        },
+        "<"
+      );
+    };
+    const scrollInLine = function(item2) {
+      if (!item2) return;
+      const clipAttr = attr("left", item2.getAttribute(CLIP_DIRECTION));
+      const clipStart = getClipDirection(clipAttr);
+      const clipEnd = getClipDirection("full");
+      const tl = scrollInTL(item2);
+      tl.fromTo(
+        item2,
+        {
+          clipPath: clipStart
+        },
+        {
+          clipPath: clipEnd
+        }
+      );
+    };
+    const scrollInContainer = function(item2) {
+      if (!item2) return;
+      const children = gsap.utils.toArray(item2.children);
+      if (children.length === 0) return;
+      children.forEach((child) => {
+        const tl = scrollInTL(child);
+        const tween2 = defaultTween(child, tl);
+      });
+    };
+    const scrollInStagger = function(item2) {
+      if (!item2) return;
+      let parent = item2;
+      const style = window.getComputedStyle(item2);
+      const display = style.getPropertyValue("display");
+      if (display === "contents") {
+        parent = item2.parentElement;
+      }
+      const staggerAmount = attr(EASE_LARGE, item2.getAttribute(SCROLL_STAGGER));
+      const children = gsap.utils.toArray(item2.children);
+      if (children.length === 0) return;
+      const tl = scrollInTL(parent);
+      const tween2 = defaultTween(children, tl, { stagger: staggerAmount });
+    };
+    const scrollInRichText = function(item2) {
+      if (!item2) return;
+      const children = gsap.utils.toArray(item2.children);
+      if (children.length === 0) return;
+      children.forEach((child) => {
+        const childTag = child.tagName;
+        if (["H1", "H2", "H3", "H4", "H5", "H6"].includes(childTag)) {
+          scrollInHeading(child);
+        }
+        if (childTag === "FIGURE") {
+          scrollInImage(child);
+        } else {
+          scrollInItem(child);
+        }
+      });
+    };
+    const items = gsap.utils.toArray(`[${ELEMENT}]`);
+    items.forEach((item2) => {
+      if (!item2) return;
+      let runOnBreakpoint = checkBreakpoints(item2, ANIMATION_ID, gsapContext);
+      if (runOnBreakpoint === false) return;
+      const scrollInType = item2.getAttribute(ELEMENT);
+      if (scrollInType === HEADING) {
+        scrollInHeading(item2);
+      }
+      if (scrollInType === ITEM) {
+        scrollInItem(item2);
+      }
+      if (scrollInType === IMAGE) {
+        scrollInImage(item2);
+      }
+      if (scrollInType === LINE) {
+        scrollInLine(item2);
+      }
+      if (scrollInType === CONTAINER) {
+        scrollInContainer(item2);
+      }
+      if (scrollInType === STAGGER) {
+        scrollInStagger(item2);
+      }
+      if (scrollInType === RICH_TEXT) {
+        scrollInRichText(item2);
+      }
+    });
+  };
+
+  // src/interactions/scrolling.js
+  init_live_reload();
+  var scrolling = function(gsapContext) {
+    const ANIMATION_ID = "scrolling";
+    const WRAP = `[data-ix-scrolling="wrap"]`;
+    const TRIGGER = `[data-ix-scrolling="trigger"]`;
+    const LAYER = '[data-ix-scrolling="layer"]';
+    const START = "data-ix-scrolling-start";
+    const END = "data-ix-scrolling-end";
+    const TABLET_START = "data-ix-scrolling-start-tablet";
+    const TABLET_END = "data-ix-scrolling-end-tablet";
+    const MOBILE_START = "data-ix-scrolling-start-mobile";
+    const MOBILE_END = "data-ix-scrolling-end-mobile";
+    const SCRUB = "data-ix-scrolling-scrub";
+    const POSITION = "data-ix-scrolling-position";
+    const X_START = "data-ix-scrolling-x-start";
+    const X_END = "data-ix-scrolling-x-end";
+    const Y_START = "data-ix-scrolling-y-start";
+    const Y_END = "data-ix-scrolling-y-end";
+    const SCALE_START = "data-ix-scrolling-scale-start";
+    const SCALE_END = "data-ix-scrolling-scale-end";
+    const WIDTH_START = "data-ix-scrolling-width-start";
+    const WIDTH_END = "data-ix-scrolling-width-end";
+    const HEIGHT_START = "data-ix-scrolling-height-start";
+    const HEIGHT_END = "data-ix-scrolling-height-end";
+    const ROTATE_X_START = "data-ix-scrolling-rotate-x-start";
+    const ROTATE_X_END = "data-ix-scrolling-rotate-x-end";
+    const ROTATE_Y_START = "data-ix-scrolling-rotate-y-start";
+    const ROTATE_Y_END = "data-ix-scrolling-rotate-y-end";
+    const ROTATE_Z_START = "data-ix-scrolling-rotate-z-start";
+    const ROTATE_Z_END = "data-ix-scrolling-rotate-z-end";
+    const OPACITY_START = "data-ix-scrolling-opacity-start";
+    const OPACITY_END = "data-ix-scrolling-opacity-end";
+    const CLIP_START = "data-ix-scrolling-clip-start";
+    const CLIP_END = "data-ix-scrolling-clip-end";
+    const CLIP_TYPE = "data-ix-scrolling-clip-type";
+    const scrollingItems = gsap.utils.toArray(WRAP);
+    scrollingItems.forEach((scrollingItem) => {
+      const layers = scrollingItem.querySelectorAll(LAYER);
+      if (!scrollingItem || layers.length === 0) return;
+      let trigger = scrollingItem.querySelector(TRIGGER);
+      if (!trigger) {
+        trigger = scrollingItem;
+      }
+      let runOnBreakpoint = checkBreakpoints(scrollingItem, ANIMATION_ID, gsapContext);
+      if (runOnBreakpoint === false) return;
+      let { isMobile, isTablet, isDesktop, reduceMotion } = gsapContext.conditions;
+      const tlSettings = {
+        scrub: 0.5,
+        start: "top bottom",
+        end: "bottom top"
+      };
+      tlSettings.start = attr(tlSettings.start, scrollingItem.getAttribute(START));
+      tlSettings.end = attr(tlSettings.end, scrollingItem.getAttribute(END));
+      tlSettings.scrub = attr(tlSettings.scrub, scrollingItem.getAttribute(SCRUB));
+      if (isTablet && scrollingItem.getAttribute(TABLET_START)) {
+        tlSettings.start = attr(tlSettings.start, scrollingItem.getAttribute(TABLET_START));
+      }
+      if (isTablet && scrollingItem.getAttribute(TABLET_END)) {
+        tlSettings.start = attr(tlSettings.start, scrollingItem.getAttribute(TABLET_END));
+      }
+      if (isMobile && scrollingItem.getAttribute(MOBILE_START)) {
+        tlSettings.start = attr(tlSettings.start, scrollingItem.getAttribute(MOBILE_START));
+      }
+      if (isMobile && scrollingItem.getAttribute(MOBILE_END)) {
+        tlSettings.start = attr(tlSettings.start, scrollingItem.getAttribute(MOBILE_END));
+      }
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger,
+          start: tlSettings.start,
+          end: tlSettings.end,
+          scrub: tlSettings.scrub,
+          markers: false
+        },
+        defaults: {
+          duration: 1,
+          ease: "none"
+        }
+      });
+      layers.forEach((layer) => {
+        if (!layer) return;
+        const varsFrom = {};
+        const varsTo = {};
+        const processAttribute = function(attributeName, defaultValue) {
+          const hasAttribute = layer.hasAttribute(attributeName);
+          const attributeValue = attr(defaultValue, layer.getAttribute(attributeName));
+          if (hasAttribute) {
+            return attributeValue;
+          } else {
+            return;
+          }
+        };
+        varsFrom.x = processAttribute(X_START, "0%");
+        varsTo.x = processAttribute(X_END, "0%");
+        varsFrom.y = processAttribute(Y_START, "0%");
+        varsTo.y = processAttribute(Y_END, "0%");
+        varsFrom.scale = processAttribute(SCALE_START, 1);
+        varsTo.scale = processAttribute(SCALE_END, 1);
+        varsFrom.width = processAttribute(WIDTH_START, "0%");
+        varsTo.width = processAttribute(WIDTH_END, "0%");
+        varsFrom.height = processAttribute(HEIGHT_START, "0%");
+        varsTo.height = processAttribute(HEIGHT_END, "0%");
+        varsFrom.rotateX = processAttribute(ROTATE_X_START, 0);
+        varsTo.rotateX = processAttribute(ROTATE_X_END, 0);
+        varsFrom.rotateY = processAttribute(ROTATE_Y_START, 0);
+        varsTo.rotateY = processAttribute(ROTATE_Y_END, 0);
+        varsFrom.rotateZ = processAttribute(ROTATE_Z_START, 0);
+        varsTo.rotateZ = processAttribute(ROTATE_Z_END, 0);
+        varsFrom.opacity = processAttribute(OPACITY_START, 0);
+        varsTo.opacity = processAttribute(OPACITY_END, 0);
+        varsFrom.clipPath = processAttribute(CLIP_START, "string");
+        varsTo.clipPath = processAttribute(CLIP_END, "string");
+        const position = attr("<", layer.getAttribute(POSITION));
+        let fromTween = tl.fromTo(layer, varsFrom, varsTo, position);
+      });
+    });
+  };
+
+  // src/interactions/marquee.js
+  init_live_reload();
+  var marquee = function(gsapContext) {
+    const ANIMATION_ID = "marquee";
+    const WRAP = '[data-ix-marquee="wrap"]';
+    const LIST = '[data-ix-marquee="list"]';
+    const VERTICAL = "data-ix-marquee-vertical";
+    const REVERSE = "data-ix-marquee-reverse";
+    const DURATION = "data-ix-marquee-duration";
+    const DYNAMIC_DURATION = "data-ix-marquee-duration-dynamic";
+    const DURATION_PER_ITEM = "data-ix-marquee-duration-per-item";
+    const HOVER_EFFECT = "data-ix-marquee-hover";
+    const ACCELERATE_ON_HOVER = "accelerate";
+    const DECELERATE_ON_HOVER = "decelerate";
+    const PAUSE_ON_HOVER = "pause";
+    const DEFAULT_DURATION = 30;
+    const DEFAULT_DYNAMIC_DURATION = 5;
+    const wraps = document.querySelectorAll(WRAP);
+    if (wraps.length === 0) return;
+    wraps.forEach((wrap) => {
+      let runOnBreakpoint = checkBreakpoints(wrap, ANIMATION_ID, gsapContext);
+      if (runOnBreakpoint === false) return;
+      const lists = [...wrap.querySelectorAll(LIST)];
+      let vertical = attr(false, wrap.getAttribute(VERTICAL));
+      let reverse = attr(false, wrap.getAttribute(REVERSE));
+      let duration = attr(DEFAULT_DURATION, wrap.getAttribute(DURATION));
+      let durationDynamic = attr(false, wrap.getAttribute(DYNAMIC_DURATION));
+      let durationPerItem = attr(DEFAULT_DYNAMIC_DURATION, wrap.getAttribute(DURATION_PER_ITEM));
+      let itemCount = lists[0].childElementCount;
+      if (itemCount === 1) {
+        itemCount = lists[0].firstElementChild.childElementCount;
+      }
+      if (durationDynamic) {
+        duration = itemCount * durationPerItem;
+      }
+      let hoverEffect = attr("none", wrap.getAttribute(HOVER_EFFECT));
+      let direction = 1;
+      if (reverse) {
+        direction = -1;
+      }
+      let tl = gsap.timeline({
+        repeat: -1,
+        defaults: {
+          ease: "none"
+        }
+      });
+      tl.fromTo(
+        lists,
+        {
+          xPercent: 0,
+          yPercent: 0
+        },
+        {
+          // if vertical is true move yPercent, otherwise move x percent
+          xPercent: vertical ? 0 : -100 * direction,
+          yPercent: vertical ? -100 * direction : 0,
+          duration
+        }
+      );
+      if (hoverEffect === ACCELERATE_ON_HOVER) {
+        wrap.addEventListener("mouseenter", (event) => {
+          tl.timeScale(2);
+        });
+        wrap.addEventListener("mouseleave", (event) => {
+          tl.timeScale(1);
+        });
+      }
+      if (hoverEffect === DECELERATE_ON_HOVER) {
+        wrap.addEventListener("mouseenter", (event) => {
+          tl.timeScale(0.5);
+        });
+        wrap.addEventListener("mouseleave", (event) => {
+          tl.timeScale(1);
+        });
+      }
+      if (hoverEffect === PAUSE_ON_HOVER) {
+        wrap.addEventListener("mouseenter", (event) => {
+          tl.pause();
+        });
+        wrap.addEventListener("mouseleave", (event) => {
+          tl.play();
+        });
+      }
+    });
+  };
+
+  // src/interactions/accordion.js
+  init_live_reload();
+  var accordion = function(gsapContext) {
+    const ANIMATION_ID = "accordion";
+    const WRAP = '[data-ix-accordion="wrap"]';
+    const ITEM = '[data-ix-accordion="item"]';
+    const OPEN = '[data-ix-accordion="open"]';
+    const OPTION_FIRST_OPEN = "data-ix-accordion-first-open";
+    const OPTION_ONE_ACTIVE = "data-ix-accordion-one-active";
+    const OPTION_KEEP_ONE_OPEN = "data-ix-accordion-keep-one-open";
+    const OPTION_HOVER_OPEN = "data-ix-accordion-hover";
+    const ACTIVE_CLASS = "is-active";
+    const accordionLists = gsap.utils.toArray(WRAP);
+    const openAccordion = function(item2, open = true) {
+      if (open === true) {
+        item2.classList.add(ACTIVE_CLASS);
+      } else {
+        item2.classList.remove(ACTIVE_CLASS);
+      }
+    };
+    if (accordionLists.length === 0 || accordionLists === void 0) return;
+    accordionLists.forEach((list) => {
+      let runOnBreakpoint = checkBreakpoints(list, ANIMATION_ID, gsapContext);
+      if (runOnBreakpoint === false) return;
+      let firstOpen = attr(false, list.getAttribute(OPTION_FIRST_OPEN));
+      let oneActive = attr(false, list.getAttribute(OPTION_ONE_ACTIVE));
+      let keepOneOpen = attr(false, list.getAttribute(OPTION_KEEP_ONE_OPEN));
+      let hoverOnly = attr(false, list.getAttribute(OPTION_HOVER_OPEN));
+      const accordionItems = Array.from(list.querySelectorAll(ITEM));
+      if (accordionItems.length === 0) return;
+      const firstItem = list.firstElementChild;
+      if (firstOpen) {
+        openAccordion(firstItem);
+      }
+      if (!hoverOnly) {
+        list.addEventListener("click", function(e2) {
+          const clickedEl = e2.target.closest(OPEN);
+          if (!clickedEl) return;
+          const clickedItem = clickedEl.closest(ITEM);
+          let clickedItemAlreadyActive = clickedItem.classList.contains(ACTIVE_CLASS);
+          if (!clickedItemAlreadyActive) {
+            if (oneActive) {
+              accordionItems.forEach((item2) => {
+                if (item2 === clickedItem) {
+                  openAccordion(item2);
+                } else {
+                  openAccordion(item2, false);
+                }
+              });
+            }
+            if (!oneActive) {
+              openAccordion(clickedItem);
+            }
+          }
+          if (clickedItemAlreadyActive && !keepOneOpen) {
+            openAccordion(clickedItem, false);
+          }
+          if (clickedItemAlreadyActive && keepOneOpen) {
+            const activeItems = accordionItems.filter(function(item2) {
+              return item2.classList.contains(activeClass);
+            });
+            if (activeItems.length > 1) {
+              openAccordion(item, false);
+            }
+          }
+        });
+      }
+      if (hoverOnly) {
+        accordionItems.forEach((item2) => {
+          item2.addEventListener("mouseover", function() {
+            openAccordion(item2);
+          });
+          item2.addEventListener("mouseout", function() {
+            openAccordion(item2, false);
+          });
+        });
+      }
+    });
+  };
+
+  // src/interactions/image-switch.js
+  init_live_reload();
+  var imageSwitch = function(gsapContext) {
+    const ANIMATION_ID = "imageswitch";
+    const WRAP = '[data-ix-imageswitch="wrap"]';
+    const ITEM = '[data-ix-imageswitch="item"]';
+    const IMAGE = '[data-ix-imageswitch="image"]';
+    const LINK = '[data-ix-imageswitch="link"]';
+    const wraps = [...document.querySelectorAll(WRAP)];
+    if (!wraps.length === 0) return;
+    wraps.forEach((wrap) => {
+      let runOnBreakpoint = checkBreakpoints(wrap, ANIMATION_ID, gsapContext);
+      if (runOnBreakpoint === false) return;
+      const tabLinks = [...wrap.querySelectorAll(LINK)];
+      const items = [...wrap.querySelectorAll(ITEM)];
+      const images = [...wrap.querySelectorAll(IMAGE)];
+      const ACTIVE_CLASS = "is-active";
+      if (items.length === 0 || images.length === 0) return;
+      const activateItem = function(index, activate = true) {
+        const image = images[index];
+        const item2 = items[index];
+        const tab = tabLinks[index];
+        if (activate) {
+          image.classList.add(ACTIVE_CLASS);
+          item2.classList.add(ACTIVE_CLASS);
+          tab.classList.add(ACTIVE_CLASS);
+        } else {
+          image.classList.remove(ACTIVE_CLASS);
+          item2.classList.remove(ACTIVE_CLASS);
+          tab.classList.remove(ACTIVE_CLASS);
+        }
+      };
+      images.forEach((item2) => item2.classList.remove(ACTIVE_CLASS));
+      activateItem(0);
+      items.forEach((item2, index) => {
+        const image = images[index];
+        const tab = tabLinks[index];
+        if (!item2 || !image) return;
+        const imageTL = gsap.timeline({
+          scrollTrigger: {
+            trigger: item2,
+            start: "top center",
+            end: "bottom center",
+            markers: false,
+            scrub: true,
+            onEnter: () => {
+              activateItem(index);
+            },
+            onLeave: () => {
+              if (index !== items.length - 1) {
+                activateItem(index, false);
+              }
+              tab.classList.remove(ACTIVE_CLASS);
+            },
+            onEnterBack: () => {
+              activateItem(index);
+            },
+            onLeaveBack: () => {
+              if (index !== 0) {
+                activateItem(index, false);
+              }
+              tab.classList.remove(ACTIVE_CLASS);
+            }
+          }
+        });
+      });
+      tabLinks.forEach((link, index) => {
+        if (!link) return;
+        link.addEventListener("click", (e2) => {
+          const el = items[index];
+          if (!el) return;
+          el.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+          });
+        });
+      });
+    });
+  };
+
+  // src/interactions/text-scrub.js
+  init_live_reload();
+  var textScrub = function(gsapContext) {
+    const ANIMATION_ID = "textscrub";
+    const ITEM = '[data-ix-textscrub="item"]';
+    const LINE_CLASS = "line-mask";
+    const items = gsap.utils.toArray(ITEM);
+    items.forEach((item2) => {
+      if (!item2) return;
+      let runOnBreakpoint = checkBreakpoints(item2, ANIMATION_ID, gsapContext);
+      if (runOnBreakpoint === false) return;
+      let splitText;
+      const lineMasks = [];
+      const animateLines = function(self2) {
+        if (lineMasks.length !== 0) {
+          lineMasks.forEach((line) => {
+            line.remove();
+          });
+        }
+        self2.lines.forEach((line) => {
+          const lineMask = document.createElement("div");
+          lineMasks.push(lineMask);
+          lineMask.classList.add(LINE_CLASS);
+          line.appendChild(lineMask);
+          let tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: line,
+              start: "top 70%",
+              end: "bottom 70%",
+              scrub: 1.5
+            }
+          });
+          tl.fromTo(
+            lineMask,
+            {
+              width: "100%"
+            },
+            {
+              width: "0%",
+              ease: "power1.out",
+              duration: 1
+            }
+          );
+        });
+      };
+      function createAnimation() {
+        const splitText2 = SplitText.create(item2, {
+          type: "lines",
+          linesClass: "line",
+          autoSplit: true,
+          onSplit: (self2) => {
+            return animateLines(self2);
+          }
+        });
+        if (!splitText2) return;
+        return splitText2;
+      }
+      splitText = createAnimation();
+    });
+  };
+
+  // src/interactions/video-plyr.js
+  init_live_reload();
+  var import_plyr = __toESM(require_plyr_min(), 1);
+  var videoPlyr = function() {
+    const COMPONENT = ".plyr_component";
+    const VIDEO_CLASS = ".plyr_video";
+    const COVER_CLASS = ".plyr_cover";
+    const HIDE_COVER_CLASS = "hide-cover";
+    const PAUSE_TRIGGER_CLASS = ".plyr_pause-trigger";
+    const CONTAIN_CLASS = "contain-video";
+    const settings = {
+      autoplay: false,
+      loop: false,
+      mute: false,
+      hideControls: true
+    };
+    const PLAYING_CLASS = ".plyr--playing";
+    const players = [];
+    const components = [...document.querySelectorAll(COMPONENT)];
+    if (components.length === 0) return;
+    components.forEach((component, index) => {
+      const video = component.querySelector(VIDEO_CLASS);
+      const cover = component.querySelector(COVER_CLASS);
+      const pauseTrigger = component.querySelector(PAUSE_TRIGGER_CLASS);
+      const loopSetting = attr(settings.loop, component.getAttribute("data-player-loop"));
+      const autoplaySetting = attr(settings.loop, component.getAttribute("data-player-autoplay"));
+      let muteSetting = attr(settings.mute, component.getAttribute("data-player-mute"));
+      const showCoverOnPause = attr(false, component.getAttribute("data-player-show-cover-on-pause"));
+      let player = new import_plyr.default(video, {
+        controls: ["play", "progress", "current-time", "mute", "fullscreen"],
+        hideControls: settings.hideControls,
+        loop: { active: loopSetting },
+        resetOnEnd: true
+      });
+      players.push(player);
+      if (cover) {
+        cover.addEventListener("click", () => {
+          player.play();
+        });
+      }
+      player.on("ended", (event) => {
+        component.classList.remove(HIDE_COVER_CLASS);
+      });
+      if (showCoverOnPause) {
+        player.on("pause", (event) => {
+          component.classList.remove(HIDE_COVER_CLASS);
+        });
+      }
+      player.on("play", (event) => {
+        components.forEach((item2, index2) => {
+          item2.classList.remove(HIDE_COVER_CLASS);
+          if (item2 !== component) {
+            const player2 = players[index2];
+            player2.pause();
+          }
+        });
+        component.classList.add(HIDE_COVER_CLASS);
+        let prevPlayingComponent = document.querySelector(PLAYING_CLASS).closest(COMPONENT);
+        if (prevPlayingComponent && prevPlayingComponent !== component) {
+          prevPlayingComponent.find(PAUSE_TRIGGER_CLASS)[0].click();
+        }
+      });
+      pauseTrigger.addEventListener("click", () => {
+        player.pause();
+      });
+      player.on("ended", (event) => {
+        if (player.fullscreen.active) {
+          player.fullscreen.exit();
+        }
+      });
+      player.on("enterfullscreen", (event) => {
+        component.classList.add(CONTAIN_CLASS);
+      });
+      player.on("exitfullscreen", (event) => {
+        component.classList.remove(CONTAIN_CLASS);
+      });
+    });
+    return [players, components];
+  };
+
+  // src/interactions/count-up.js
+  init_live_reload();
+
+  // node_modules/countup.js/dist/countUp.min.js
+  init_live_reload();
+  var t2 = function() {
+    return t2 = Object.assign || function(t3) {
+      for (var i2, n = 1, s = arguments.length; n < s; n++) for (var a in i2 = arguments[n]) Object.prototype.hasOwnProperty.call(i2, a) && (t3[a] = i2[a]);
+      return t3;
+    }, t2.apply(this, arguments);
+  };
+  var i = function() {
+    function i2(i3, n, s) {
+      var a = this;
+      this.endVal = n, this.options = s, this.version = "2.9.0", this.defaults = { startVal: 0, decimalPlaces: 0, duration: 2, useEasing: true, useGrouping: true, useIndianSeparators: false, smartEasingThreshold: 999, smartEasingAmount: 333, separator: ",", decimal: ".", prefix: "", suffix: "", enableScrollSpy: false, scrollSpyDelay: 200, scrollSpyOnce: false }, this.finalEndVal = null, this.useEasing = true, this.countDown = false, this.error = "", this.startVal = 0, this.paused = true, this.once = false, this.count = function(t3) {
+        a.startTime || (a.startTime = t3);
+        var i4 = t3 - a.startTime;
+        a.remaining = a.duration - i4, a.useEasing ? a.countDown ? a.frameVal = a.startVal - a.easingFn(i4, 0, a.startVal - a.endVal, a.duration) : a.frameVal = a.easingFn(i4, a.startVal, a.endVal - a.startVal, a.duration) : a.frameVal = a.startVal + (a.endVal - a.startVal) * (i4 / a.duration);
+        var n2 = a.countDown ? a.frameVal < a.endVal : a.frameVal > a.endVal;
+        a.frameVal = n2 ? a.endVal : a.frameVal, a.frameVal = Number(a.frameVal.toFixed(a.options.decimalPlaces)), a.printValue(a.frameVal), i4 < a.duration ? a.rAF = requestAnimationFrame(a.count) : null !== a.finalEndVal ? a.update(a.finalEndVal) : a.options.onCompleteCallback && a.options.onCompleteCallback();
+      }, this.formatNumber = function(t3) {
+        var i4, n2, s2, e2, o = t3 < 0 ? "-" : "";
+        i4 = Math.abs(t3).toFixed(a.options.decimalPlaces);
+        var r = (i4 += "").split(".");
+        if (n2 = r[0], s2 = r.length > 1 ? a.options.decimal + r[1] : "", a.options.useGrouping) {
+          e2 = "";
+          for (var l = 3, h = 0, u = 0, p = n2.length; u < p; ++u) a.options.useIndianSeparators && 4 === u && (l = 2, h = 1), 0 !== u && h % l == 0 && (e2 = a.options.separator + e2), h++, e2 = n2[p - u - 1] + e2;
+          n2 = e2;
+        }
+        return a.options.numerals && a.options.numerals.length && (n2 = n2.replace(/[0-9]/g, function(t4) {
+          return a.options.numerals[+t4];
+        }), s2 = s2.replace(/[0-9]/g, function(t4) {
+          return a.options.numerals[+t4];
+        })), o + a.options.prefix + n2 + s2 + a.options.suffix;
+      }, this.easeOutExpo = function(t3, i4, n2, s2) {
+        return n2 * (1 - Math.pow(2, -10 * t3 / s2)) * 1024 / 1023 + i4;
+      }, this.options = t2(t2({}, this.defaults), s), this.formattingFn = this.options.formattingFn ? this.options.formattingFn : this.formatNumber, this.easingFn = this.options.easingFn ? this.options.easingFn : this.easeOutExpo, this.el = "string" == typeof i3 ? document.getElementById(i3) : i3, n = null == n ? this.parse(this.el.innerHTML) : n, this.startVal = this.validateValue(this.options.startVal), this.frameVal = this.startVal, this.endVal = this.validateValue(n), this.options.decimalPlaces = Math.max(this.options.decimalPlaces), this.resetDuration(), this.options.separator = String(this.options.separator), this.useEasing = this.options.useEasing, "" === this.options.separator && (this.options.useGrouping = false), this.el ? this.printValue(this.startVal) : this.error = "[CountUp] target is null or undefined", "undefined" != typeof window && this.options.enableScrollSpy && (this.error ? console.error(this.error, i3) : (window.onScrollFns = window.onScrollFns || [], window.onScrollFns.push(function() {
+        return a.handleScroll(a);
+      }), window.onscroll = function() {
+        window.onScrollFns.forEach(function(t3) {
+          return t3();
+        });
+      }, this.handleScroll(this)));
+    }
+    return i2.prototype.handleScroll = function(t3) {
+      if (t3 && window && !t3.once) {
+        var i3 = window.innerHeight + window.scrollY, n = t3.el.getBoundingClientRect(), s = n.top + window.pageYOffset, a = n.top + n.height + window.pageYOffset;
+        a < i3 && a > window.scrollY && t3.paused ? (t3.paused = false, setTimeout(function() {
+          return t3.start();
+        }, t3.options.scrollSpyDelay), t3.options.scrollSpyOnce && (t3.once = true)) : (window.scrollY > a || s > i3) && !t3.paused && t3.reset();
+      }
+    }, i2.prototype.determineDirectionAndSmartEasing = function() {
+      var t3 = this.finalEndVal ? this.finalEndVal : this.endVal;
+      this.countDown = this.startVal > t3;
+      var i3 = t3 - this.startVal;
+      if (Math.abs(i3) > this.options.smartEasingThreshold && this.options.useEasing) {
+        this.finalEndVal = t3;
+        var n = this.countDown ? 1 : -1;
+        this.endVal = t3 + n * this.options.smartEasingAmount, this.duration = this.duration / 2;
+      } else this.endVal = t3, this.finalEndVal = null;
+      null !== this.finalEndVal ? this.useEasing = false : this.useEasing = this.options.useEasing;
+    }, i2.prototype.start = function(t3) {
+      this.error || (this.options.onStartCallback && this.options.onStartCallback(), t3 && (this.options.onCompleteCallback = t3), this.duration > 0 ? (this.determineDirectionAndSmartEasing(), this.paused = false, this.rAF = requestAnimationFrame(this.count)) : this.printValue(this.endVal));
+    }, i2.prototype.pauseResume = function() {
+      this.paused ? (this.startTime = null, this.duration = this.remaining, this.startVal = this.frameVal, this.determineDirectionAndSmartEasing(), this.rAF = requestAnimationFrame(this.count)) : cancelAnimationFrame(this.rAF), this.paused = !this.paused;
+    }, i2.prototype.reset = function() {
+      cancelAnimationFrame(this.rAF), this.paused = true, this.resetDuration(), this.startVal = this.validateValue(this.options.startVal), this.frameVal = this.startVal, this.printValue(this.startVal);
+    }, i2.prototype.update = function(t3) {
+      cancelAnimationFrame(this.rAF), this.startTime = null, this.endVal = this.validateValue(t3), this.endVal !== this.frameVal && (this.startVal = this.frameVal, null == this.finalEndVal && this.resetDuration(), this.finalEndVal = null, this.determineDirectionAndSmartEasing(), this.rAF = requestAnimationFrame(this.count));
+    }, i2.prototype.printValue = function(t3) {
+      var i3;
+      if (this.el) {
+        var n = this.formattingFn(t3);
+        if (null === (i3 = this.options.plugin) || void 0 === i3 ? void 0 : i3.render) this.options.plugin.render(this.el, n);
+        else if ("INPUT" === this.el.tagName) this.el.value = n;
+        else "text" === this.el.tagName || "tspan" === this.el.tagName ? this.el.textContent = n : this.el.innerHTML = n;
+      }
+    }, i2.prototype.ensureNumber = function(t3) {
+      return "number" == typeof t3 && !isNaN(t3);
+    }, i2.prototype.validateValue = function(t3) {
+      var i3 = Number(t3);
+      return this.ensureNumber(i3) ? i3 : (this.error = "[CountUp] invalid start or end value: ".concat(t3), null);
+    }, i2.prototype.resetDuration = function() {
+      this.startTime = null, this.duration = 1e3 * Number(this.options.duration), this.remaining = this.duration;
+    }, i2.prototype.parse = function(t3) {
+      var i3 = function(t4) {
+        return t4.replace(/([.,'  ])/g, "\\$1");
+      }, n = i3(this.options.separator), s = i3(this.options.decimal), a = t3.replace(new RegExp(n, "g"), "").replace(new RegExp(s, "g"), ".");
+      return parseFloat(a);
+    }, i2;
+  }();
+
+  // src/interactions/count-up.js
+  var countUp = function(gsapContext) {
+    const ANIMATION_ID = "countup";
+    const ITEM = '[data-ix-countup="item"]';
+    const OPTION_START = "data-ix-countup-start";
+    const OPTION_DURATION = "data-ix-countup-duration";
+    const OPTION_ACTIVE_CLASS = "data-ix-countup-active";
+    const ACTIVE_CLASS = "is-active";
+    const items = document.querySelectorAll(ITEM);
+    items.forEach((item2) => {
+      const parent = item2.parentElement;
+      let runOnBreakpoint = checkBreakpoints(item2, ANIMATION_ID, gsapContext);
+      if (runOnBreakpoint === false) return;
+      const number = +item2.textContent;
+      if (!number || Number.isNaN(number)) return;
+      decimalPoints = countDecimalPoints(number);
+      let duration = attr(2.5, item2.getAttribute(OPTION_DURATION));
+      let start = attr("top bottom", item2.getAttribute(OPTION_START));
+      let activeClass2 = attr(ACTIVE_CLASS, item2.getAttribute(OPTION_ACTIVE_CLASS));
+      const countUp2 = new i(item2, number, {
+        useGrouping: false,
+        decimalPlaces: decimalPoints,
+        duration
+      });
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: item2,
+          start,
+          end: "top 10%",
+          scrub: true,
+          onEnter: () => {
+            countUp2.start();
+            parent.classList.add(activeClass2);
+            setTimeout(() => {
+              parent.classList.remove(activeClass2);
+            }, duration * 1e3);
+          }
+        }
+      });
+    });
+  };
+  function countDecimalPoints(number) {
+    const numberString = number.toString();
+    const parts = numberString.split(".");
+    if (parts.length === 1) {
+      return 0;
+    }
+    return parts[1].length;
+  }
+
+  // src/index.js
+  document.addEventListener("DOMContentLoaded", function() {
+    if (gsap.ScrollTrigger !== void 0) {
+      gsap.registerPlugin(ScrollTrigger);
+    }
+    initLenis();
+    const pricingPanels = function() {
+      const PANEL = "data-pricing-panel";
+      const BUTTON = "data-pricing-target";
+      const panels = [...document.querySelectorAll(`[${PANEL}]`)];
+      const buttons = [...document.querySelectorAll(`[${BUTTON}]`)];
+      const ACTIVE_CLASS = "is-active";
+      if (panels.length === 0) return;
+      const activatePanel = function(nextPanel) {
+        if (!nextPanel) return;
+        let activePanel = panels.find((item2) => item2.classList.contains(ACTIVE_CLASS));
+        if (activePanel === void 0) {
+          activePanel = panels[0];
+        }
+        activePanel.classList.remove(ACTIVE_CLASS);
+        nextPanel.classList.add(ACTIVE_CLASS);
+        let tl = gsap.timeline({
+          duration: 0.4,
+          onComplete: () => {
+          }
+        });
+        gsap.fromTo(nextPanel, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.6 });
+        if (nextPanel !== activePanel) {
+          gsap.set(activePanel, { opacity: 0 }, "<.6");
+        }
+      };
+      activatePanel(panels[0]);
+      buttons.forEach((button) => {
+        const target = button.getAttribute(BUTTON);
+        const targetPanel = document.querySelector(`[${PANEL}="${target}"]`);
+        button.addEventListener("click", function(e2) {
+          activatePanel(targetPanel);
+        });
+      });
+    };
+    commercialsScroll = function() {
+      const triggerElement = document.querySelector(".commercials_component");
+      if (!triggerElement) return;
+      let tl = gsap.timeline({
+        scrollTrigger: {
+          markers: false,
+          trigger: triggerElement,
+          start: "top 80%",
+          end: "bottom 10%",
+          scrub: 0.25
+        },
+        defaults: {
+          duration: 1,
+          ease: "none"
+        }
+      });
+      tl.fromTo(
+        ".commercials_layout",
+        {
+          rotationZ: 6
+        },
+        {
+          rotationZ: 2
+        },
+        "<"
+      );
+      tl.fromTo(
+        ".commercials_row.is-top",
+        {
+          xPercent: 20
+        },
+        {
+          xPercent: -30
+        },
+        "<"
+      );
+      tl.fromTo(
+        ".commercials_row.is-bottom",
+        {
+          xPercent: -30
+        },
+        {
+          xPercent: 30
+        },
+        "<"
+      );
+    };
+    const headerGradients = function() {
+      const SELECTOR = "#gradient-canvas";
+      const gradientEl = document.querySelector(SELECTOR);
+      if (!gradientEl) return;
+      var gradient = new Gradient();
+      gradient.initGradient(SELECTOR);
+    };
+    let mm = gsap.matchMedia();
+    mm.add(
+      {
+        //This is the conditions object
+        isMobile: "(max-width: 767px)",
+        isTablet: "(min-width: 768px)  and (max-width: 991px)",
+        isDesktop: "(min-width: 992px)",
+        reduceMotion: "(prefers-reduced-motion: reduce)"
+      },
+      (gsapContext) => {
+        let { isMobile, isTablet, isDesktop, reduceMotion } = gsapContext.conditions;
+        headerGradients();
+        videoPlyr();
+        countUp(gsapContext);
+        marquee(gsapContext);
+        accordion(gsapContext);
+        imageSwitch(gsapContext);
+        load(gsapContext);
+        scrollIn(gsapContext);
+        scrolling(gsapContext);
+        textScrub(gsapContext);
+        pricingPanels();
+        if (!reduceMotion) {
+          commercialsScroll();
+        }
+      }
+    );
+    const scrollReset = function() {
+      const RESET_EL = "[data-ix-reset]";
+      const RESET_TIME = "data-ix-reset-time";
+      const resetScrollTriggers = document.querySelectorAll(RESET_EL);
+      resetScrollTriggers.forEach(function(item2) {
+        item2.addEventListener("click", function(e2) {
+          ScrollTrigger.refresh();
+          if (item2.hasAttribute(RESET_TIME)) {
+            let time = attr(1e3, item2.getAttribute(RESET_TIME));
+            setTimeout(() => {
+              ScrollTrigger.refresh();
+            }, time);
+          }
+        });
+      });
+    };
+    scrollReset();
+    const updaterFooterYear = function() {
+      const YEAR_SELECTOR = "[data-footer-year]";
+      const yearSpan = document.querySelector(YEAR_SELECTOR);
+      if (!yearSpan) return;
+      const currentYear = (/* @__PURE__ */ new Date()).getFullYear();
+      yearSpan.innerText = currentYear.toString();
+    };
+    updaterFooterYear();
+  });
+})();
