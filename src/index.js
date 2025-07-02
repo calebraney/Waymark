@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
         xPercent: 20,
       },
       {
-        xPercent: -30,
+        xPercent: -70,
       },
       '<'
     );
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
         xPercent: -30,
       },
       {
-        xPercent: 30,
+        xPercent: 60,
       },
       '<'
     );
