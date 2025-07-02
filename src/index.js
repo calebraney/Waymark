@@ -78,16 +78,16 @@ document.addEventListener('DOMContentLoaded', function () {
         ease: 'none',
       },
     });
-    tl.fromTo(
-      '.commercials_layout',
-      {
-        rotationZ: 6,
-      },
-      {
-        rotationZ: 2,
-      },
-      '<'
-    );
+    // tl.fromTo(
+    //   '.commercials_layout',
+    //   {
+    //     rotationZ: 6,
+    //   },
+    //   {
+    //     rotationZ: 2,
+    //   },
+    //   '<'
+    // );
     tl.fromTo(
       '.commercials_row.is-top',
       {
