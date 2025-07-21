@@ -131,13 +131,13 @@ document.addEventListener('DOMContentLoaded', function () {
       //Page Load Animation
       // homeHeaderLoad();
 
-      headerGradients();
+      load(gsapContext);
       videoPlyr();
+      // headerGradients();
       countUp(gsapContext);
       marquee(gsapContext);
       accordion(gsapContext);
       imageSwitch(gsapContext);
-      load(gsapContext);
       scrollIn(gsapContext);
       scrolling(gsapContext);
       textScrub(gsapContext);
