@@ -13,10 +13,7 @@ import { countUp } from './interactions/count-up';
 // Webflow is initialized
 document.addEventListener('DOMContentLoaded', function () {
   // register gsap plugins if available
-  if (gsap.ScrollTrigger !== undefined) {
-    gsap.registerPlugin(ScrollTrigger);
-  }
-  initLenis();
+  let lenis;
 
   // Pricing Panel Interaction
   const pricingPanels = function () {
@@ -117,6 +114,16 @@ document.addEventListener('DOMContentLoaded', function () {
     gradient.initGradient(SELECTOR);
   };
 
+  //if gsap isn't found add .gsap-not-found class to document
+  if (typeof window.gsap === 'undefined') document.documentElement.classList.add('gsap-not-found');
+  // register gsap plugins if available
+  if (gsap.ScrollTrigger !== undefined) {
+    gsap.registerPlugin(ScrollTrigger);
+  }
+  if (gsap.Flip !== undefined) {
+    gsap.registerPlugin(Flip);
+  }
+
   let mm = gsap.matchMedia();
   mm.add(
     {
@@ -130,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
       let { isMobile, isTablet, isDesktop, reduceMotion } = gsapContext.conditions;
       //Page Load Animation
       // homeHeaderLoad();
-
+      lenis = initLenis();
       load(gsapContext);
       videoPlyr();
       // headerGradients();
