@@ -169,9 +169,13 @@ export const load = function (gsapContext) {
   });
 
   //Play interaction on font load, or remove it from callback to play immediately
-  document.fonts.ready.then(() => {
-    tl.play(0);
-  });
+  // tl.play();
+
+  tl.play(0);
+  // was creating issues in firefox
+  // document.fonts.ready.then(() => {
+  //   tl.play(0);
+  // });
   // Alternatively use the returned tl to trigger the interaction after transition or image load
   return tl;
 };
